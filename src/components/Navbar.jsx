@@ -12,7 +12,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="fixed top-0 w-screen border-gray-200 bg-white px-4 py-5 shadow">
+      <nav className="sticky top-0 block w-screen border-gray-200 bg-white px-4 py-5 shadow">
         <div className="container mx-auto flex flex-wrap items-center justify-between">
           <a href="/" className="flex items-center">
             <img
@@ -50,17 +50,27 @@ const Navbar = () => {
                   </li>
                 ) : (
                   <li key={option.name}>
-                    <Link
-                      activeClass="active"
-                      to={option.id}
-                      spy={true}
-                      smooth={true}
-                      offset={-130}
-                      duration={500}
-                      className="bg-black-700 block cursor-pointer rounded py-2 pr-4 pl-3 text-2xl font-bold text-black hover:text-blue-700 md:bg-transparent md:p-0"
-                    >
-                      {option.name}
-                    </Link>
+                    {window.location.pathname === "/" && (
+                      <Link
+                        activeClass="active"
+                        to={option.id}
+                        spy={true}
+                        smooth={true}
+                        offset={-130}
+                        duration={500}
+                        className="bg-black-700 block cursor-pointer rounded py-2 pr-4 pl-3 text-2xl font-bold text-black hover:text-blue-700 md:bg-transparent md:p-0"
+                      >
+                        {option.name}
+                      </Link>
+                    )}{" "}
+                    {window.location.pathname !== "/" && (
+                      <a
+                        href="/"
+                        className="bg-black-700 block rounded py-2 pr-4 pl-3 text-2xl font-bold text-black hover:text-blue-700 md:bg-transparent md:p-0"
+                      >
+                        {option.name}
+                      </a>
+                    )}
                   </li>
                 )
               )}
