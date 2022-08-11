@@ -1,11 +1,11 @@
-import React from "react";
+import Title from "./Title";
 
 const AboutUs = () => {
   return (
     <div className="grid grid-flow-row gap-6 px-6 lg:px-16">
-      <h2 className="text-3xl font-bold">
+      <Title>
         Sobre <span className="text-blue"> nós</span>{" "}
-      </h2>
+      </Title>
       <h3 className="text-xl">
         O NUPEP foi fundado em 1991 e hoje constitui um grupo de pesquisa
         <strong> consolidado</strong>, com mais{" "}
