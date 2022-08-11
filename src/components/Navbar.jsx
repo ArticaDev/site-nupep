@@ -12,12 +12,12 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="sticky top-0 block w-screen border-gray-200 bg-white px-4 py-5 shadow">
-        <div className="container mx-auto flex flex-wrap items-center justify-between">
+      <nav className="max-w-screen sticky top-0 z-10 block border-gray-200 bg-white px-4 py-5 shadow">
+        <div className="flex flex-wrap items-center justify-between lg:px-12">
           <a href="/" className="flex items-center">
             <img
               src={Logo}
-              className="w-360 h-12 self-center whitespace-nowrap font-semibold text-black "
+              className="h-12 w-36 self-center whitespace-nowrap font-semibold text-black "
             ></img>
           </a>
           <button className="ml-3 inline-flex items-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 md:hidden">
@@ -43,7 +43,7 @@ const Navbar = () => {
                   <li key={option.name}>
                     <a
                       href={option.url}
-                      className="bg-black-700 block rounded py-2 pr-4 pl-3 text-2xl font-bold text-black hover:text-blue-700 md:bg-transparent md:p-0"
+                      className="bg-black-700 block rounded py-2 pr-4 pl-3 text-2xl font-bold text-black hover:text-blue md:bg-transparent md:p-0"
                     >
                       {option.name}
                     </a>
@@ -58,7 +58,7 @@ const Navbar = () => {
                         smooth={true}
                         offset={-130}
                         duration={500}
-                        className="bg-black-700 block cursor-pointer rounded py-2 pr-4 pl-3 text-2xl font-bold text-black hover:text-blue-700 md:bg-transparent md:p-0"
+                        className="bg-black-700 block cursor-pointer rounded py-2 pr-4 pl-3 text-2xl font-bold text-black hover:text-blue md:bg-transparent md:p-0"
                       >
                         {option.name}
                       </Link>
@@ -66,7 +66,7 @@ const Navbar = () => {
                     {window.location.pathname !== "/" && (
                       <a
                         href="/"
-                        className="bg-black-700 block rounded py-2 pr-4 pl-3 text-2xl font-bold text-black hover:text-blue-700 md:bg-transparent md:p-0"
+                        className="bg-black-700 block rounded py-2 pr-4 pl-3 text-2xl font-bold text-black hover:text-blue md:bg-transparent md:p-0"
                       >
                         {option.name}
                       </a>

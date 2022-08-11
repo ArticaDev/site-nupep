@@ -29,7 +29,7 @@ const Footer = () => {
   ];
 
   return (
-    <div className="grid w-screen grid-flow-row items-center justify-center gap-2 bg-[#161616] p-10 font-bold text-white">
+    <div className="max-w-screen grid grid-flow-row items-center justify-center gap-2 bg-[#161616] p-10 font-bold text-white">
       <p>
         Núcleo de Pesquisa em Eletrônica de Potência (NUPEP) - Universidade
         Federal de Uberlândia (UFU)
@@ -45,7 +45,7 @@ const Footer = () => {
             <li>Links Externos</li>
             {urlList.map((url) => (
               <li key={url.name}>
-                <a className="text-blue-400 hover:text-blue-600" href={url.url}>
+                <a className="text-blue hover:text-cyan-600" href={url.url}>
                   {url.name}
                 </a>
               </li>

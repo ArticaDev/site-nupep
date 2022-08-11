@@ -1,7 +1,11 @@
 const config = {
   content: ["./src/**/*.{html,js,jsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        blue: "#05ADF2",
+      },
+    },
   },
   plugins: [],
 };

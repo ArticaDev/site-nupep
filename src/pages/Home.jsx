@@ -1,13 +1,14 @@
 import Layout from "../components/Layout";
+import Slider from "../components/Slider";
+import AboutUs from "../components/AboutUs";
 
 function Home() {
   return (
     <Layout>
-      <div className="h-screen">
-        <div className="mt-24 grid grid-flow-row gap-96 ">
-          <h2 id="about">Sobre nós</h2>
-          <h2 id="search">Pesquisa</h2>
-        </div>
+      <Slider />
+      <div className="mt-8 grid min-h-fit gap-8">
+        <AboutUs />
+        <h2 id="search">Pesquisa</h2>
       </div>
     </Layout>
   );
