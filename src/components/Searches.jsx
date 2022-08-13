@@ -34,7 +34,7 @@ const Searches = () => {
       <Slider withNavigation={!isMobile()}>
         {sliceds_search_lists.map((sliced_search_list, index) => (
           <SwiperSlide key={index}>
-            <div className="grid items-center justify-center px-8">
+            <div className="grid items-center justify-center px-8 pb-16">
               <ul>
                 {sliced_search_list.map((search, index) => (
                   <li className="list-disc text-xl" key={index}>
