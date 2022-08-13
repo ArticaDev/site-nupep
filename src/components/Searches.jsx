@@ -1,6 +1,7 @@
 import Title from "./Title";
 import Slider from "./Slider";
 import { SwiperSlide } from "swiper/react";
+import isMobile from "../utils/isMobile";
 
 const Searches = () => {
   const search_list = [
@@ -30,10 +31,10 @@ const Searches = () => {
       <Title>
         Pesquisa <span className="text-blue">e desenvolvimento</span>
       </Title>
-      <Slider>
+      <Slider withNavigation={!isMobile()}>
         {sliceds_search_lists.map((sliced_search_list, index) => (
           <SwiperSlide key={index}>
-            <div className="grid items-center justify-center py-12 px-8">
+            <div className="grid items-center justify-center px-8">
               <ul>
                 {sliced_search_list.map((search, index) => (
                   <li className="list-disc text-xl" key={index}>

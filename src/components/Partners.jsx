@@ -2,6 +2,7 @@ import React from "react";
 import Title from "./Title";
 import Slider from "./Slider";
 import { SwiperSlide } from "swiper/react";
+import isMobile from "../utils/isMobile";
 
 const Partners = () => {
   const partnerImgs = [
@@ -16,7 +17,7 @@ const Partners = () => {
       </Title>
       <div className="col-span-3 grid grid-flow-col justify-around gap-11 lg:px-40">
         <Slider
-          sliderPerView={3}
+          sliderPerView={isMobile() ? 1 : 3}
           autoplay
           withNavigation={false}
           withPagination={false}

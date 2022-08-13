@@ -1,6 +1,6 @@
 // import Swiper core and required modules
 import { Autoplay, Navigation, Pagination } from "swiper";
-
+import isMobile from "../utils/isMobile";
 import { Swiper } from "swiper/react";
 
 // Import Swiper styles
@@ -15,15 +15,13 @@ export default ({
   autoplay = false,
   children,
 }) => {
-  const isMobile = window.innerWidth < 768;
-
   return (
     <Swiper
       // install Swiper modules
       modules={[Navigation, Pagination, Autoplay]}
       spaceBetween={10}
       slidesPerView={sliderPerView}
-      navigation={(isMobile ? false : true) && withNavigation}
+      navigation={(isMobile() ? false : true) && withNavigation}
       className="w-full"
       loop
       autoplay={autoplay}
