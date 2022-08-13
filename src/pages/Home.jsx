@@ -4,6 +4,7 @@ import AboutUs from "../components/AboutUs";
 import Searches from "../components/Searches";
 import { SwiperSlide } from "swiper/react";
 import SwiperImageWithTitle from "../components/SwiperImageWithTitle";
+import Partners from "../components/Partners";
 
 function Home() {
   const projects = [
@@ -37,9 +38,7 @@ function Home() {
       <div className="mt-8 grid min-h-fit gap-28">
         <AboutUs />
         <Searches />
-        <h2 id="search" className="mt-10">
-          Pesquisa
-        </h2>
+        <Partners />
       </div>
     </Layout>
   );

@@ -2,7 +2,7 @@ import Title from "./Title";
 
 const AboutUs = () => {
   return (
-    <div className="grid grid-flow-row gap-6 px-6 lg:px-16">
+    <div id="about" className="grid grid-flow-row gap-6 px-6 lg:px-16">
       <Title>
         Sobre <span className="text-blue"> nós</span>{" "}
       </Title>

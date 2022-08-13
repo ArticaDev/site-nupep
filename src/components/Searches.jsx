@@ -26,7 +26,7 @@ const Searches = () => {
     sliceds_search_lists.push(search_list.slice(i, i + 5));
   }
   return (
-    <div className="grid grid-flow-row gap-6 px-6 lg:px-16 ">
+    <div className="grid grid-flow-row gap-6 px-6 lg:px-16 " id="search">
       <Title>
         Pesquisa <span className="text-blue">e desenvolvimento</span>
       </Title>

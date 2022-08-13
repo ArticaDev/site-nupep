@@ -29,7 +29,7 @@ const Footer = () => {
   ];
 
   return (
-    <div className="max-w-screen grid grid-flow-row items-center justify-center gap-2 bg-[#161616] p-10 font-bold text-white">
+    <div className="max-w-screen mt-28 grid grid-flow-row items-center justify-center gap-2 bg-[#161616] p-10 font-bold text-white">
       <p>
         Núcleo de Pesquisa em Eletrônica de Potência (NUPEP) - Universidade
         Federal de Uberlândia (UFU)
