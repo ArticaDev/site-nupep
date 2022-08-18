@@ -1,6 +1,8 @@
 import ReactSearchBox from "react-search-box";
 
 const Searchbar = ({
+  name,
+  className,
   placeholder,
   data = [],
   value = "",
@@ -10,14 +12,17 @@ const Searchbar = ({
   ...props
 }) => {
   return (
-    <div className="container mx-auto">
-      <ReactSearchBox
-        placeholder={placeholder}
-        data={data}
-        onChange={onChange}
-        onSelect={onSelect}
-        onFocus={onFocus}
-      />
+    <div className={className}>
+      <div className="container relative mx-auto max-w-sm md:max-w-md">
+        <ReactSearchBox
+          name={name}
+          placeholder={placeholder}
+          data={data}
+          onChange={onChange}
+          onSelect={onSelect}
+          onFocus={onFocus}
+        />
+      </div>
     </div>
   );
 };
