@@ -7,9 +7,9 @@ const Card = ({ img, name, hidden }) => {
       hidden={hidden}
     >
       <div className="flex items-center justify-between">
-        <p>{name}</p>
+        <p className="overflow-ellipsis">{name}</p>
         <div
-          className="h-[100px] w-[100px] bg-slate-400 bg-clip-padding bg-no-repeat bg-contain"
+          className="h-[100px] w-[100px] shrink-0 bg-slate-400 bg-contain bg-clip-padding bg-no-repeat"
           style={{
             backgroundImage: `url(${img})`,
           }}

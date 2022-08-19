@@ -1,4 +1,4 @@
-import ReactSearchBox from "react-search-box";
+import React from "react";
 
 const Searchbar = ({
   name,
@@ -12,7 +12,7 @@ const Searchbar = ({
   return (
     <div className={className}>
       <input
-        className="container relative mx-auto h-full max-w-md rounded-sm border border-solid border-black"
+        className="container mx-auto h-full w-full rounded-sm border border-solid border-black"
         type="text"
         value={value}
         onChange={onChange}
