@@ -113,17 +113,17 @@ const Team = () => {
   return (
     <div>
       <Layout>
-        <div className="grid grid-cols-2 p-4 gap-2 md:grid-cols-3">
+        <div className="grid grid-cols-2 gap-2 px-4 py-3 md:grid-cols-3">
           <Title>Equipe</Title>
           <Searchbar
             name="search"
-            className="col-span-2 w-full h-8 place-self-center md:col-span-1"
+            className="col-span-2 h-8 w-full place-self-center md:col-span-1"
             placeholder={"Digite o nome de um integrante"}
             value={search}
             onChange={(event) => setSearch(event.target.value)}
           />
           <Filter
-            className="order h-8 col-start-2 row-start-1 justify-self-end self-center md:hidden"
+            className="order col-start-2 row-start-1 h-8 self-center justify-self-end md:hidden"
             name="role"
             id="filter"
             options={options}
