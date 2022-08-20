@@ -5,6 +5,7 @@ import Searches from "../components/Searches";
 import { SwiperSlide } from "swiper/react";
 import SwiperImageWithTitle from "../components/SwiperImageWithTitle";
 import Partners from "../components/Partners";
+import Contact from "../components/Contact";
 
 function Home() {
   const projects = [
@@ -39,6 +40,7 @@ function Home() {
         <AboutUs />
         <Searches />
         <Partners />
+        <Contact />
       </div>
     </Layout>
   );
