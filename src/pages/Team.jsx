@@ -9,7 +9,11 @@ import MemberCard from "../components/MemberCard";
 import isMobile from "../utils/isMobile";
 
 const Grid = ({ children }) => {
-  return <div className="grid grid-cols-1 p-3 md:grid-cols-4">{children}</div>;
+  return (
+    <div className="grid grid-cols-1 gap-1 lg:gap-10 p-3 sm:grid-cols-2 md:grid-cols-4">
+      {children}
+    </div>
+  );
 };
 
 const Col = ({ title, children, hidden }) => {
@@ -35,7 +39,7 @@ const Team = () => {
   const members = [
     {
       key: "eustaquio-teacher",
-      name: "Eustáquio Inácio",
+      name: "Ernane Antônio Alves Coelho",
       picture: "https://picsum.photos/200",
       role: roles.teacher,
     },
