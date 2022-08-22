@@ -5,6 +5,9 @@ const config = {
       colors: {
         blue: "#05ADF2",
       },
+      width: {
+        150: "500px",
+      },
     },
   },
   plugins: [],
