@@ -1,27 +1,38 @@
-import React from "react";
 import Title from "./Title";
-import isMobile from "../utils/isMobile";
 import Input from "./Input";
+import { useState } from "react";
 const Contact = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (name && email && message) {
+      setName("");
+      setEmail("");
+      setMessage("");
+    }
+  };
+
   return (
     <div className="grid grid-flow-col md:grid-flow-row">
       <div className="grid grid-flow-row gap-6 px-6 lg:px-16">
-        {!isMobile() && <Title>Contato</Title>}
         <div className="grid gap-4 lg:grid-flow-col lg:grid-cols-3 lg:gap-12	">
           <div className="grid gap-3.5">
-            {isMobile() && <Title>Contato</Title>}
-            <div className="grid gap-2">
+            <Title>Contato</Title>
+            <form onSubmit={handleSubmit} className="grid gap-2">
               <Input labelText="Seu nome:" />
               <Input labelText="Seu email:" />
               <Input labelText="Assunto:" />
-              <div className="grid grid-flow-row">
+              <div className="mb-3 grid grid-flow-row">
                 <label className="font-bold">Mensagem:</label>
-                <textarea className="border-2 border-black "></textarea>
+                <textarea className="border-2 border-black px-4 pt-1 outline-none"></textarea>
               </div>
               <button className="mx-auto w-32 rounded-sm bg-black px-8 py-2 text-sm font-bold text-white">
                 Enviar
               </button>
-            </div>
+            </form>
           </div>
           <div className="">
             <div className="grid gap-5">

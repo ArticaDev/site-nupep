@@ -1,5 +1,3 @@
-import React from "react";
-
 const Input = ({ labelText, value, setValue }) => {
   return (
     <div className="grid grid-flow-row">
@@ -7,7 +5,7 @@ const Input = ({ labelText, value, setValue }) => {
       <input
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        className="border-2 border-black "
+        className="border-2 border-black px-4 py-1 outline-none"
       ></input>
     </div>
   );
