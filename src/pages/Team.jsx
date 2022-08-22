@@ -110,9 +110,14 @@ const Team = () => {
   const [visibleColumn, setVisibleColumn] = useState(
     isMobile() ? "teacher" : "all"
   );
+
   const filterByRole = (role) => {
     return members.filter((member) => member.role === role);
   };
+
+  const hideMember = (name) => {
+    return !name.toLowerCase().startsWith(search.toLowerCase())
+  }
 
   return (
     <div>
@@ -154,7 +159,7 @@ const Team = () => {
                   key={`member-${member.key}`}
                   name={member.name}
                   img={member.picture}
-                  hidden={!member.name.startsWith(search)}
+                  hidden={hideMember(member.name)}
                 />
               ))}
             </Col>
