@@ -8,9 +8,3 @@
     font-family: "Ubuntu", sans-serif !important;
   }
 }
-
-@layer components {
-  .grid-cols-autofit-85 {
-    grid-template-columns: repeat(auto-fit, minmax(21.25rem, 1fr));
-  }
-}
