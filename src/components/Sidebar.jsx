@@ -1,29 +1,39 @@
-import Logo from "../assets/Logo.svg";
+import { useState, useRef } from "react";
+import useOnClickOutside from "use-onclickoutside";
+import BurgerIcon from "./BurgerIcon";
 import { Link } from "react-scroll";
-import Sidebar from "./Sidebar";
 
-const Navbar = () => {
-  const navbarOptions = [
-    { name: "Sobre nós", id: "about" },
-    { name: "Pesquisa", id: "search" },
-    { name: "Projetos", url: "/projetos" },
-    { name: "Publicações", url: "/publicacoes" },
-    { name: "Equipe", url: "/equipe" },
-  ];
-
+const Sidebar = ({ navbarOptions }) => {
+  const [showSidebar, setShowSidebar] = useState(false);
+  const ref = useRef(null);
+  useOnClickOutside(ref, () => setShowSidebar(false));
   return (
-    <>
-      <nav className="max-w-screen sticky top-0 z-10 block border-gray-200 bg-white px-4 py-5 shadow">
-        <div className="flex flex-wrap items-center justify-between lg:px-12">
-          <a href="/" className="flex items-center">
-            <img
-              src={Logo}
-              className="h-12 w-36 self-center whitespace-nowrap font-semibold text-black "
-            ></img>
-          </a>
-          <Sidebar navbarOptions={navbarOptions} />
-          <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-            <ul className="mt-4 flex flex-col rounded-lg border border-gray-100 bg-gray-50 p-4 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:text-sm md:font-medium">
+    <div ref={ref}>
+      {!showSidebar && (
+        <button
+          onClick={() => setShowSidebar(!showSidebar)}
+          className="ml-3 inline-flex items-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 md:hidden"
+        >
+          <BurgerIcon />
+        </button>
+      )}
+      <div
+        className={`fixed top-0 right-0 z-40 h-screen bg-blue text-black  duration-300 ease-in-out ${
+          showSidebar ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="grid w-64 grid-flow-row items-center justify-center gap-5">
+          <div className="grid items-center justify-end">
+            <button
+              onClick={() => setShowSidebar(!showSidebar)}
+              className=" px-6 pt-5 text-3xl text-white"
+            >
+              x
+            </button>
+          </div>
+          <div className="grid grid-flow-row gap-6">
+            <ul className="mt-4 flex flex-col rounded-lg border border-gray-100 bg-gray-50 p-8">
+              <hr></hr>
               {navbarOptions.map((option) =>
                 option.url ? (
                   <li key={option.name}>
@@ -33,6 +43,7 @@ const Navbar = () => {
                     >
                       {option.name}
                     </a>
+                    <hr></hr>
                   </li>
                 ) : (
                   <li key={option.name}>
@@ -57,15 +68,16 @@ const Navbar = () => {
                         {option.name}
                       </a>
                     )}
+                    <hr></hr>
                   </li>
                 )
               )}
             </ul>
           </div>
         </div>
-      </nav>
-    </>
+      </div>
+    </div>
   );
 };
 
-export default Navbar;
+export default Sidebar;
