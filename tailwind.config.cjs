@@ -5,8 +5,12 @@ const config = {
       colors: {
         blue: "#05ADF2",
       },
+      height: {
+        "25": "6.25rem",
+      },
       width: {
-        150: "500px",
+        "25": "6.25rem",
+        "150": "500px",
       },
     },
   },
