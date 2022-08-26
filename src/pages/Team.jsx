@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import Layout from "../components/Layout";
 import Searchbar from "../components/Searchbar";
 import Title from "../components/Title";
@@ -10,7 +9,7 @@ import isMobile from "../utils/isMobile";
 
 const Grid = ({ children }) => {
   return (
-    <div className="grid grid-cols-1 gap-1 lg:gap-10 p-3 sm:grid-cols-2 md:grid-cols-4">
+    <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-2 md:grid-cols-4 lg:gap-10">
       {children}
     </div>
   );
@@ -116,8 +115,8 @@ const Team = () => {
   };
 
   const hideMember = (name) => {
-    return !name.toLowerCase().startsWith(search.toLowerCase())
-  }
+    return !name.toLowerCase().startsWith(search.toLowerCase());
+  };
 
   return (
     <div>
@@ -160,6 +159,7 @@ const Team = () => {
                   name={member.name}
                   img={member.picture}
                   hidden={hideMember(member.name)}
+                  teamMemberUrl={`/equipe/teamMemberPage`}
                 />
               ))}
             </Col>
