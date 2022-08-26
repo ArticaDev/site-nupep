@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Card = ({ img, name, hidden }) => {
   return (
@@ -7,14 +8,16 @@ const Card = ({ img, name, hidden }) => {
       hidden={hidden}
     >
       <div className="flex items-center justify-between">
-        <p className="text-2xl font-bold overflow-ellipsis">{name}</p>
-        <div
-          className="h-25 w-25 shrink-0 bg-slate-400 bg-contain bg-clip-padding bg-no-repeat"
-          style={{
-            backgroundImage: `url(${img})`,
-          }}
-          alt={`Foto de ${name}`}
-        />
+        <Link to={`/equipe/${name}`} key={name + "link"}>
+          <p className="overflow-ellipsis text-2xl font-bold">{name}</p>
+          <div
+            className="h-25 w-25 shrink-0 bg-slate-400 bg-contain bg-clip-padding bg-no-repeat"
+            style={{
+              backgroundImage: `url(${img})`,
+            }}
+            alt={`Foto de ${name}`}
+          />
+        </Link>
       </div>
     </div>
   );
