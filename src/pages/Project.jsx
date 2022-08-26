@@ -1,10 +1,14 @@
+import { useParams } from "react-router-dom";
+
 import Layout from "../components/Layout";
 import Title from "../components/Title";
 import Image from "../components/Image";
 
 const Project = ({ ...props }) => {
+  const { projectTitle } = useParams();
+
   const project = {
-    title: "Projeto",
+    title: projectTitle,
     abstract: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus
     dicta, laborum accusamus sint similique et eveniet nihil ad quam quasi
     nam iste voluptatibus. Quae id, odio deleniti omnis nihil quod!
@@ -42,14 +46,19 @@ const Project = ({ ...props }) => {
         </h3>
         <hr />
         {project.images.length > 0 && (
-          <div>
-            <h4>Galeria de imagens</h4>
-            <div className="container flex flex-wrap gap-6">
+          <>
+            <h4 className="text-3xl font-bold">
+              Galeria de <span className="text-blue">Imagens</span>
+            </h4>
+            <div className="container mx-auto flex flex-wrap gap-6">
               {project.images.map((src) => (
-                <Image className="aspect-square grow basis-32 max-w-xs" src={src} />
+                <Image
+                  className="aspect-square max-w-xs grow basis-32"
+                  src={src}
+                />
               ))}
             </div>
-          </div>
+          </>
         )}
       </div>
     </Layout>
