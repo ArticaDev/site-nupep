@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import Layout from "../components/Layout";
 import Title from "../components/Title";
@@ -49,18 +50,16 @@ const Projects = () => {
                       <h3 className="text-white">{project.title}</h3>
                     </div>
                     <div className="mx-2 flex h-1/2 flex-wrap items-end justify-between overflow-auto p-3">
-                      <p>
-                        {project.description}
-                      </p>
+                      <p>{project.description}</p>
                       {project.status === "finished" && <CompleteTag />}
                       {project.status === "inprogress" && <InProgressTag />}
                       {project.status === "dropped" && <DroppedTag />}
-                      <a
+                      <Link
                         className="rounded-sm bg-black px-8 py-2 text-sm font-bold text-white"
-                        href=""
+                        to={`/projeto/${project.title}`}
                       >
                         Ler Mais
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
