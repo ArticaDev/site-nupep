@@ -35,22 +35,23 @@ const Projects = () => {
             {[...new Array(7)]
               .map((project) => ({
                 title: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Debitis similique doloribus accusamus cum praesentium aut
-                harum reprehenderit, et voluptatem ipsum sapiente,
-                recusandae mollitia autem eos. Ad doloribus iusto dicta
-                sed.`,
+                Debi`,
                 description: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Exercitationem vel minima perferendis quae deleniti`,
                 status: "finished",
               }))
               .map((project) => (
-                <div className="h-80 flex-shrink basis-85">
+                <div className="flex-shrink basis-85">
                   <div className="h-full w-full rounded-xl shadow-md">
-                    <div className="flex h-1/2 place-items-center text-ellipsis whitespace-normal rounded-t-xl bg-black p-3">
-                      <h3 className="text-white">{project.title}</h3>
+                    <div className="flex place-items-center text-ellipsis whitespace-normal rounded-t-xl bg-black p-3">
+                      <Link to={`/projeto/${project.title}`}>
+                        <h3 className="py-6 px-3 text-lg font-bold text-white">
+                          {project.title}
+                        </h3>
+                      </Link>
                     </div>
-                    <div className="mx-2 flex h-1/2 flex-wrap items-end justify-between overflow-auto p-3">
-                      <p>{project.description}</p>
+                    <div className="mx-2 flex flex-wrap items-end justify-between overflow-auto p-3 py-8">
+                      <p className="mb-3">{project.description}</p>
                       {project.status === "finished" && <CompleteTag />}
                       {project.status === "inprogress" && <InProgressTag />}
                       {project.status === "dropped" && <DroppedTag />}
