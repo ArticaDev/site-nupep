@@ -12,6 +12,12 @@ const config = {
       },
       flexBasis: {
         85: "21.25rem",
+      height: {
+        "25": "6.25rem",
+      },
+      width: {
+        "25": "6.25rem",
+        "150": "500px",
       },
     },
   },

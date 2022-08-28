@@ -1,4 +1,3 @@
-import React from "react";
 import Title from "./Title";
 import Slider from "./Slider";
 import { SwiperSlide } from "swiper/react";

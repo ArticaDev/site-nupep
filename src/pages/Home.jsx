@@ -5,6 +5,8 @@ import Searches from "../components/Searches";
 import { SwiperSlide } from "swiper/react";
 import SwiperImageWithTitle from "../components/SwiperImageWithTitle";
 import Partners from "../components/Partners";
+import Contact from "../components/Contact";
+import CheckOtherPages from "../components/CheckOtherPages";
 
 function Home() {
   const projects = [
@@ -38,7 +40,9 @@ function Home() {
       <div className="mt-8 grid min-h-fit gap-28">
         <AboutUs />
         <Searches />
+        <CheckOtherPages />
         <Partners />
+        <Contact />
       </div>
     </Layout>
   );
