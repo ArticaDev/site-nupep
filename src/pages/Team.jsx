@@ -29,6 +29,7 @@ const Col = ({ title, children, hidden }) => {
 
 const Team = () => {
   const roles = {
+    all:"all",
     teacher: "teacher",
     master: "master",
     doctorate: "doctorate",
@@ -88,6 +89,10 @@ const Team = () => {
 
   const options = [
     {
+      name:"Todos",
+      value:roles.all
+    },
+    {
       name: "Professores",
       value: roles.teacher,
     },
@@ -131,14 +136,13 @@ const Team = () => {
             onChange={(event) => setSearch(event.target.value)}
           />
           <Filter
-            className="order col-start-2 row-start-1 h-8 self-center justify-self-end md:hidden"
+            className="order col-start-2 row-start-1 md:col-start-3 h-8 self-center justify-self-end"
             name="role"
             id="filter"
             options={options}
             onChange={(event) => {
               setVisibleColumn(event.target.value);
             }}
-            disabled={!isMobile()}
           />
         </div>
         <Grid>
