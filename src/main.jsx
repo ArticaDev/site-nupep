@@ -20,10 +20,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/">
             <Route index element={<Home />} />
             <Route path="projetos" element={<Projects />} />
-            <Route path="projeto/:projectTitle" element={<Project />} />
+            <Route path="projeto/:projectID" element={<Project />} />
             <Route path="publicacoes" element={<Publications />} />
             <Route path="equipe" element={<Team />} />
-            <Route path="equipe/:memberName" element={<TeamMemberPage />} />
+            <Route path="equipe/:memberID" element={<TeamMemberPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

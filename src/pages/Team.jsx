@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Layout from "../components/Layout";
 import Searchbar from "../components/Searchbar";
 import Title from "../components/Title";
 import Filter from "../components/Filter";
 import MemberCard from "../components/MemberCard";
-
+import axios from 'axios';
 import isMobile from "../utils/isMobile";
 
 const Grid = ({ children }) => {
@@ -28,63 +28,36 @@ const Col = ({ title, children, hidden }) => {
 };
 
 const Team = () => {
-  const roles = {
-    teacher: "teacher",
-    master: "master",
-    doctorate: "doctorate",
-    undergraduate: "undergraduate",
+
+  const [members, setMembers] = useState([])
+
+  const formatMembersData = (raw_data) => {
+    const members_data = raw_data.data.map(data => data.attributes.Campos)
+    members_data.forEach(member => {
+      if (member.Foto) {
+        member.Foto = member.Foto.data.attributes.url
+      }
+    });
+    return members_data;
+  }
+
+  const getMembers = async () => {
+    const result = await axios.get('https://nupepcms.articadev.com/api/members?populate[Campos][populate]=*');
+    if (result) {
+      setMembers(formatMembersData(result.data));
+    }
   };
 
-  const members = [
-    {
-      key: "eustaquio-teacher",
-      name: "Ernane Antônio Alves Coelho",
-      picture: "https://picsum.photos/200",
-      role: roles.teacher,
-    },
-    {
-      key: "joao-teacher",
-      name: "João Batista",
-      picture: "https://picsum.photos/200",
-      role: roles.teacher,
-    },
-    {
-      key: "eustaquio-master",
-      name: "Eustáquio Inácio",
-      picture: "https://picsum.photos/200",
-      role: roles.master,
-    },
-    {
-      key: "joao-master",
-      name: "João Batista",
-      picture: "https://picsum.photos/200",
-      role: roles.master,
-    },
-    {
-      key: "eustaquio-doctor",
-      name: "Eustáquio Inácio",
-      picture: "https://picsum.photos/200",
-      role: roles.doctorate,
-    },
-    {
-      key: "joao-doctor",
-      name: "João Batista",
-      picture: "https://picsum.photos/200",
-      role: roles.doctorate,
-    },
-    {
-      key: "eustaquio-ic",
-      name: "Eustáquio Inácio",
-      picture: "https://picsum.photos/200",
-      role: roles.undergraduate,
-    },
-    {
-      key: "joao-ic",
-      name: "João Batista",
-      picture: "https://picsum.photos/200",
-      role: roles.undergraduate,
-    },
-  ];
+  useEffect(() => {
+    getMembers()
+  }, [])
+
+  const roles = {
+    teacher: "Professor",
+    master: "Aluno de Mestrado",
+    doctorate: "Aluno de Doutorado",
+    undergraduate: "Aluno de IC",
+  };
 
   const options = [
     {
@@ -111,7 +84,7 @@ const Team = () => {
   );
 
   const filterByRole = (role) => {
-    return members.filter((member) => member.role === role);
+    return members.filter((member) => member.Cargo === role);
   };
 
   const hideMember = (name) => {
@@ -155,10 +128,10 @@ const Team = () => {
             >
               {filterByRole(column[1]).map((member) => (
                 <MemberCard
-                  key={`member-${member.key}`}
-                  name={member.name}
-                  img={member.picture}
-                  hidden={hideMember(member.name)}
+                  name={member.Nome}
+                  id={member.id}
+                  img={`https://nupepcms.articadev.com${member.Foto}`}
+                  hidden={hideMember(member.Nome)}
                   teamMemberUrl={`/equipe/teamMemberPage`}
                 />
               ))}

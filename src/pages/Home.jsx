@@ -7,33 +7,41 @@ import SwiperImageWithTitle from "../components/SwiperImageWithTitle";
 import Partners from "../components/Partners";
 import Contact from "../components/Contact";
 import CheckOtherPages from "../components/CheckOtherPages";
+import { useState, useEffect } from "react";
+import axios from 'axios';
 
 function Home() {
-  const projects = [
-    {
-      src: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-      title: "Titulo de projeto 1",
-    },
-    {
-      src: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-      title: "Titulo de projeto 2",
-    },
-    {
-      src: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-      title: "Titulo de projeto 3",
-    },
-    {
-      src: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-      title: "Titulo de projeto 4",
-    },
-  ];
+
+  const [projects, setProjects] = useState([])
+
+  const formatProjectsData = (raw_data) => {
+    const projects_data = raw_data.data.map(data => data.attributes.Campos)
+    projects_data.forEach(project => {
+      if (project.Imagens) {
+        const url = `https://nupepcms.articadev.com${project.Imagens.data[0].attributes.url}`
+        project.thumbnail = url
+      }
+    });
+    return projects_data;
+  }
+
+  const getProjects = async () => {
+    const result = await axios.get('https://nupepcms.articadev.com/api/projects?populate[Campos][populate]=*');
+    if (result) {
+      setProjects(formatProjectsData(result.data));
+    }
+  };
+
+  useEffect(() => {
+    getProjects()
+  }, [])
 
   return (
     <Layout>
       <Slider>
         {projects.map((project, index) => (
           <SwiperSlide key={index}>
-            <SwiperImageWithTitle src={project.src} title={project.title} />
+            <SwiperImageWithTitle src={project.thumbnail} title={project.Titulo} />
           </SwiperSlide>
         ))}
       </Slider>
