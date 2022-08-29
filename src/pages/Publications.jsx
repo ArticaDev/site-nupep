@@ -19,7 +19,8 @@ const filterOptions = [
   { name: "Teses", value: publicationTypes.thesis },
 ];
 
-const sisbi_link = "http://www.bdtd.ufu.br/tde_busca/processaPesquisa.php?nrPagina=1&amp;pesqExecutada=0&amp;nrExpressoes=4&amp;texto%5B0%5D=%22Luiz+Carlos+de+Freitas%22&amp;campo%5B0%5D=CONTRIBUIDOR&amp;conectivo%5B1%5D=OR&amp;texto%5B1%5D=%22Ernane+Ant%F4nio+Alves+Coelho%22&amp;campo%5B1%5D=CONTRIBUIDOR&amp;conectivo%5B2%5D=OR&amp;texto%5B2%5D=%22Joao+Batista+Vieira+Junior%22&amp;campo%5B2%5D=CONTRIBUIDOR&amp;conectivo%5B3%5D=OR&amp;texto%5B3%5D=%22Valdeir+Jos%E9+de+Farias%22&amp;campo%5B3%5D=CONTRIBUIDOR&amp;grau=Mestre&amp;idioma=QQR&amp;dataInicDefesa=&amp;dataFimDefesa=&amp;qtdRegPagina=20&amp;Submit=Buscar";
+const sisbi_link =
+  "http://www.bdtd.ufu.br/tde_busca/processaPesquisa.php?nrPagina=1&amp;pesqExecutada=0&amp;nrExpressoes=4&amp;texto%5B0%5D=%22Luiz+Carlos+de+Freitas%22&amp;campo%5B0%5D=CONTRIBUIDOR&amp;conectivo%5B1%5D=OR&amp;texto%5B1%5D=%22Ernane+Ant%F4nio+Alves+Coelho%22&amp;campo%5B1%5D=CONTRIBUIDOR&amp;conectivo%5B2%5D=OR&amp;texto%5B2%5D=%22Joao+Batista+Vieira+Junior%22&amp;campo%5B2%5D=CONTRIBUIDOR&amp;conectivo%5B3%5D=OR&amp;texto%5B3%5D=%22Valdeir+Jos%E9+de+Farias%22&amp;campo%5B3%5D=CONTRIBUIDOR&amp;grau=Mestre&amp;idioma=QQR&amp;dataInicDefesa=&amp;dataFimDefesa=&amp;qtdRegPagina=20&amp;Submit=Buscar";
 
 const Publications = () => {
   const [filter, setFilter] = useState(publicationTypes.articles);
@@ -35,8 +36,9 @@ const Publications = () => {
   return (
     <div>
       <Layout>
-        <div className="px-4 py-3">
+        <div className="flex px-4 py-3">
           <Title>Publicações</Title>
+          <div className="grow"></div>
           <Filter
             id="filter"
             name="publication-type"
@@ -45,17 +47,20 @@ const Publications = () => {
           />
         </div>
         <div
-          className={clsx("ml-4", filter === publicationTypes.articles && "hidden")}
+          className={clsx(
+            "ml-4",
+            filter === publicationTypes.articles && "hidden"
+          )}
         >
           <p>
-            Clique no ícone abaixo para acessar o banco de {filterOptions.find((option) => option.value === filter).name.toLowerCase()}:
+            Clique no ícone abaixo para acessar o banco de{" "}
+            {filterOptions
+              .find((option) => option.value === filter)
+              .name.toLowerCase()}
+            :
           </p>
           <a target="_blank" href={sisbi_link}>
-            <img
-              alt="link sisbi"
-              src={sisbi_logo}
-              className="w-52 h-24"
-            />
+            <img alt="link sisbi" src={sisbi_logo} className="h-24 w-52" />
           </a>
         </div>
         <div
