@@ -23,12 +23,14 @@ const Partners = () => {
         >
           {partnerImgs.map((partnerImg, index) => (
             <SwiperSlide key={index}>
-              <img
-                src={partnerImg}
-                alt="partner"
-                key={index}
-                className="max-h-40 min-w-full"
-              />
+              <a className="cursor-pointer" target="_blank" href={partnerImg}>
+                <img
+                  src={partnerImg}
+                  alt="partner"
+                  key={index}
+                  className="max-h-40 min-w-full"
+                />
+              </a>
             </SwiperSlide>
           ))}
         </Slider>
