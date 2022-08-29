@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import limitText from "../utils/limitText";
 import Layout from "../components/Layout";
 import Title from "../components/Title";
 import Tag from "../components/Tag";
@@ -56,15 +56,15 @@ const Projects = () => {
             {projects.map((project) => (
                 <div className="flex-shrink basis-85">
                   <div className="h-full w-full rounded-xl shadow-md">
-                    <div className="flex place-items-center text-ellipsis whitespace-normal rounded-t-xl bg-black p-3">
+                    <div className="flex place-items-center text-ellipsis whitespace-normal rounded-t-xl bg-black">
                       <Link to={`/projeto/${project.id}`}>
-                        <h3 className="py-6 px-3 text-lg font-bold text-white">
-                          {project.Titulo}
+                      <h3 className="p-7 text-lg font-bold text-white">
+                          {limitText(project.Titulo, 10)}
                         </h3>
                       </Link>
                     </div>
-                    <div className="mx-2 flex flex-wrap items-end justify-between overflow-auto p-3 py-8">
-                      <p className="mb-3" dangerouslySetInnerHTML={ {__html: project.Resumo} }></p>
+                    <div className="mx-2 flex flex-wrap items-end justify-between overflow-auto p-3 py-4">
+                      <p className="mb-3" dangerouslySetInnerHTML={ {__html: limitText(project.Resumo, 20)} }></p>
                       {project.Status === "Concluído" && <CompleteTag />}
                       {project.Status === "Em andamento" && <InProgressTag />}
                       {project.Status === "Cancelado" && <DroppedTag />}
