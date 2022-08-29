@@ -33,7 +33,11 @@ const Project = ({ ...props }) => {
       "https://picsum.photos/200",
       "https://picsum.photos/200",
     ],
-    authors: "",
+    situation: "Em andamento",
+    studentsInvolved: "Graduação (3)/Pós-graduação (3)",
+    studentNames: "Luiz Carlos / João / Maria",
+    sponsorship: "Fundação de Amparo ao Ensino e Pesquisa",
+    nature: "Projeto de Extensão",
   };
 
   return (
@@ -42,7 +46,22 @@ const Project = ({ ...props }) => {
         <Title>{project.title}</Title>
         <hr />
         <h3 className="text-xl">
-          <i>Abstract:</i> {project.abstract}
+          <strong>Descrição:</strong> {project.abstract}
+        </h3>
+        <h3 className="text-xl">
+          <strong>Situação:</strong> {project.situation}
+        </h3>
+        <h3 className="text-xl">
+          <strong>Alunos envolvidos:</strong> {project.studentsInvolved}
+        </h3>
+        <h3 className="text-xl">
+          <strong>Integrantes:</strong> {project.studentNames}
+        </h3>
+        <h3 className="text-xl">
+          <strong>Financiadores:</strong> {project.sponsorship}
+        </h3>
+        <h3 className="text-xl">
+          <strong>Natureza:</strong> {project.nature}
         </h3>
         <hr />
         {project.images.length > 0 && (
