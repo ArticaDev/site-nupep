@@ -45,14 +45,14 @@ const Footer = () => {
             <li>Links Externos</li>
             {urlList.map((url) => (
               <li key={url.name}>
-                <a className="text-blue hover:text-cyan-600" href={url.url}>
+                <a className="text-blue cursor-pointer hover:text-cyan-600" href={url.url}>
                   {url.name}
                 </a>
               </li>
             ))}
           </ul>
         </div>
-        <a href="https://www.ufu.br">
+        <a className='cursor-pointer' href="https://www.ufu.br">
           <img className="w-48" src={ufu}></img>
         </a>
       </div>
