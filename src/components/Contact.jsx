@@ -1,14 +1,28 @@
 import Title from "./Title";
 import Input from "./Input";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import emailjs from "emailjs-com";
 import { positions, useAlert } from "react-alert";
+import axios from 'axios';
 
 const Contact = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [nupepEmail, setNupepEmail] = useState("")
+
+  const getEmail = async () => {
+    const result = await axios.get('https://nupepcms.articadev.com/api/contact-email');
+    if (result) {
+      setNupepEmail(result.data.data.attributes.Email);
+    }
+  };
+
+  useEffect(() => {
+    getEmail()
+  }, [])
+
   const alert = useAlert();
 
   const handleSubmit = (e) => {
@@ -27,7 +41,7 @@ const Contact = () => {
         subject: subject,
         from_email: email,
         message: message,
-        to_email: "articadevinfra@gmail.com",
+        to_email: nupepEmail,
       },
       "user_dBh2cKXG6hYtcY3FFqa1L"
     );
