@@ -27,6 +27,7 @@ const Contact = () => {
         subject: subject,
         from_email: email,
         message: message,
+        to_email: "articadevinfra@gmail.com",
       },
       "user_dBh2cKXG6hYtcY3FFqa1L"
     );
@@ -80,7 +81,7 @@ const Contact = () => {
               <Title>
                 Informações para <span className="text-blue">contato</span>
               </Title>
-              <p className="lg:w-150 text-xl font-bold">
+              <p className="text-xl font-bold lg:w-150">
                 Núcleo de Pesquisa em Eletrônica de Potência (NUPEP) Faculdade
                 de Engenharia Elétrica (FEELT)
                 <br /> Universidade Federal de Uberlândia (UFU)
@@ -99,7 +100,7 @@ const Contact = () => {
             <Title>Localização</Title>
             <div className="grid justify-center">
               <iframe
-                className="lg:w-150 h-48 w-72 lg:h-96"
+                className="h-48 w-72 lg:h-96 lg:w-150"
                 height="100%"
                 scrolling="no"
                 src="//maps.google.com/?ll=-18.919687%2C-48.258444&amp;spn=0.003613%2C0.005568&amp;ie=UTF8&amp;z=17&amp;t=hybrid&amp;sll=-18.919687%2C-48.258444&amp;sspn=0.003613%2C0.005568&amp;q=-18.919846%2C-48.258616%20(Local%20sem%20t%C3%ADtulo)&amp;output=embed"
