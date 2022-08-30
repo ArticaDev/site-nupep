@@ -52,7 +52,7 @@ const TeamMemberPage = () => {
             </p>
             <p dangerouslySetInnerHTML={ {__html: member.Sobre} }></p>
             <button className="mx-auto w-40 bg-zinc-800 px-4 py-2 text-sm text-white transition-all duration-150 ease-in-out hover:bg-zinc-900 focus:ring-0 active:shadow-lg">
-              <a href={`mailto:${member.Lattes}`}>Lattes</a>
+              <a href={member.Lattes}>Lattes</a>
             </button>
           </div>
         </div>
