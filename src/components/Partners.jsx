@@ -2,13 +2,12 @@ import Title from "./Title";
 import Slider from "./Slider";
 import { SwiperSlide } from "swiper/react";
 import isMobile from "../utils/isMobile";
+import logoPGM from "../assets/Logo_PGM.png";
+import logoECONOVA from "../assets/Logo_ECONOVA_2013.jpg";
+import logoIMASTEL from "../assets/Logo_IMASTEL.png";
 
 const Partners = () => {
-  const partnerImgs = [
-    "http://www.nupep.feelt.ufu.br/sites/nupep.feelt.ufu.br/files/imagens/Logo_ECONOVA_2013.jpg",
-    "http://www.nupep.feelt.ufu.br/sites/nupep.feelt.ufu.br/files/imagens/Logo_PGM.png",
-    "http://www.imastel.com.br/imgs/open.png",
-  ];
+  const partnerImgs = [logoECONOVA, logoPGM, logoIMASTEL];
   return (
     <div className="grid grid-flow-row gap-14 px-6 lg:px-16">
       <Title>
@@ -23,12 +22,12 @@ const Partners = () => {
         >
           {partnerImgs.map((partnerImg, index) => (
             <SwiperSlide key={index}>
-              <a className="cursor-pointer" target="_blank" href={partnerImg}>
+              <a className="grid cursor-pointer items-center justify-center">
                 <img
                   src={partnerImg}
                   alt="partner"
                   key={index}
-                  className="max-h-40 min-w-full"
+                  className="max-h-40 w-96"
                 />
               </a>
             </SwiperSlide>
