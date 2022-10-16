@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import Searchbar from "../components/Searchbar";
 import Title from "../components/Title";
@@ -6,6 +6,7 @@ import Filter from "../components/Filter";
 import MemberCard from "../components/MemberCard";
 import axios from 'axios';
 import isMobile from "../utils/isMobile";
+const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN
 
 const Grid = ({ children }) => {
   return (
@@ -42,7 +43,7 @@ const Team = () => {
   }
 
   const getMembers = async () => {
-    const result = await axios.get('https://nupepcms.articadev.com/api/members?populate[Campos][populate]=*');
+    const result = await axios.get(`${CMS_URL}/members?populate[Campos][populate]=*`);
     if (result) {
       setMembers(formatMembersData(result.data));
     }
@@ -53,7 +54,7 @@ const Team = () => {
   }, [])
 
   const roles = {
-    all:"all",
+    all: "all",
     teacher: "Professor",
     master: "Aluno de Mestrado",
     doctorate: "Aluno de Doutorado",
@@ -62,8 +63,8 @@ const Team = () => {
 
   const options = [
     {
-      name:"Todos",
-      value:roles.all
+      name: "Todos",
+      value: roles.all
     },
     {
       name: "Professores",
@@ -134,7 +135,7 @@ const Team = () => {
                 <MemberCard
                   name={member.Nome}
                   id={member.id}
-                  img={`https://nupepcms.articadev.com${member.Foto}`}
+                  img={`${CMS_URL}${member.Foto}`}
                   hidden={hideMember(member.Nome)}
                   teamMemberUrl={`/equipe/teamMemberPage`}
                 />

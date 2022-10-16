@@ -3,15 +3,16 @@ import Layout from "../components/Layout";
 import Title from "../components/Title";
 import { useState, useEffect } from "react";
 import axios from 'axios';
+const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN
 
 const TeamMemberPage = () => {
-  let {memberID} = useParams();
+  let { memberID } = useParams();
 
   const [member, setMember] = useState([])
 
   const formatMemberData = (raw_data) => {
     const member_data = raw_data.data.attributes.Campos
-    if(member_data.Foto){
+    if (member_data.Foto) {
       member_data.Foto = member_data.Foto.data.attributes.url
     }
     return member_data;
@@ -19,7 +20,7 @@ const TeamMemberPage = () => {
 
 
   const getMemberData = async () => {
-    const result = await axios.get(`https://nupepcms.articadev.com/api/members/${memberID}?populate[Campos][populate]=*`);
+    const result = await axios.get(`${CMS_URL}/members/${memberID}?populate[Campos][populate]=*`);
     if (result) {
       setMember(formatMemberData(result.data));
     }
@@ -38,7 +39,7 @@ const TeamMemberPage = () => {
         <div className="grid grid-flow-col items-center justify-center pt-10">
           <div className="grid grid-flow-row items-center justify-center gap-4 px-96">
             <div>
-              <img className="mx-auto h-24 w-24 rounded-full bg-black" src={`https://nupepcms.articadev.com${member.Foto}`}></img>
+              <img className="mx-auto h-24 w-24 rounded-full bg-black" src={`${CMS_URL}${member.Foto}`}></img>
               <p className="pt-4 text-center">{member.Cargo}</p>
             </div>
 
@@ -50,7 +51,7 @@ const TeamMemberPage = () => {
               Telefone:
               <a href={`callto:${member.Telefone}`}> {member.Telefone}</a>
             </p>
-            <p dangerouslySetInnerHTML={ {__html: member.Sobre} }></p>
+            <p dangerouslySetInnerHTML={{ __html: member.Sobre }}></p>
             <button className="mx-auto w-40 bg-zinc-800 px-4 py-2 text-sm text-white transition-all duration-150 ease-in-out hover:bg-zinc-900 focus:ring-0 active:shadow-lg">
               <a href={member.Lattes}>Lattes</a>
             </button>

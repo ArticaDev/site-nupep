@@ -1,13 +1,14 @@
 import Title from "./Title";
 import axios from 'axios';
 import { useState, useEffect } from "react";
+const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN
 
 const AboutUs = () => {
 
   const [aboutUs, setAboutUs] = useState("")
 
   const getAboutText = async () => {
-    const result = await axios.get('https://nupepcms.articadev.com/api/about');
+    const result = await axios.get(`${CMS_URL}/about`);
     if (result) {
       setAboutUs(result.data.data.attributes.Texto);
     }

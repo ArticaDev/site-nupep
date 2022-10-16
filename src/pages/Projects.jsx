@@ -6,6 +6,7 @@ import Title from "../components/Title";
 import Tag from "../components/Tag";
 import { useState, useEffect } from "react";
 import axios from 'axios';
+const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN
 
 const CustomTag = ({ variant, children }) => {
   return (
@@ -35,7 +36,7 @@ const Projects = () => {
   }
 
   const getProjects = async () => {
-    const result = await axios.get('https://nupepcms.articadev.com/api/projects?populate=*');
+    const result = await axios.get(`${CMS_URL}/projects?populate=*`);
     if (result) {
       setProjects(formatProjectsData(result.data));
     }
@@ -44,7 +45,7 @@ const Projects = () => {
   useEffect(() => {
     getProjects()
   }, [])
-  
+
   return (
     <div>
       <Layout>
@@ -54,30 +55,30 @@ const Projects = () => {
         <div className="container mx-auto max-w-screen-2xl">
           <div className="mx-5 flex flex-wrap justify-center gap-8">
             {projects.map((project) => (
-                <div className="flex-shrink basis-85">
-                  <div className="h-full w-full rounded-xl shadow-md">
-                    <div className="flex place-items-center text-ellipsis whitespace-normal rounded-t-xl bg-black">
-                      <Link to={`/projeto/${project.id}`}>
+              <div className="flex-shrink basis-85">
+                <div className="h-full w-full rounded-xl shadow-md">
+                  <div className="flex place-items-center text-ellipsis whitespace-normal rounded-t-xl bg-black">
+                    <Link to={`/projeto/${project.id}`}>
                       <h3 className="p-7 text-lg font-bold text-white">
-                          {limitText(project.Titulo, 10)}
-                        </h3>
-                      </Link>
-                    </div>
-                    <div className="mx-2 flex flex-wrap items-end justify-between overflow-auto p-3 py-4">
-                      <p className="mb-3" dangerouslySetInnerHTML={ {__html: limitText(project.Resumo, 20)} }></p>
-                      {project.Status === "Concluído" && <CompleteTag />}
-                      {project.Status === "Em andamento" && <InProgressTag />}
-                      {project.Status === "Cancelado" && <DroppedTag />}
-                      <Link
-                        className="rounded-sm bg-black px-8 py-2 text-sm font-bold text-white"
-                        to={`/projeto/${project.id}`}
-                      >
-                        Ler Mais
-                      </Link>
-                    </div>
+                        {limitText(project.Titulo, 10)}
+                      </h3>
+                    </Link>
+                  </div>
+                  <div className="mx-2 flex flex-wrap items-end justify-between overflow-auto p-3 py-4">
+                    <p className="mb-3" dangerouslySetInnerHTML={{ __html: limitText(project.Resumo, 20) }}></p>
+                    {project.Status === "Concluído" && <CompleteTag />}
+                    {project.Status === "Em andamento" && <InProgressTag />}
+                    {project.Status === "Cancelado" && <DroppedTag />}
+                    <Link
+                      className="rounded-sm bg-black px-8 py-2 text-sm font-bold text-white"
+                      to={`/projeto/${project.id}`}
+                    >
+                      Ler Mais
+                    </Link>
                   </div>
                 </div>
-              ))}
+              </div>
+            ))}
           </div>
         </div>
       </Layout>

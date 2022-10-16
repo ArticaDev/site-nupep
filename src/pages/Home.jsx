@@ -9,6 +9,7 @@ import Contact from "../components/Contact";
 import CheckOtherPages from "../components/CheckOtherPages";
 import { useState, useEffect } from "react";
 import axios from 'axios';
+const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN
 
 function Home() {
 
@@ -18,7 +19,7 @@ function Home() {
     const projects_data = raw_data.data.map(data => data.attributes.Campos)
     projects_data.forEach(project => {
       if (project.Imagens) {
-        const url = `https://nupepcms.articadev.com${project.Imagens.data[0].attributes.url}`
+        const url = `${CMS_URL}${project.Imagens.data[0].attributes.url}`
         project.thumbnail = url
       }
     });
@@ -26,7 +27,7 @@ function Home() {
   }
 
   const getProjects = async () => {
-    const result = await axios.get('https://nupepcms.articadev.com/api/projects?populate[Campos][populate]=*');
+    const result = await axios.get(`${CMS_URL}/projects?populate[Campos][populate]=*`);
     if (result) {
       setProjects(formatProjectsData(result.data));
     }
