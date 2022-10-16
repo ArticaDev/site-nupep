@@ -1,6 +1,21 @@
 import ufu from "../assets/ufu.png";
+import axios from 'axios';
+import { useState, useEffect } from "react";
 
 const Footer = () => {
+  const [contactText, setContactText] = useState("")
+
+  const getContactText = async () => {
+    const result = await axios.get('https://nupepcms.articadev.com/api/footer');
+    if (result) {
+      setContactText(result.data.data.attributes.Texto);
+    }
+  };
+
+  useEffect(() => {
+    getContactText()
+  }, [])
+
   const urlList = [
     {
       name: "IEEE IAS",
@@ -30,14 +45,7 @@ const Footer = () => {
 
   return (
     <div className="max-w-screen mt-28 grid grid-flow-row items-center justify-center gap-2 bg-[#161616] p-10 font-bold text-white">
-      <p>
-        Núcleo de Pesquisa em Eletrônica de Potência (NUPEP) - Universidade
-        Federal de Uberlândia (UFU)
-      </p>
-      <p>
-        Av. João Naves de Ávila 2121 - Campus Santa Mônica - Bloco 1P -
-        Uberlândia MG - CEP 38400902
-      </p>
+      <p dangerouslySetInnerHTML={{ __html: contactText }}></p>
       <a href="callto:3432394411">+55 34 3239-4411 | +55 34 3218-2111</a>
       <div className="grid grid-flow-col items-center gap-5 lg:justify-between">
         <div>
