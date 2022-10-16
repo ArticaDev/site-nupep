@@ -11,6 +11,7 @@ const Contact = () => {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [nupepEmail, setNupepEmail] = useState("")
+  const [contactText, setContactText] = useState("")
 
   const getEmail = async () => {
     const result = await axios.get('https://nupepcms.articadev.com/api/contact-email');
@@ -19,8 +20,16 @@ const Contact = () => {
     }
   };
 
+  const getContactText = async () => {
+    const result = await axios.get('https://nupepcms.articadev.com/api/contact');
+    if (result) {
+      setContactText(result.data.data.attributes.Texto);
+    }
+  };
+
   useEffect(() => {
     getEmail()
+    getContactText()
   }, [])
 
   const alert = useAlert();
@@ -95,18 +104,7 @@ const Contact = () => {
               <Title>
                 Informações para <span className="text-blue">contato</span>
               </Title>
-              <p className="text-xl font-bold lg:w-150">
-                Núcleo de Pesquisa em Eletrônica de Potência (NUPEP) Faculdade
-                de Engenharia Elétrica (FEELT)
-                <br /> Universidade Federal de Uberlândia (UFU)
-                <br /> Av. João Naves de Ávila 2121, Campus Santa Mônica - Bloco
-                1P - 1º Andar.
-                <br /> Uberlândia MG - CEP 38400-902
-                <br />
-                Telefones: +55 34-3239-4701 +55 34-3239-4767
-                <br /> Fax: 34-3239-4704
-                <br />
-                E-mail: lcgfreitas@yahoo.com.br
+              <p className="text-xl font-bold lg:w-150" dangerouslySetInnerHTML={{ __html: contactText }}>
               </p>
             </div>
           </div>
