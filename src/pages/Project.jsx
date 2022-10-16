@@ -5,6 +5,7 @@ import Title from "../components/Title";
 import Image from "../components/Image";
 import { useState, useEffect } from "react";
 import axios from 'axios';
+const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN
 
 const Project = ({ ...props }) => {
   const { projectID } = useParams();
@@ -13,7 +14,7 @@ const Project = ({ ...props }) => {
 
   const formatProjectData = (raw_data) => {
     const project_data = raw_data.data.attributes.Campos
-    if(project_data.Imagens){
+    if (project_data.Imagens) {
       project_data.Imagens = project_data.Imagens.data.map(data => data.attributes.url)
     }
     return project_data;
@@ -21,7 +22,7 @@ const Project = ({ ...props }) => {
 
 
   const getProject = async () => {
-    const result = await axios.get(`https://nupepcms.articadev.com/api/projects/${projectID}?populate[Campos][populate]=*`);
+    const result = await axios.get(`${CMS_URL}/projects/${projectID}?populate[Campos][populate]=*`);
     if (result) {
       setProject(formatProjectData(result.data));
     }
@@ -38,7 +39,7 @@ const Project = ({ ...props }) => {
         <hr />
         <h3 className="text-xl">
           <strong>Descrição:</strong>
-          <div dangerouslySetInnerHTML={ {__html: project.Resumo} }></div>
+          <div dangerouslySetInnerHTML={{ __html: project.Resumo }}></div>
         </h3>
         <h3 className="text-xl">
           <strong>Situação:</strong> {project.Status}
@@ -62,7 +63,7 @@ const Project = ({ ...props }) => {
               {project.Imagens.map((src) => (
                 <Image
                   className="aspect-square max-w-xs grow basis-32"
-                  src={`https://nupepcms.articadev.com${src}`}
+                  src={`${CMS_URL}${src}`}
                 />
               ))}
             </div>

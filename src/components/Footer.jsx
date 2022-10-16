@@ -1,12 +1,13 @@
 import ufu from "../assets/ufu.png";
 import axios from 'axios';
 import { useState, useEffect } from "react";
+const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN
 
 const Footer = () => {
   const [contactText, setContactText] = useState("")
 
   const getContactText = async () => {
-    const result = await axios.get('https://nupepcms.articadev.com/api/footer');
+    const result = await axios.get(`${CMS_URL}/footer`);
     if (result) {
       setContactText(result.data.data.attributes.Texto);
     }
