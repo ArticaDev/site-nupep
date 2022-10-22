@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import limitText from "../utils/limitText";
 import Layout from "../components/Layout";
 import Title from "../components/Title";
 import Tag from "../components/Tag";
-import { useState, useEffect } from "react";
-import axios from 'axios';
-const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN
+import Searchbar from "../components/Searchbar";
+import SortButton from "../components/SortButton";
+import Info from "../components/Info";
+import axios from "axios";
+
+const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
 
 const CustomTag = ({ variant, children }) => {
   return (
@@ -27,13 +30,17 @@ const DroppedTag = () => {
 };
 
 const Projects = () => {
-
-  const [projects, setProjects] = useState([])
+  const [projects, setProjects] = useState([]);
+  const [order, setOrder] = useState("desc");
+  const [search, setSearch] = useState("");
+  const handleSortButtonClick = () => {
+    setOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
+  };
 
   const formatProjectsData = (raw_data) => {
-    const projects_data = raw_data.data.map(data => data.attributes.Campos)
+    const projects_data = raw_data.data.map((data) => data.attributes.Campos);
     return projects_data;
-  }
+  };
 
   const getProjects = async () => {
     const result = await axios.get(`${CMS_URL}/projects?populate=*`);
@@ -43,42 +50,78 @@ const Projects = () => {
   };
 
   useEffect(() => {
-    getProjects()
-  }, [])
+    getProjects();
+  }, []);
 
   return (
     <div>
       <Layout>
-        <div className="mb-4 px-4 py-3">
+        <div className="grid grid-cols-2 gap-2 px-4 py-3 md:grid-cols-3">
           <Title>Projetos</Title>
+          <Searchbar
+            name="search"
+            className="col-span-2 h-8 w-full place-self-center md:col-span-1"
+            placeholder={"Busque por projeto ou agência financiadora"}
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+          />
+          <div className="flex col-start-2 row-start-1 self-center justify-self-end md:col-start-3">
+            <label
+              htmlFor="order"
+              className="my-auto w-32 block text-sm font-semibold text-zinc-700"
+            >
+              Ordenar por ano: {order === "asc" ? "Crescente" : "Decrescente"}
+            </label>
+            <SortButton
+              title="Ordenar"
+              name="order"
+              id="button-order"
+              size="md"
+              order={order}
+              onClick={handleSortButtonClick}
+            />
+          </div>
         </div>
         <div className="container mx-auto max-w-screen-2xl">
           <div className="mx-5 flex flex-wrap justify-center gap-8">
-            {projects.map((project) => (
-              <div className="flex-shrink basis-85">
-                <div className="h-full w-full rounded-xl shadow-md">
-                  <div className="flex place-items-center text-ellipsis whitespace-normal rounded-t-xl bg-black">
-                    <Link to={`/projeto/${project.id}`}>
-                      <h3 className="p-7 text-lg font-bold text-white">
-                        {limitText(project.Titulo, 10)}
-                      </h3>
-                    </Link>
-                  </div>
-                  <div className="mx-2 flex flex-wrap items-end justify-between overflow-auto p-3 py-4">
-                    <p className="mb-3" dangerouslySetInnerHTML={{ __html: limitText(project.Resumo, 20) }}></p>
-                    {project.Status === "Concluído" && <CompleteTag />}
-                    {project.Status === "Em andamento" && <InProgressTag />}
-                    {project.Status === "Cancelado" && <DroppedTag />}
-                    <Link
-                      className="rounded-sm bg-black px-8 py-2 text-sm font-bold text-white"
-                      to={`/projeto/${project.id}`}
-                    >
-                      Ler Mais
-                    </Link>
+            {projects
+              .sort((a, b) =>
+                order === "asc" ? a.year - b.year : b.year - a.year
+              )
+              .filter(
+                (project) =>
+                  search.match(project.titulo) || search.match(project.patron)
+              )
+              .map((project) => (
+                <div className="flex-shrink basis-85">
+                  <div className="h-full w-full rounded-xl shadow-md">
+                    <div className="flex place-items-center text-ellipsis whitespace-normal rounded-t-xl bg-black">
+                      <Link to={`/projeto/${project.id}`}>
+                        <h3 className="p-7 text-lg font-bold text-white">
+                          {limitText(project.Titulo, 10)}
+                        </h3>
+                      </Link>
+                    </div>
+                    <div className="mx-2 flex flex-wrap items-end justify-between overflow-auto p-3 py-4">
+                      <p
+                        className="mb-3"
+                        dangerouslySetInnerHTML={{
+                          __html: limitText(project.Resumo, 20),
+                        }}
+                      ></p>
+                      {project.Status === "Concluído" && <CompleteTag />}
+                      {project.Status === "Em andamento" && <InProgressTag />}
+                      {project.Status === "Cancelado" && <DroppedTag />}
+                      <Link
+                        className="rounded-sm bg-black px-8 py-2 text-sm font-bold text-white"
+                        to={`/projeto/${project.id}`}
+                      >
+                        Ler Mais
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       </Layout>
