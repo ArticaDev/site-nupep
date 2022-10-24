@@ -6,8 +6,8 @@ import Title from "../components/Title";
 import Tag from "../components/Tag";
 import Searchbar from "../components/Searchbar";
 import SortButton from "../components/SortButton";
-import Info from "../components/Info";
 import axios from "axios";
+import { useMemo } from "react";
 
 const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
 
@@ -33,6 +33,7 @@ const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [order, setOrder] = useState("desc");
   const [search, setSearch] = useState("");
+  const searchRegExp = useMemo(() => new RegExp(search), [search]);
   const handleSortButtonClick = () => {
     setOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
   };
@@ -65,10 +66,10 @@ const Projects = () => {
             value={search}
             onChange={(event) => setSearch(event.target.value)}
           />
-          <div className="flex col-start-2 row-start-1 self-center justify-self-end md:col-start-3">
+          <div className="col-start-2 row-start-1 flex self-center justify-self-end md:col-start-3">
             <label
               htmlFor="order"
-              className="my-auto w-32 block text-sm font-semibold text-zinc-700"
+              className="my-auto block w-32 text-sm font-semibold text-zinc-700"
             >
               Ordenar por ano: {order === "asc" ? "Crescente" : "Decrescente"}
             </label>
@@ -90,7 +91,9 @@ const Projects = () => {
               )
               .filter(
                 (project) =>
-                  search.match(project.titulo) || search.match(project.patron)
+                  !search.length > 0 ||
+                  searchRegExp.test(project.sponsor) ||
+                  searchRegExp.test(project.Titulo)
               )
               .map((project) => (
                 <div className="flex-shrink basis-85">
