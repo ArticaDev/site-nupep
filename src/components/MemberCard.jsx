@@ -11,7 +11,7 @@ const Card = ({ img, name, hidden, id }) => {
         <Link to={`/equipe/${id}`} key={name + "link"}>
           <p className="overflow-ellipsis text-2xl font-bold">{name}</p>
           <div
-            className="h-25 w-25 shrink-0 bg-slate-400 bg-contain bg-clip-padding bg-no-repeat"
+            className="h-25 w-25 shrink-0 rounded bg-slate-400 bg-contain bg-clip-padding bg-no-repeat"
             style={{
               backgroundImage: `url(${img})`,
             }}
