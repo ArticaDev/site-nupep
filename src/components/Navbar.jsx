@@ -8,6 +8,7 @@ const Navbar = () => {
     { name: "Pesquisa", id: "search" },
     { name: "Projetos", url: "/projetos" },
     { name: "Publicações", url: "/publicacoes" },
+    { name: "Blog", url: "/blog" },
     { name: "Equipe", url: "/equipe" },
   ];
 

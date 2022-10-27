@@ -7,6 +7,7 @@ import Project from "./pages/Project";
 import Publications from "./pages/Publications";
 import Team from "./pages/Team";
 import TeamMemberPage from "./pages/TeamMemberPage";
+import Blog from "./pages/Blog";
 import AlertTemplate from "react-alert-template-basic";
 import { Provider as AlertProvider } from "react-alert";
 
@@ -23,6 +24,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path="projeto/:projectID" element={<Project />} />
             <Route path="publicacoes" element={<Publications />} />
             <Route path="equipe" element={<Team />} />
+            <Route path="/blog" element={<Blog />} />
             <Route path="equipe/:memberID" element={<TeamMemberPage />} />
           </Route>
         </Routes>
