@@ -135,6 +135,7 @@ const Team = () => {
               {filterByRole(column[1]).map((member) => (
                 <MemberCard
                   name={member.Nome}
+                  lattes={member.Lattes}
                   id={member.id}
                   img={`${CMS_URL}${member.Foto}`}
                   hidden={hideMember(member.Nome)}
