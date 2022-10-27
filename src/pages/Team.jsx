@@ -4,9 +4,9 @@ import Searchbar from "../components/Searchbar";
 import Title from "../components/Title";
 import Filter from "../components/Filter";
 import MemberCard from "../components/MemberCard";
-import axios from 'axios';
+import axios from "axios";
 import isMobile from "../utils/isMobile";
-const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN
+const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
 
 const Grid = ({ children }) => {
   return (
@@ -29,29 +29,30 @@ const Col = ({ title, children, hidden }) => {
 };
 
 const Team = () => {
-
-  const [members, setMembers] = useState([])
+  const [members, setMembers] = useState([]);
 
   const formatMembersData = (raw_data) => {
-    const members_data = raw_data.data.map(data => data.attributes.Campos)
-    members_data.forEach(member => {
+    const members_data = raw_data.data.map((data) => data.attributes.Campos);
+    members_data.forEach((member) => {
       if (member.Foto) {
-        member.Foto = member.Foto.data.attributes.url
+        member.Foto = member.Foto.data.attributes.url;
       }
     });
     return members_data;
-  }
+  };
 
   const getMembers = async () => {
-    const result = await axios.get(`${CMS_URL}/members?populate[Campos][populate]=*`);
+    const result = await axios.get(
+      `${CMS_URL}/members?populate[Campos][populate]=*`
+    );
     if (result) {
       setMembers(formatMembersData(result.data));
     }
   };
 
   useEffect(() => {
-    getMembers()
-  }, [])
+    getMembers();
+  }, []);
 
   const roles = {
     all: "all",
@@ -64,7 +65,7 @@ const Team = () => {
   const options = [
     {
       name: "Todos",
-      value: roles.all
+      value: roles.all,
     },
     {
       name: "Professores",
@@ -110,7 +111,7 @@ const Team = () => {
             onChange={(event) => setSearch(event.target.value)}
           />
           <Filter
-            className="order col-start-2 row-start-1 md:col-start-3 h-8 self-center justify-self-end"
+            className="order col-start-2 row-start-1 h-8 self-center justify-self-end md:col-start-3"
             name="role"
             id="filter"
             options={options}
