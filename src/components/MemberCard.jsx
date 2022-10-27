@@ -8,7 +8,9 @@ const Card = ({ img, name, hidden, id, lattes }) => {
       hidden={hidden}
     >
       <div className="grid grid-flow-row gap-4">
-        <p className="overflow-ellipsis text-2xl font-bold">{name}</p>
+        <Link to={`/equipe/${id}`} key={name + "link"}>
+          <p className="overflow-ellipsis text-2xl font-bold">{name}</p>
+        </Link>
         <div className="grid grid-flow-col items-center gap-4">
           <Link to={`/equipe/${id}`} key={name + "link"}>
             <img
