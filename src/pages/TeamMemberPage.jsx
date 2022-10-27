@@ -35,10 +35,10 @@ const TeamMemberPage = () => {
     <div>
       <Layout>
         <div className="grid grid-flow-col items-center justify-center pt-10">
-          <div className="px-4 py-3">
-            <Title>{member.Nome}</Title>
-          </div>
           <div className="grid grid-flow-row items-center justify-center gap-4 px-96">
+            <div className="px-4 py-3 text-center">
+              <Title>{member.Nome}</Title>
+            </div>
             <div>
               <img
                 className="mx-auto h-24 w-24 rounded-full bg-black"
