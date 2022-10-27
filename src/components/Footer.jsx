@@ -22,15 +22,7 @@ const Footer = () => {
     <div className="max-w-screen mt-28 grid grid-flow-row items-center justify-center gap-2 bg-[#161616] p-10 font-bold text-white">
       <div className="mx-auto grid items-center justify-center gap-10 lg:w-3/4 lg:gap-4">
         <a href="callto:3432394411">+55 34 3239-4411 | +55 34 3218-2111</a>
-        <p>
-          Culpa nostrud adipisicing incididunt et labore fugiat nisi mollit non
-          culpa. Excepteur dolore qui Lorem anim. Aliqua elit mollit
-          reprehenderit quis labore pariatur minim. Occaecat dolore eiusmod sit
-          incididunt ut ut laborum ipsum reprehenderit non nisi. Veniam dolor et
-          ut commodo. Esse elit qui non ea proident enim eiusmod tempor esse
-          elit anim occaecat.
-        </p>
-        {/* <p dangerouslySetInnerHTML={{ __html: contactText }}></p> */}
+        <p dangerouslySetInnerHTML={{ __html: contactText }}></p>
         <div className="grid grid-flow-col items-center lg:justify-between">
           <div className="mx-auto grid grid-flow-row gap-4 lg:grid-flow-col">
             <a
