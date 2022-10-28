@@ -2,44 +2,48 @@ import { useParams } from "react-router-dom";
 import Layout from "../components/Layout";
 import Title from "../components/Title";
 import { useState, useEffect } from "react";
-import axios from 'axios';
-const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN
+import axios from "axios";
+const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
 
 const TeamMemberPage = () => {
   let { memberID } = useParams();
 
-  const [member, setMember] = useState([])
+  const [member, setMember] = useState([]);
 
   const formatMemberData = (raw_data) => {
-    const member_data = raw_data.data.attributes.Campos
+    const member_data = raw_data.data.attributes.Campos;
     if (member_data.Foto) {
-      member_data.Foto = member_data.Foto.data.attributes.url
+      member_data.Foto = member_data.Foto.data.attributes.url;
     }
     return member_data;
-  }
-
+  };
 
   const getMemberData = async () => {
-    const result = await axios.get(`${CMS_URL}/members/${memberID}?populate[Campos][populate]=*`);
+    const result = await axios.get(
+      `${CMS_URL}/members/${memberID}?populate[Campos][populate]=*`
+    );
     if (result) {
       setMember(formatMemberData(result.data));
     }
   };
 
   useEffect(() => {
-    getMemberData()
-  }, [])
+    getMemberData();
+  }, []);
 
   return (
     <div>
       <Layout>
-        <div className="px-4 py-3">
-          <Title>{member.Nome}</Title>
-        </div>
         <div className="grid grid-flow-col items-center justify-center pt-10">
           <div className="grid grid-flow-row items-center justify-center gap-4 px-96">
+            <div className="px-4 py-3 text-center">
+              <Title>{member.Nome}</Title>
+            </div>
             <div>
-              <img className="mx-auto h-24 w-24 rounded-full bg-black" src={`${CMS_URL}${member.Foto}`}></img>
+              <img
+                className="mx-auto h-24 w-24 rounded-full bg-black"
+                src={`${CMS_URL}${member.Foto}`}
+              ></img>
               <p className="pt-4 text-center">{member.Cargo}</p>
             </div>
 
