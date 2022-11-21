@@ -37,14 +37,34 @@ const Publications = () => {
   const [articles, setArticles] = useState([])
 
   const formatArticlesData = (raw_data) => {
-    const articles_data = raw_data.data.map(data => data.attributes.Campos)
+    const articles_data = raw_data.data.map((data) => data.attributes)
     return articles_data;
   }
 
+  const getInfoFromDOI = async (DOI) => {
+    const response = await axios.get(`https://api.crossref.org/works/${DOI}`)
+    const articleInfo = response.data.message
+    const relevantInfo = {
+      title: articleInfo.title[0],
+      authors: articleInfo.author.map(author => author.family).join(', '),
+      year: articleInfo.created['date-parts'][0][0],
+      journal: articleInfo['container-title'][0],
+      volume: articleInfo.volume,
+      issue: articleInfo.issue,
+      doi: articleInfo.DOI
+    }
+    return relevantInfo
+  }
+
   const getArticles = async () => {
-    const result = await axios.get(`${CMS_URL}/articles?populate=*`);
+    const result = await axios.get(`${CMS_URL}/articles`);
+    let articles_raw_data
     if (result) {
-      setArticles(formatArticlesData(result.data));
+      articles_raw_data = formatArticlesData(result.data);
+      const articles_data = await Promise.all(articles_raw_data.map(async (article) =>
+        await getInfoFromDOI(article.DOI)
+      ))
+      setArticles(articles_data)
     }
   };
 
@@ -90,20 +110,20 @@ const Publications = () => {
         >
           {articles.map((article) => (
             <div
-              key={article.key}
+              key={article.doi}
               className="mx-auto flex h-72 max-w-sm flex-1 basis-80 border border-solid border-black font-bold"
             >
               <div className="grid grid-flow-row grid-cols-2 grid-rows-6 gap-2 py-4 px-2">
                 <div className="col-span-2 row-span-3 overflow-hidden">
                   <h3 className="text-ellipsis whitespace-normal text-xl">
-                    {article.Titulo}
+                    {article.title}
                   </h3>
                 </div>
                 <div className="col-span-2 row-span-2 overflow-hidden">
-                  <span className="text-md">{article.Autores}</span>
+                  <span className="text-md">{article.authors}</span>
                 </div>
                 <div className="self-center">
-                  <span className="text-xl">Ano: {article.Ano}</span>
+                  <span className="text-xl">Ano: {article.year}</span>
                 </div>
                 <div className="self-center justify-self-end">
                   <button
@@ -111,7 +131,7 @@ const Publications = () => {
                     data-mdb-ripple-color="light"
                     className="min-w-max bg-zinc-800 px-4 py-2 text-sm text-white transition-all duration-150 ease-in-out hover:bg-zinc-900 focus:ring-0 active:shadow-lg"
                     onClick={() => {
-                      copyToClipboard(article.Referencia);
+                      copyToClipboard("");
                       alert.show("Referência copiada", {
                         type: "success",
                         position: positions.BOTTOM_CENTER,
