@@ -10,6 +10,7 @@ import CheckOtherPages from "../components/CheckOtherPages";
 import { useState, useEffect } from "react";
 import axios from 'axios';
 const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN
+const CMS_ASSETS_URL = import.meta.env.VITE_NUPEP_CMS_ASSETS
 
 function Home() {
 
@@ -19,7 +20,7 @@ function Home() {
     const projects_data = raw_data.data.map(data => data.attributes.Campos)
     projects_data.forEach(project => {
       if (project.Imagens) {
-        const url = `${CMS_URL}${project.Imagens.data[0].attributes.url}`
+        const url = `${CMS_ASSETS_URL}${project.Imagens.data[0].attributes.url}`
         project.thumbnail = url
       }
     });
