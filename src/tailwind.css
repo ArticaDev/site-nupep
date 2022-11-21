@@ -8,3 +8,11 @@
     font-family: "Ubuntu", sans-serif !important;
   }
 }
+
+.home-researches-content{
+  @apply text-xl
+}
+
+.home-researches-content ul{
+  @apply list-disc
+}
