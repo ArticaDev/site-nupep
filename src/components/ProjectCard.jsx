@@ -8,7 +8,7 @@ import {
 
 const ProjectCard = ({ status, title, id, resume, sponsors }) => {
   return (
-    <div className="flex-shrink basis-85" key={id}>
+    <div className="lg:w-1/3" key={id}>
       <div className="h-full w-full rounded-xl shadow-md">
         <div className="flex place-items-center text-ellipsis whitespace-normal rounded-t-xl bg-black">
           <Link to={`/projeto/${id}`}>
