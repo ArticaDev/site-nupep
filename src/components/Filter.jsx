@@ -1,10 +1,8 @@
-import React from "react";
-
 const Filter = ({ className, id, name, options = [], onChange, disabled }) => {
   return (
     <div className={className}>
       <select
-        className="rounded-sm h-full w-full border border-solid border-black"
+        className="h-full w-full rounded-sm border border-solid border-black"
         name={name}
         id={id}
         onChange={onChange}
