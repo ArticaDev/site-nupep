@@ -67,12 +67,6 @@ const Projects = () => {
             onChange={(event) => setSearch(event.target.value)}
           />
           <div className="col-start-2 row-start-1 flex self-center justify-self-end md:col-start-3">
-            <label
-              htmlFor="order"
-              className="my-auto block w-32 text-sm font-semibold text-zinc-700"
-            >
-              Ordenar por ano: {order === "asc" ? "Crescente" : "Decrescente"}
-            </label>
             <SortButton
               title="Ordenar"
               name="order"

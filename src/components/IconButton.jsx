@@ -9,6 +9,7 @@ const IconButton = ({
   size = "md",
   icon: Icon = null,
   onClick,
+  children,
 }) => {
   const sizes = {
     sm: "h-4 w-4",
@@ -22,13 +23,15 @@ const IconButton = ({
       name={name}
       id={id}
       className={clsx(
-        "rounded-full border-black p-1",
-        "active:animate-ping",
+        "grid items-center rounded-full border-black p-1",
         className
       )}
       onClick={onClick}
     >
-      {Icon && <Icon className={clsx("", sizes[size])} />}
+      <div className="grid grid-flow-col py-2 md:grid-flow-row">
+        {children}
+        {Icon && <Icon className={clsx("", sizes[size])} />}
+      </div>
     </button>
   );
 };
