@@ -1,5 +1,3 @@
-import React from "react";
-
 const Filter = ({ className, id, name, options = [], onChange, disabled }) => {
   return (
     <div className={className}>
