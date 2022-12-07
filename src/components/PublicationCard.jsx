@@ -1,4 +1,4 @@
-const PublicationCard = ({ doi, title, authors, year, journal }) => {
+const PublicationCard = ({ doi, title, authors, year, journal, url }) => {
   return (
     <div
       key={doi}
@@ -7,7 +7,7 @@ const PublicationCard = ({ doi, title, authors, year, journal }) => {
       <div className="grid grid-flow-row gap-4 py-4 px-2">
         <div className="">
           <h3 className="text-ellipsis whitespace-normal text-xl font-bold">
-            {title}
+            <a className="hover:underline" href={url}>{title}</a>
           </h3>
         </div>
         <div className=" ">

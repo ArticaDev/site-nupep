@@ -53,6 +53,7 @@ const Publications = () => {
       volume: articleInfo.volume,
       issue: articleInfo.issue,
       doi: articleInfo.DOI,
+      url: articleInfo.URL
     };
     return relevantInfo;
   };
@@ -137,6 +138,7 @@ const Publications = () => {
                 title={article.title}
                 year={article.year}
                 journal={article.journal}
+                url={article.url}
               />
             ))}
         </div>
