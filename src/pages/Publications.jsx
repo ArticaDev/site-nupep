@@ -47,13 +47,13 @@ const Publications = () => {
     const articleInfo = response.data.message;
     const relevantInfo = {
       title: articleInfo.title[0],
-      authors: articleInfo.author.map((author) => author.family).join(", "),
+      authors: articleInfo.author.map((author) => author.family).join("; "),
       year: articleInfo.created["date-parts"][0][0],
       journal: articleInfo["container-title"][0],
       volume: articleInfo.volume,
       issue: articleInfo.issue,
       doi: articleInfo.DOI,
-      url: articleInfo.URL
+      url: articleInfo.URL,
     };
     return relevantInfo;
   };
