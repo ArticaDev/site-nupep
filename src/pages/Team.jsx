@@ -7,6 +7,7 @@ import MemberCard from "../components/MemberCard";
 import axios from "axios";
 import isMobile from "../utils/isMobile";
 const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
+const CMS_ASSETS_URL = import.meta.env.VITE_NUPEP_CMS_ASSETS_URL
 
 const Grid = ({ children }) => {
   return (
@@ -137,7 +138,7 @@ const Team = () => {
                   name={member.Nome}
                   lattes={member.Lattes}
                   id={member.id}
-                  img={`${CMS_URL}${member.Foto}`}
+                  img={`${CMS_ASSETS_URL}${member.Foto}`}
                   hidden={hideMember(member.Nome)}
                   teamMemberUrl={`/equipe/teamMemberPage`}
                 />
