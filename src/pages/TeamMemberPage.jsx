@@ -4,7 +4,6 @@ import Title from "../components/Title";
 import { useState, useEffect } from "react";
 import axios from "axios";
 const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
-const CMS_ASSETS_URL = import.meta.env.VITE_NUPEP_CMS_ASSETS_URL
 
 const TeamMemberPage = () => {
   let { memberID } = useParams();
@@ -43,7 +42,7 @@ const TeamMemberPage = () => {
             <div>
               <img
                 className="mx-auto h-24 w-24 rounded-full bg-black"
-                src={`${CMS_ASSETS_URL}${member.Foto}`}
+                src={member.Foto}
               ></img>
               <p className="pt-4 text-center">{member.Cargo}</p>
             </div>

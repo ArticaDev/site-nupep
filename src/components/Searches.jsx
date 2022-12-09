@@ -5,7 +5,6 @@ import isMobile from "../utils/isMobile";
 import { useState, useEffect } from "react";
 import axios from 'axios';
 const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN
-const CMS_ASSETS_URL = import.meta.env.VITE_NUPEP_CMS_ASSETS_URL
 
 const Searches = () => {
 
@@ -13,11 +12,6 @@ const Searches = () => {
 
   const formatTopics = (raw_data) => {
     let topics_content = raw_data.data.map((data) => data.attributes.Texto)
-    topics_content = topics_content.map((content) => {
-      const regex = /\/uploads\//g
-      const subst = `${CMS_ASSETS_URL}/uploads/`
-      return content.replace(regex, subst);
-    })
     return topics_content;
   }
 

@@ -10,7 +10,6 @@ import CheckOtherPages from "../components/CheckOtherPages";
 import { useState, useEffect } from "react";
 import axios from 'axios';
 const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN
-const CMS_ASSETS_URL = import.meta.env.VITE_NUPEP_CMS_ASSETS_URL
 
 function Home() {
 
@@ -20,7 +19,7 @@ function Home() {
     const higlights_data = raw_data.data.map(data => data.attributes)
     higlights_data.forEach(highlight => {
       if (highlight.Imagem) {
-        const url = `${CMS_ASSETS_URL}${highlight.Imagem.data.attributes.url}`
+        const url = highlight.Imagem.data.attributes.url
         highlight.thumbnail = url
       }
     });

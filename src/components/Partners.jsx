@@ -5,7 +5,6 @@ import isMobile from "../utils/isMobile";
 import { useState, useEffect } from "react";
 import axios from 'axios';
 const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN
-const CMS_ASSETS_URL = import.meta.env.VITE_NUPEP_CMS_ASSETS_URL
 
 const Partners = () => {
   const [partners, setPartners] = useState([])
@@ -14,7 +13,7 @@ const Partners = () => {
     const partners_content = raw_data.data.map((data) => data.attributes)
     partners_content.forEach(partner => {
       if (partner.Logo) {
-        const url = `${CMS_ASSETS_URL}${partner.Logo.data.attributes.url}`
+        const url = partner.Logo.data.attributes.url
         partner.Logo = url
       }
     });

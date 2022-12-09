@@ -9,7 +9,6 @@ import isMobile from "../utils/isMobile";
 import default_user from "../assets/default_user.png";
 
 const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
-const CMS_ASSETS_URL = import.meta.env.VITE_NUPEP_CMS_ASSETS_URL;
 
 const Grid = ({ children }) => {
   return (
@@ -42,7 +41,7 @@ const Team = () => {
         member.Coordenador = true;
       }
       if (member.Foto && member.Foto.data) {
-        member.Foto = `${CMS_ASSETS_URL}${member.Foto.data.attributes.url}`;
+        member.Foto = member.Foto.data.attributes.url;
       } else {
         member.Foto = default_user;
       }

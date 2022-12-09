@@ -5,7 +5,6 @@ import Image from "../components/Image";
 import { useState, useEffect } from "react";
 import axios from "axios";
 const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
-const CMS_ASSETS_URL = import.meta.env.VITE_NUPEP_CMS_ASSETS_URL;
 
 const Project = ({ ...props }) => {
   const { projectID } = useParams();
@@ -69,7 +68,7 @@ const Project = ({ ...props }) => {
               {project.Imagens.map((src) => (
                 <Image
                   className="aspect-square max-w-xs grow basis-32"
-                  src={`${CMS_ASSETS_URL}${src}`}
+                  src={src}
                 />
               ))}
             </div>
