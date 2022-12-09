@@ -47,11 +47,13 @@ const Publications = () => {
     const articleInfo = response.data.message;
     const relevantInfo = {
       Titulo: articleInfo.title[0],
-      Autores: articleInfo.author.map((author) => author.family).join("; "),
+      Autores: articleInfo.author
+        .map((author) => author.family + ", " + author.given)
+        .join("; "),
       Ano: articleInfo.created["date-parts"][0][0],
       Revista: articleInfo["container-title"][0],
       Link: articleInfo.URL,
-      DOI: articleInfo.DOI
+      DOI: articleInfo.DOI,
     };
     return relevantInfo;
   };
@@ -62,15 +64,13 @@ const Publications = () => {
     if (result) {
       articles_raw_data = formatArticlesData(result.data);
       const articles_data = await Promise.all(
-        articles_raw_data.map(
-          async (article) => {
-            if(article.DOI){
-              return await getInfoFromDOI(article.DOI)
-            }else{
-              return article
-            }
+        articles_raw_data.map(async (article) => {
+          if (article.DOI) {
+            return await getInfoFromDOI(article.DOI);
+          } else {
+            return article;
           }
-        )
+        })
       );
       setArticles(articles_data);
     }
