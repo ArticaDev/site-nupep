@@ -9,7 +9,7 @@ import isMobile from "../utils/isMobile";
 import default_user from "../assets/default_user.png";
 
 const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
-const CMS_ASSETS_URL = import.meta.env.VITE_NUPEP_CMS_ASSETS_URL
+const CMS_ASSETS_URL = import.meta.env.VITE_NUPEP_CMS_ASSETS_URL;
 
 const Grid = ({ children }) => {
   return (
@@ -39,11 +39,11 @@ const Team = () => {
     members_data.forEach((member) => {
       if (member.Cargo == "Coordenador") {
         member.Cargo = "Professor";
+        member.Coordenador = true;
       }
       if (member.Foto && member.Foto.data) {
         member.Foto = `${CMS_ASSETS_URL}${member.Foto.data.attributes.url}`;
-      }
-      else {
+      } else {
         member.Foto = default_user;
       }
     });
@@ -110,7 +110,7 @@ const Team = () => {
   return (
     <div>
       <Layout>
-        <div className="grid grid-cols-2 gap-2 px-4 py-3 md:grid-cols-3">
+        <div className="grid grid-cols-2 gap-4 px-4 py-3 md:grid-cols-3">
           <Title>Equipe</Title>
           <Searchbar
             name="search"
@@ -141,16 +141,27 @@ const Team = () => {
               title={column[0]}
               hidden={!(visibleColumn === "all" || visibleColumn === column[1])}
             >
-              {filterByRole(column[1]).map((member) => (
-                <MemberCard
-                  name={member.Nome}
-                  lattes={member.Lattes}
-                  id={member.id}
-                  img={member.Foto}
-                  hidden={hideMember(member.Nome)}
-                  teamMemberUrl={`/equipe/teamMemberPage`}
-                />
-              ))}
+              {filterByRole(column[1])
+                .sort((a, b) => {
+                  if (a.Coordenador && !b.Coordenador) {
+                    return -1;
+                  } else if (!a.Coordenador && b.Coordenador) {
+                    return 1;
+                  } else {
+                    return 0;
+                  }
+                })
+                .map((member) => (
+                  <MemberCard
+                    isCoord={member.Coordenador}
+                    name={member.Nome}
+                    lattes={member.Lattes}
+                    id={member.id}
+                    img={member.Foto}
+                    hidden={hideMember(member.Nome)}
+                    teamMemberUrl={`/equipe/teamMemberPage`}
+                  />
+                ))}
             </Col>
           ))}
         </Grid>
