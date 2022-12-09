@@ -9,10 +9,18 @@
   }
 }
 
-.home-researches-content{
-  @apply text-xl
+h1 {
+  @apply text-3xl font-bold;
 }
 
-.home-researches-content ul{
-  @apply list-disc
+h2 {
+  @apply text-2xl font-bold;
+}
+
+.home-researches-content {
+  @apply text-xl;
+}
+
+.home-researches-content ul {
+  @apply list-disc;
 }
