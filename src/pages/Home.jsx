@@ -14,36 +14,36 @@ const CMS_ASSETS_URL = import.meta.env.VITE_NUPEP_CMS_ASSETS_URL
 
 function Home() {
 
-  const [projects, setProjects] = useState([])
+  const [highlights, setHighlights] = useState([])
 
-  const formatProjectsData = (raw_data) => {
-    const projects_data = raw_data.data.map(data => data.attributes.Campos)
-    projects_data.forEach(project => {
-      if (project.Imagens) {
-        const url = `${CMS_ASSETS_URL}${project.Imagens.data[0].attributes.url}`
-        project.thumbnail = url
+  const formatHighlightsData = (raw_data) => {
+    const higlights_data = raw_data.data.map(data => data.attributes)
+    higlights_data.forEach(highlight => {
+      if (highlight.Imagem) {
+        const url = `${CMS_ASSETS_URL}${highlight.Imagem.data.attributes.url}`
+        highlight.thumbnail = url
       }
     });
-    return projects_data;
+    return higlights_data;
   }
 
-  const getProjects = async () => {
-    const result = await axios.get(`${CMS_URL}/projects?populate[Campos][populate]=*`);
+  const getHighlights = async () => {
+    const result = await axios.get(`${CMS_URL}/highlights?populate=*`);
     if (result) {
-      setProjects(formatProjectsData(result.data));
+      setHighlights(formatHighlightsData(result.data));
     }
   };
 
   useEffect(() => {
-    getProjects()
+    getHighlights()
   }, [])
 
   return (
     <Layout>
       <Slider>
-        {projects.map((project, index) => (
+        {highlights.map((highlight, index) => (
           <SwiperSlide key={index}>
-            <SwiperImageWithTitle src={project.thumbnail} title={project.Titulo} />
+            <SwiperImageWithTitle src={highlight.thumbnail} title={highlight.Titulo} />
           </SwiperSlide>
         ))}
       </Slider>

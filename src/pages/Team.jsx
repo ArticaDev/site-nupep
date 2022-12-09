@@ -6,6 +6,8 @@ import Filter from "../components/Filter";
 import MemberCard from "../components/MemberCard";
 import axios from "axios";
 import isMobile from "../utils/isMobile";
+import default_user from "../assets/default_user.png";
+
 const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
 const CMS_ASSETS_URL = import.meta.env.VITE_NUPEP_CMS_ASSETS_URL
 
@@ -35,8 +37,14 @@ const Team = () => {
   const formatMembersData = (raw_data) => {
     const members_data = raw_data.data.map((data) => data.attributes.Campos);
     members_data.forEach((member) => {
-      if (member.Foto) {
-        member.Foto = member.Foto.data.attributes.url;
+      if (member.Cargo == "Coordenador") {
+        member.Cargo = "Professor";
+      }
+      if (member.Foto && member.Foto.data) {
+        member.Foto = `${CMS_ASSETS_URL}${member.Foto.data.attributes.url}`;
+      }
+      else {
+        member.Foto = default_user;
       }
     });
     return members_data;
@@ -138,7 +146,7 @@ const Team = () => {
                   name={member.Nome}
                   lattes={member.Lattes}
                   id={member.id}
-                  img={`${CMS_ASSETS_URL}${member.Foto}`}
+                  img={member.Foto}
                   hidden={hideMember(member.Nome)}
                   teamMemberUrl={`/equipe/teamMemberPage`}
                 />

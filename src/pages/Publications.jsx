@@ -46,14 +46,12 @@ const Publications = () => {
     const response = await axios.get(`https://api.crossref.org/works/${DOI}`);
     const articleInfo = response.data.message;
     const relevantInfo = {
-      title: articleInfo.title[0],
-      authors: articleInfo.author.map((author) => author.family).join("; "),
-      year: articleInfo.created["date-parts"][0][0],
-      journal: articleInfo["container-title"][0],
-      volume: articleInfo.volume,
-      issue: articleInfo.issue,
-      doi: articleInfo.DOI,
-      url: articleInfo.URL,
+      Titulo: articleInfo.title[0],
+      Autores: articleInfo.author.map((author) => author.family).join("; "),
+      Ano: articleInfo.created["date-parts"][0][0],
+      Revista: articleInfo["container-title"][0],
+      Link: articleInfo.URL,
+      DOI: articleInfo.DOI
     };
     return relevantInfo;
   };
@@ -65,7 +63,13 @@ const Publications = () => {
       articles_raw_data = formatArticlesData(result.data);
       const articles_data = await Promise.all(
         articles_raw_data.map(
-          async (article) => await getInfoFromDOI(article.DOI)
+          async (article) => {
+            if(article.DOI){
+              return await getInfoFromDOI(article.DOI)
+            }else{
+              return article
+            }
+          }
         )
       );
       setArticles(articles_data);
@@ -133,12 +137,12 @@ const Publications = () => {
             )
             .map((article) => (
               <PublicationCard
-                authors={article.authors}
-                doi={article.doi}
-                title={article.title}
-                year={article.year}
-                journal={article.journal}
-                url={article.url}
+                authors={article.Autores}
+                doi={article.DOI}
+                title={article.Titulo}
+                year={article.Ano}
+                journal={article.Revista}
+                url={article.Link}
               />
             ))}
         </div>

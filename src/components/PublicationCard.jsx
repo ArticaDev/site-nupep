@@ -18,12 +18,22 @@ const PublicationCard = ({ doi, title, authors, year, journal, url }) => {
           <strong>Publicado em: </strong>
           {journal}
         </div>
-        <div className=" ">
-          <strong>DOI: </strong>
-          <a className="text-blue hover:underline" href={url}>
-            {doi}
-          </a>
-        </div>
+        {doi ? (
+          <div className=" ">
+            <strong>DOI: </strong>
+            <a className="text-blue hover:underline" href={url}>
+              {doi}
+            </a>
+          </div>
+          )
+          :
+          <div className=" ">
+            <strong>Link: </strong>
+            <a className="text-blue hover:underline" href={url}>
+              {url}
+            </a>
+          </div>
+        }
         <div className="self-center">
           <strong>Ano: </strong>
           {year}
