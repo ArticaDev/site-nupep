@@ -1,4 +1,5 @@
 import Logo from "../assets/Logo.svg";
+import LogoUfu from "../assets/logo-ufu.png";
 import { Link } from "react-scroll";
 import Sidebar from "./Sidebar";
 
@@ -18,8 +19,9 @@ const Navbar = () => {
           <a href="/" className="flex items-center">
             <img
               src={Logo}
-              className="h-12 w-36 self-center whitespace-nowrap font-semibold text-black "
+              className="h-16 w-36 self-center whitespace-nowrap font-semibold text-black "
             ></img>
+            <img src={LogoUfu} className="h-14"></img>
           </a>
           <Sidebar navbarOptions={navbarOptions} />
           <div className="hidden w-full md:block md:w-auto" id="navbar-default">
