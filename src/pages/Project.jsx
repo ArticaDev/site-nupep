@@ -6,17 +6,20 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
 
-const Project = ({ ...props }) => {
+const Project = () => {
   const { projectID } = useParams();
 
   const [project, setProject] = useState([]);
 
   const formatProjectData = (raw_data) => {
     const project_data = raw_data.data.attributes.Campos;
-    if (project_data.Imagens) {
+    if (project_data.Imagens && project_data.Imagens.data) {
       project_data.Imagens = project_data.Imagens.data.map(
         (data) => data.attributes.url
       );
+    }
+    else{
+      project_data.Imagens = null;
     }
     return project_data;
   };
