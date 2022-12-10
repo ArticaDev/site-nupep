@@ -11,21 +11,21 @@ const config = {
         blue: "#05ADF2",
       },
       flexBasis: {
-        "85": "21.25rem",
+        85: "21.25rem",
       },
       height: {
-        "25": "6.25rem",
+        25: "6.25rem",
       },
-      maxHeight:{
-        "85":"21.25rem",
+      maxHeight: {
+        85: "21.25rem",
       },
       width: {
-        "25": "6.25rem",
-        "150": "500px",
+        25: "6.25rem",
+        150: "500px",
       },
-      maxWidth:{
-        "85": "21.25rem"
-      }
+      maxWidth: {
+        85: "21.25rem",
+      },
     },
   },
   plugins: [],

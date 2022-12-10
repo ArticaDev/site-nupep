@@ -65,8 +65,8 @@ const Team = () => {
   const roles = {
     all: "all",
     teacher: "Professor",
-    master: "Aluno de Mestrado",
     doctorate: "Aluno de Doutorado",
+    master: "Aluno de Mestrado",
     undergraduate: "Aluno de IC",
   };
 
@@ -80,12 +80,12 @@ const Team = () => {
       value: roles.teacher,
     },
     {
-      name: "Alunos de Mestrado",
-      value: roles.master,
-    },
-    {
       name: "Alunos de Doutorado",
       value: roles.doctorate,
+    },
+    {
+      name: "Alunos de Mestrado",
+      value: roles.master,
     },
     {
       name: "Alunos de Iniciação Científica",
@@ -130,9 +130,9 @@ const Team = () => {
         </div>
         <Grid>
           {[
-            ["Professores", roles.teacher],
-            ["Alunos de Mestrado", roles.master],
+            ["Pesquisadores", roles.teacher],
             ["Alunos de Doutorado", roles.doctorate],
+            ["Alunos de Mestrado", roles.master],
             ["Alunos de Iniciação Científica", roles.undergraduate],
           ].map((column) => (
             <Col

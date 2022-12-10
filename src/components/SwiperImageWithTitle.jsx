@@ -1,7 +1,10 @@
 const SwiperImageWithTitle = ({ src, title }) => {
   return (
     <div>
-      <img src={src} className="h-96 w-full object-cover object-top" />
+      <img
+        src={src}
+        className="h-96 w-full object-cover object-top lg:object-fill "
+      />
       <div className="grid h-32 items-center bg-black bg-opacity-90">
         <h2 className="px-6 text-xl text-white lg:px-16 lg:text-2xl">
           {title}

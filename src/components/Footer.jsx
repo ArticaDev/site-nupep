@@ -22,8 +22,8 @@ const Footer = () => {
     <div className="max-w-screen mt-28 grid grid-flow-row items-center justify-center gap-2 bg-[#161616] p-10 font-bold text-white">
       <div className="mx-auto grid items-center justify-center gap-10 lg:w-3/4 lg:gap-4">
         <p dangerouslySetInnerHTML={{ __html: contactText }}></p>
-        <div className="grid grid-flow-col items-center lg:justify-between">
-          <div className="mx-auto grid grid-flow-row gap-4 lg:grid-flow-col">
+        <div className="grid grid-flow-row items-center gap-4 lg:justify-between">
+          <div className="mx-auto grid grid-flow-col gap-4">
             <a
               href="https://www.linkedin.com/in/nupep-ufu/?originalSubdomain=br"
               className="cursor-pointer transition-colors hover:text-blue"

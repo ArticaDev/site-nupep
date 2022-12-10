@@ -25,15 +25,14 @@ const PublicationCard = ({ doi, title, authors, year, journal, url }) => {
               {doi}
             </a>
           </div>
-          )
-          :
+        ) : (
           <div className=" ">
             <strong>Link: </strong>
-            <a className="text-blue hover:underline" href={url}>
+            <a target="_blank" className="text-blue hover:underline" href={url}>
               {url}
             </a>
           </div>
-        }
+        )}
         <div className="self-center">
           <strong>Ano: </strong>
           {year}
