@@ -1,4 +1,4 @@
-const PublicationCard = ({ doi, title, authors, year, journal, url }) => {
+const PublicationCard = ({ doi, title, authors, year, journal, url, supervisor, coordinator }) => {
   return (
     <div
       key={doi}
@@ -10,23 +10,43 @@ const PublicationCard = ({ doi, title, authors, year, journal, url }) => {
             {title}
           </h3>
         </div>
-        <div className=" ">
+        <div>
           <strong>Autores: </strong>
           {authors}
         </div>
-        <div className=" ">
-          <strong>Publicado em: </strong>
-          {journal}
-        </div>
+        {
+          supervisor && (
+            <div>
+              <strong>Orientadores: </strong>
+              {supervisor}
+            </div>)
+        }
+        {
+          coordinator && (
+            <div>
+            <strong>Coordenador: </strong>
+            {coordinator}
+          </div>)
+        }
+        
+        {
+          journal && (
+            <div>
+            <strong>Publicado em: </strong>
+            {journal}
+          </div>
+          )
+        }
+
         {doi ? (
-          <div className=" ">
+          <div>
             <strong>DOI: </strong>
             <a className="text-blue hover:underline" href={url}>
               {doi}
             </a>
           </div>
         ) : (
-          <div className=" ">
+          <div>
             <strong>Link: </strong>
             <a target="_blank" className="text-blue hover:underline" href={url}>
               {url}

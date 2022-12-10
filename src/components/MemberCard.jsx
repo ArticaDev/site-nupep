@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Card = ({ img, name, hidden, id, lattes, isCoord }) => {
+const Card = ({ img, name, hidden, id, lattes, subRole }) => {
   return (
     <div
       className="mb-2 border-t border-b border-solid border-gray-400 px-3 py-2"
@@ -19,8 +19,8 @@ const Card = ({ img, name, hidden, id, lattes, isCoord }) => {
             ></img>
           </Link>
           <div className="mx-auto grid items-center justify-center gap-2">
-            {isCoord && (
-              <p className="text-xl font-bold text-gray-500">Coordenador</p>
+            {subRole && (
+              <p className="text-xl font-bold text-gray-500">{subRole}</p>
             )}
             <button className="mx-auto h-10 w-40 bg-zinc-800 px-4 py-2 text-sm text-white transition-all duration-150 ease-in-out hover:bg-zinc-900 focus:ring-0 active:shadow-lg">
               <a href={lattes}>Lattes</a>

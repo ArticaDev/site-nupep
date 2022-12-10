@@ -11,7 +11,19 @@ const Searches = () => {
   const [topics, setTopics] = useState([])
 
   const formatTopics = (raw_data) => {
-    let topics_content = raw_data.data.map((data) => data.attributes.Texto)
+    let topics_content = raw_data.data.map((data) => {
+      return {
+        Texto: data.attributes.Texto,
+        Imagens: data.attributes.Imagens.data
+      }
+    })
+
+    topics_content.forEach(topic => {
+      if (topic.Imagens) {
+        topic.Imagens = topic.Imagens.map((image) => image.attributes.url)
+      }
+    });
+
     return topics_content;
   }
 
@@ -35,8 +47,20 @@ const Searches = () => {
       <Slider withNavigation={!isMobile()}>
         {topics.map((topic, index) => (
           <SwiperSlide key={index} className="home-researches-content">
-            <div className="grid items-center justify-center px-8 pb-16" dangerouslySetInnerHTML={{ __html: topic }}>
+            <div className="grid items-center justify-center px-8 pb-16" dangerouslySetInnerHTML={{ __html: topic.Texto }}>
             </div>
+
+            {topic.Imagens && (
+              <>
+                <div className="w-1/2 flex flex-wrap mx-auto justify-center ">
+                  {topic.Imagens.map((src) => (
+                    <img src={src} alt
+                      className="aspect-square w-1/2 h-1/2"
+                    />
+                  ))}
+                </div>
+              </>
+            )}
           </SwiperSlide>
         ))}
       </Slider>

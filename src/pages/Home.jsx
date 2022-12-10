@@ -42,7 +42,9 @@ function Home() {
       <Slider>
         {highlights.map((highlight, index) => (
           <SwiperSlide key={index}>
-            <SwiperImageWithTitle src={highlight.thumbnail} title={highlight.Titulo} />
+            <a href={highlight.Link}>
+              <SwiperImageWithTitle src={highlight.thumbnail} title={highlight.Titulo} />
+            </a>
           </SwiperSlide>
         ))}
       </Slider>
