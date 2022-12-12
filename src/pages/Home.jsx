@@ -40,7 +40,7 @@ function Home() {
   return (
     <Layout>
       <Slider>
-        {highlights.map((highlight, index) => (
+        {highlights.sort((a, b) => a.id - b.id).map((highlight, index) => (
           <SwiperSlide key={index}>
             <a href={highlight.Link}>
               <SwiperImageWithTitle src={highlight.thumbnail} title={highlight.Titulo} />
