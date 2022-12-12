@@ -44,7 +44,6 @@ const Team = () => {
   const formatMembersData = (raw_data) => {
     const members_data = raw_data.data.map((data) => data.attributes.Campos);
     members_data.forEach((member) => {
-
       if (!Object.values(roles).includes(member.Cargo)) {
         member.SubRole = member.Cargo;
         member.Cargo = "Professor";
@@ -95,9 +94,7 @@ const Team = () => {
   ];
 
   const [search, setSearch] = useState("");
-  const [visibleColumn, setVisibleColumn] = useState(
-    isMobile() ? "teacher" : "all"
-  );
+  const [visibleColumn, setVisibleColumn] = useState(roles.all);
 
   const filterByRole = (role) => {
     return members.filter((member) => member.Cargo === role);
@@ -108,11 +105,11 @@ const Team = () => {
   };
 
   const subRolesOrder = {
-    "Coordenador": 1,
+    Coordenador: 1,
     "Pós-doc": 2,
-    "Professor": 3,
-    "Colaborador": 4
-  }
+    Professor: 3,
+    Colaborador: 4,
+  };
 
   return (
     <div>
@@ -148,23 +145,23 @@ const Team = () => {
               title={column[0]}
               hidden={!(visibleColumn === "all" || visibleColumn === column[1])}
             >
-              {
-
-                filterByRole(column[1])
-                  .sort((first, second) => {
-                    return subRolesOrder[first.SubRole] - subRolesOrder[second.SubRole];
-                  })
-                  .map((member) => (
-                    <MemberCard
-                      subRole={member.SubRole}
-                      name={member.Nome}
-                      lattes={member.Lattes}
-                      id={member.id}
-                      img={member.Foto}
-                      hidden={hideMember(member.Nome)}
-                      teamMemberUrl={`/equipe/teamMemberPage`}
-                    />
-                  ))}
+              {filterByRole(column[1])
+                .sort((first, second) => {
+                  return (
+                    subRolesOrder[first.SubRole] - subRolesOrder[second.SubRole]
+                  );
+                })
+                .map((member) => (
+                  <MemberCard
+                    subRole={member.SubRole}
+                    name={member.Nome}
+                    lattes={member.Lattes}
+                    id={member.id}
+                    img={member.Foto}
+                    hidden={hideMember(member.Nome)}
+                    teamMemberUrl={`/equipe/teamMemberPage`}
+                  />
+                ))}
             </Col>
           ))}
         </Grid>
