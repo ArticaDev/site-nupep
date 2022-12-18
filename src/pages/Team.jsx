@@ -40,64 +40,7 @@ const MemberRoster = ({ title, children, hidden }) => {
 };
 
 const Team = () => {
-  const [members, setMembers] = useState([
-    {
-      Cargo: "Aluno de Doutorado",
-      Nome: "Lucas Pinheiro Moraes",
-      Lattes: "google.com",
-      id: 1,
-      Foto: "https://picsum.photos/200",
-    },
-    {
-      Cargo: "Aluno de Doutorado",
-      Nome: "Lucas Pinheiro Moraes",
-      Lattes: "google.com",
-      id: 1,
-      Foto: "https://picsum.photos/200",
-    },
-    {
-      Cargo: "Aluno de Doutorado",
-      Nome: "Lucas Pinheiro Moraes",
-      Lattes: "google.com",
-      id: 1,
-      Foto: "https://picsum.photos/200",
-    },
-    {
-      Cargo: "Aluno de Doutorado",
-      Nome: "Lucas Pinheiro Moraes",
-      Lattes: "google.com",
-      id: 1,
-      Foto: "https://picsum.photos/200",
-    },
-    {
-      Cargo: "Aluno de Doutorado",
-      Nome: "Lucas Pinheiro Moraes",
-      Lattes: "google.com",
-      id: 1,
-      Foto: "https://picsum.photos/200",
-    },
-    {
-      Cargo: "Aluno de Mestrado",
-      Nome: "Lucas Pinheiro Moraes",
-      Lattes: "google.com",
-      id: 1,
-      Foto: "https://picsum.photos/200",
-    },
-    {
-      Cargo: "Professor",
-      Nome: "Lucas Pinheiro Moraes",
-      Lattes: "google.com",
-      id: 1,
-      Foto: "https://picsum.photos/200",
-    },
-    {
-      Cargo: "Aluno de Doutorado",
-      Nome: "Lucas Pinheiro Moraes",
-      Lattes: "google.com",
-      id: 1,
-      Foto: "https://picsum.photos/200",
-    },
-  ]);
+  const [members, setMembers] = useState([]);
 
   const roles = {
     all: "all",
@@ -211,14 +154,20 @@ const Team = () => {
               title={roster[0]}
               hidden={!(visibleRoster === "all" || visibleRoster === roster[1])}
             >
-              {filterByRole(roster[1])
-                .sort((first, second) => {
-                  return (
-                    subRolesOrder[first.SubRole] - subRolesOrder[second.SubRole]
-                  );
-                })
-                .map((member) => (
-                  <div className={clsx(visibleRoster !== roles.all && "mx-1 float-left clear-right")}>
+              <div
+                className={clsx(
+                  visibleRoster !== roles.all &&
+                    "grid grid-cols-members justify-between gap-2"
+                )}
+              >
+                {filterByRole(roster[1])
+                  .sort((first, second) => {
+                    return (
+                      subRolesOrder[first.SubRole] -
+                      subRolesOrder[second.SubRole]
+                    );
+                  })
+                  .map((member) => (
                     <MemberCard
                       subRole={member.SubRole}
                       name={member.Nome}
@@ -228,8 +177,8 @@ const Team = () => {
                       hidden={hideMember(member.Nome)}
                       teamMemberUrl={`/equipe/teamMemberPage`}
                     />
-                  </div>
-                ))}
+                  ))}
+              </div>
             </MemberRoster>
           ))}
         </Grid>
