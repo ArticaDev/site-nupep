@@ -6,7 +6,6 @@ import Filter from "../components/Filter";
 import MemberCard from "../components/MemberCard";
 import clsx from "clsx";
 import axios from "axios";
-import isMobile from "../utils/isMobile";
 import default_user from "../assets/default_user.png";
 
 const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
