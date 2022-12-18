@@ -15,10 +15,11 @@ const Grid = ({ direction = "col", cols, children }) => {
     <div
       className={clsx(
         "grid gap-1 p-3 lg:gap-10",
-        direction == "col" && !cols
-          ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-4"
-          : "",
-        cols && `grid-cols-${cols}`
+        direction == "col"
+          ? cols
+            ? `grid-cols-${cols}`
+            : "grid-cols-1 sm:grid-cols-2 md:grid-cols-4"
+          : ""
       )}
     >
       {children}
