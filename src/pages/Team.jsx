@@ -4,21 +4,30 @@ import Searchbar from "../components/Searchbar";
 import Title from "../components/Title";
 import Filter from "../components/Filter";
 import MemberCard from "../components/MemberCard";
+import clsx from "clsx";
 import axios from "axios";
 import isMobile from "../utils/isMobile";
 import default_user from "../assets/default_user.png";
 
 const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
 
-const Grid = ({ children }) => {
+const Grid = ({ direction = "col", cols, children }) => {
   return (
-    <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-2 md:grid-cols-4 lg:gap-10">
+    <div
+      className={clsx(
+        "grid gap-1 p-3 lg:gap-10",
+        direction == "col" && !cols
+          ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-4"
+          : "",
+        cols && `grid-cols-${cols}`
+      )}
+    >
       {children}
     </div>
   );
 };
 
-const Col = ({ title, children, hidden }) => {
+const MemberRoster = ({ title, children, hidden }) => {
   return (
     <div hidden={hidden}>
       <h3 className="overflow-hidden text-ellipsis whitespace-nowrap text-2xl font-bold text-blue">
@@ -31,7 +40,64 @@ const Col = ({ title, children, hidden }) => {
 };
 
 const Team = () => {
-  const [members, setMembers] = useState([]);
+  const [members, setMembers] = useState([
+    {
+      Cargo: "Aluno de Doutorado",
+      Nome: "Lucas Pinheiro Moraes",
+      Lattes: "google.com",
+      id: 1,
+      Foto: "https://picsum.photos/200",
+    },
+    {
+      Cargo: "Aluno de Doutorado",
+      Nome: "Lucas Pinheiro Moraes",
+      Lattes: "google.com",
+      id: 1,
+      Foto: "https://picsum.photos/200",
+    },
+    {
+      Cargo: "Aluno de Doutorado",
+      Nome: "Lucas Pinheiro Moraes",
+      Lattes: "google.com",
+      id: 1,
+      Foto: "https://picsum.photos/200",
+    },
+    {
+      Cargo: "Aluno de Doutorado",
+      Nome: "Lucas Pinheiro Moraes",
+      Lattes: "google.com",
+      id: 1,
+      Foto: "https://picsum.photos/200",
+    },
+    {
+      Cargo: "Aluno de Doutorado",
+      Nome: "Lucas Pinheiro Moraes",
+      Lattes: "google.com",
+      id: 1,
+      Foto: "https://picsum.photos/200",
+    },
+    {
+      Cargo: "Aluno de Mestrado",
+      Nome: "Lucas Pinheiro Moraes",
+      Lattes: "google.com",
+      id: 1,
+      Foto: "https://picsum.photos/200",
+    },
+    {
+      Cargo: "Professor",
+      Nome: "Lucas Pinheiro Moraes",
+      Lattes: "google.com",
+      id: 1,
+      Foto: "https://picsum.photos/200",
+    },
+    {
+      Cargo: "Aluno de Doutorado",
+      Nome: "Lucas Pinheiro Moraes",
+      Lattes: "google.com",
+      id: 1,
+      Foto: "https://picsum.photos/200",
+    },
+  ]);
 
   const roles = {
     all: "all",
@@ -94,7 +160,7 @@ const Team = () => {
   ];
 
   const [search, setSearch] = useState("");
-  const [visibleColumn, setVisibleColumn] = useState(roles.all);
+  const [visibleRoster, setVisibleRoster] = useState(roles.all);
 
   const filterByRole = (role) => {
     return members.filter((member) => member.Cargo === role);
@@ -129,40 +195,42 @@ const Team = () => {
             id="filter"
             options={options}
             onChange={(event) => {
-              setVisibleColumn(event.target.value);
+              setVisibleRoster(event.target.value);
             }}
           />
         </div>
-        <Grid>
+        <Grid cols={visibleRoster !== roles.all ? 1 : 0}>
           {[
             ["Pesquisadores", roles.teacher],
             ["Alunos de Doutorado", roles.doctorate],
             ["Alunos de Mestrado", roles.master],
             ["Alunos de Iniciação Científica", roles.undergraduate],
-          ].map((column) => (
-            <Col
-              key={`col-${column[1]}`}
-              title={column[0]}
-              hidden={!(visibleColumn === "all" || visibleColumn === column[1])}
+          ].map((roster) => (
+            <MemberRoster
+              key={`roster-${roster[1]}`}
+              title={roster[0]}
+              hidden={!(visibleRoster === "all" || visibleRoster === roster[1])}
             >
-              {filterByRole(column[1])
+              {filterByRole(roster[1])
                 .sort((first, second) => {
                   return (
                     subRolesOrder[first.SubRole] - subRolesOrder[second.SubRole]
                   );
                 })
                 .map((member) => (
-                  <MemberCard
-                    subRole={member.SubRole}
-                    name={member.Nome}
-                    lattes={member.Lattes}
-                    id={member.id}
-                    img={member.Foto}
-                    hidden={hideMember(member.Nome)}
-                    teamMemberUrl={`/equipe/teamMemberPage`}
-                  />
+                  <div className={clsx(visibleRoster !== roles.all && "mx-1 float-left clear-right")}>
+                    <MemberCard
+                      subRole={member.SubRole}
+                      name={member.Nome}
+                      lattes={member.Lattes}
+                      id={member.id}
+                      img={member.Foto}
+                      hidden={hideMember(member.Nome)}
+                      teamMemberUrl={`/equipe/teamMemberPage`}
+                    />
+                  </div>
                 ))}
-            </Col>
+            </MemberRoster>
           ))}
         </Grid>
       </Layout>
