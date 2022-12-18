@@ -13,7 +13,7 @@ const ProjectCard = ({ status, title, id, resume, sponsors }) => {
         <div className="flex place-items-center text-ellipsis whitespace-normal rounded-t-xl bg-black">
           <Link to={`/projeto/${id}`}>
             <h3 className="p-7 text-2xl font-bold text-white">
-              {limitText(title, 15)}
+              {title}
             </h3>
           </Link>
         </div>
