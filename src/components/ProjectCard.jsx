@@ -6,14 +6,14 @@ import {
   DroppedTag,
 } from "../components/CustomTag";
 
-const ProjectCard = ({ status, title, id, resume, sponsors }) => {
+const ProjectCard = ({ status, title, id, resume, sponsors, coordinator }) => {
   return (
     <div className="lg:w-1/3" key={id}>
       <div className="h-full w-full rounded-xl shadow-md">
         <div className="flex place-items-center text-ellipsis whitespace-normal rounded-t-xl bg-black">
           <Link to={`/projeto/${id}`}>
             <h3 className="p-7 text-2xl font-bold text-white">
-              {limitText(title, 15)}
+              {title}
             </h3>
           </Link>
         </div>
@@ -27,6 +27,11 @@ const ProjectCard = ({ status, title, id, resume, sponsors }) => {
           <div className="py-4">
             <h3>
               <strong>Financiadores</strong>: {sponsors}
+            </h3>
+          </div>
+          <div className="py-4">
+            <h3>
+              <strong>Coordenador</strong>: {coordinator}
             </h3>
           </div>
           {status === "Concluído" && <CompleteTag />}
