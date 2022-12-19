@@ -28,7 +28,7 @@ const config = {
       },
       gridTemplateColumns:{
         auto: "repeat(auto-fill, minmax(0, 1fr))",
-        members: "repeat(auto-fill, minmax(300px, 1fr))"
+        members: "repeat(auto-fill, minmax(295px, 1fr))"
       }
     },
   },

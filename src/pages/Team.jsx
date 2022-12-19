@@ -1,31 +1,15 @@
 import React, { useState, useEffect } from "react";
+import clsx from "clsx";
+import axios from "axios";
 import Layout from "../components/Layout";
 import Searchbar from "../components/Searchbar";
 import Title from "../components/Title";
 import Filter from "../components/Filter";
+import Grid from "../components/Grid";
 import MemberCard from "../components/MemberCard";
-import clsx from "clsx";
-import axios from "axios";
 import default_user from "../assets/default_user.png";
 
 const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
-
-const Grid = ({ direction = "col", cols, children }) => {
-  return (
-    <div
-      className={clsx(
-        "grid gap-1 p-3 lg:gap-10",
-        direction == "col"
-          ? cols
-            ? `grid-cols-${cols}`
-            : "grid-cols-1 sm:grid-cols-2 md:grid-cols-4"
-          : ""
-      )}
-    >
-      {children}
-    </div>
-  );
-};
 
 const MemberRoster = ({ title, children, hidden }) => {
   return (
@@ -113,6 +97,88 @@ const Team = () => {
     return !name.toLowerCase().startsWith(search.toLowerCase());
   };
 
+  useEffect(() => {
+    setMembers([
+      {
+        Cargo: roles.teacher,
+        Nome: "Lucas",
+        id: 1,
+        Foto: "https://picsum.photos/200",
+        Lattes: "https://picsum.photos/200",
+      },
+      {
+        Cargo: roles.teacher,
+        Nome: "Lucas",
+        id: 1,
+        Foto: "https://picsum.photos/200",
+        Lattes: "https://picsum.photos/200",
+      },
+      {
+        Cargo: roles.teacher,
+        Nome: "Lucas",
+        id: 1,
+        Foto: "https://picsum.photos/200",
+        Lattes: "https://picsum.photos/200",
+      },
+      {
+        Cargo: roles.teacher,
+        Nome: "Lucas",
+        id: 1,
+        Foto: "https://picsum.photos/200",
+        Lattes: "https://picsum.photos/200",
+      },
+      {
+        Cargo: roles.teacher,
+        Nome: "Lucas",
+        id: 1,
+        Foto: "https://picsum.photos/200",
+        Lattes: "https://picsum.photos/200",
+      },
+      {
+        Cargo: roles.doctorate,
+        Nome: "Lucas",
+        id: 1,
+        Foto: "https://picsum.photos/200",
+        Lattes: "https://picsum.photos/200",
+      },
+      {
+        Cargo: roles.doctorate,
+        Nome: "Lucas",
+        id: 1,
+        Foto: "https://picsum.photos/200",
+        Lattes: "https://picsum.photos/200",
+      },
+      {
+        Cargo: roles.doctorate,
+        Nome: "Lucas",
+        id: 1,
+        Foto: "https://picsum.photos/200",
+        Lattes: "https://picsum.photos/200",
+      },
+      {
+        Cargo: roles.doctorate,
+        Nome: "Lucas",
+        id: 1,
+        Foto: "https://picsum.photos/200",
+        Lattes: "https://picsum.photos/200",
+      },
+      {
+        Cargo: roles.doctorate,
+        Nome: "Lucas",
+        id: 1,
+        Foto: "https://picsum.photos/200",
+        Lattes: "https://picsum.photos/200",
+      },
+      {
+        Cargo: roles.doctorate,
+        Nome: "Lucas",
+        id: 1,
+        Foto: "https://picsum.photos/200",
+        Lattes: "https://picsum.photos/200",
+      },
+    ]);
+  }, []);
+
   const subRolesOrder = {
     Coordenador: 1,
     "Pós-doc": 2,
@@ -142,7 +208,8 @@ const Team = () => {
             }}
           />
         </div>
-        <Grid cols={visibleRoster !== roles.all ? 1 : 0}>
+        {/*rows equals a falsy value to explicitly disable fixed row numbers*/}
+        <Grid direction="rows" cols={1} rows={0}>
           {[
             ["Pesquisadores", roles.teacher],
             ["Alunos de Doutorado", roles.doctorate],
@@ -156,8 +223,7 @@ const Team = () => {
             >
               <div
                 className={clsx(
-                  visibleRoster !== roles.all &&
-                    "grid grid-cols-members justify-between gap-2"
+                  "grid grid-cols-members justify-between gap-x-6"
                 )}
               >
                 {filterByRole(roster[1])

@@ -15,7 +15,7 @@ const Card = ({ img, name, hidden, id, lattes, subRole }) => {
             <img
               src={img}
               alt={`Foto de ${name}`}
-              className="h-25 w-25 shrink-0 rounded-full bg-slate-400 bg-contain bg-clip-padding bg-no-repeat"
+              className="h-20 w-20 sm:h-25 sm:w-25 shrink-0 rounded-full bg-slate-400 bg-contain bg-clip-padding bg-no-repeat"
             ></img>
           </Link>
           <div className="mx-auto grid items-center justify-center gap-2">
