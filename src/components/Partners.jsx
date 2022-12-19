@@ -37,28 +37,30 @@ const Partners = () => {
         Nossos <span className="text-blue">parceiros</span>{" "}
       </Title>
       <div className="col-span-3 grid grid-flow-col justify-around gap-11 lg:px-40">
-        <Slider
-          sliderPerView={isMobile() ? 1 : 3}
-          withNavigation={false}
-          withPagination={false}
-          autoplay
-        >
-          {partners.map((partner, index) => (
-            <SwiperSlide key={index}>
-              <a
-                className="grid cursor-pointer items-center justify-center"
-                href={partner.Link}
-              >
-                <img
-                  src={partner.Logo}
-                  alt="partner"
-                  key={index}
-                  className="max-h-40 w-96"
-                />
-              </a>
-            </SwiperSlide>
-          ))}
-        </Slider>
+        {partners.length >= 1 && (
+          <Slider
+            sliderPerView={isMobile() ? 1 : 3}
+            withNavigation={false}
+            withPagination={false}
+            autoplay
+          >
+            {partners.map((partner, index) => (
+              <SwiperSlide key={index}>
+                <a
+                  className="grid cursor-pointer items-center justify-center"
+                  href={partner.Link}
+                >
+                  <img
+                    src={partner.Logo}
+                    alt="partner"
+                    key={index}
+                    className="max-h-40 w-96"
+                  />
+                </a>
+              </SwiperSlide>
+            ))}
+          </Slider>
+        )}
       </div>
     </div>
   );
