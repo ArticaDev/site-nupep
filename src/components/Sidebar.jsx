@@ -62,7 +62,7 @@ const Sidebar = ({ navbarOptions }) => {
                     )}{" "}
                     {window.location.pathname !== "/" && (
                       <a
-                        href="/"
+                        href={"/#" + option.id}
                         className="bg-black-700 block rounded py-2 pr-4 pl-3 text-2xl font-bold text-black hover:text-blue md:bg-transparent md:p-0"
                       >
                         {option.name}
