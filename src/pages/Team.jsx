@@ -1,24 +1,17 @@
 import React, { useState, useEffect } from "react";
+import clsx from "clsx";
+import axios from "axios";
 import Layout from "../components/Layout";
 import Searchbar from "../components/Searchbar";
 import Title from "../components/Title";
 import Filter from "../components/Filter";
+import Grid from "../components/Grid";
 import MemberCard from "../components/MemberCard";
-import axios from "axios";
-import isMobile from "../utils/isMobile";
 import default_user from "../assets/default_user.png";
 
 const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
 
-const Grid = ({ children }) => {
-  return (
-    <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-2 md:grid-cols-4 lg:gap-10">
-      {children}
-    </div>
-  );
-};
-
-const Col = ({ title, children, hidden }) => {
+const MemberRoster = ({ title, children, hidden }) => {
   return (
     <div hidden={hidden}>
       <h3 className="overflow-hidden text-ellipsis whitespace-nowrap text-2xl font-bold text-blue">
@@ -94,7 +87,7 @@ const Team = () => {
   ];
 
   const [search, setSearch] = useState("");
-  const [visibleColumn, setVisibleColumn] = useState(roles.all);
+  const [visibleRoster, setVisibleRoster] = useState(roles.all);
 
   const filterByRole = (role) => {
     return members.filter((member) => member.Cargo === role);
@@ -103,6 +96,88 @@ const Team = () => {
   const hideMember = (name) => {
     return !name.toLowerCase().startsWith(search.toLowerCase());
   };
+
+  useEffect(() => {
+    setMembers([
+      {
+        Cargo: roles.teacher,
+        Nome: "Lucas",
+        id: 1,
+        Foto: "https://picsum.photos/200",
+        Lattes: "https://picsum.photos/200",
+      },
+      {
+        Cargo: roles.teacher,
+        Nome: "Lucas",
+        id: 1,
+        Foto: "https://picsum.photos/200",
+        Lattes: "https://picsum.photos/200",
+      },
+      {
+        Cargo: roles.teacher,
+        Nome: "Lucas",
+        id: 1,
+        Foto: "https://picsum.photos/200",
+        Lattes: "https://picsum.photos/200",
+      },
+      {
+        Cargo: roles.teacher,
+        Nome: "Lucas",
+        id: 1,
+        Foto: "https://picsum.photos/200",
+        Lattes: "https://picsum.photos/200",
+      },
+      {
+        Cargo: roles.teacher,
+        Nome: "Lucas",
+        id: 1,
+        Foto: "https://picsum.photos/200",
+        Lattes: "https://picsum.photos/200",
+      },
+      {
+        Cargo: roles.doctorate,
+        Nome: "Lucas",
+        id: 1,
+        Foto: "https://picsum.photos/200",
+        Lattes: "https://picsum.photos/200",
+      },
+      {
+        Cargo: roles.doctorate,
+        Nome: "Lucas",
+        id: 1,
+        Foto: "https://picsum.photos/200",
+        Lattes: "https://picsum.photos/200",
+      },
+      {
+        Cargo: roles.doctorate,
+        Nome: "Lucas",
+        id: 1,
+        Foto: "https://picsum.photos/200",
+        Lattes: "https://picsum.photos/200",
+      },
+      {
+        Cargo: roles.doctorate,
+        Nome: "Lucas",
+        id: 1,
+        Foto: "https://picsum.photos/200",
+        Lattes: "https://picsum.photos/200",
+      },
+      {
+        Cargo: roles.doctorate,
+        Nome: "Lucas",
+        id: 1,
+        Foto: "https://picsum.photos/200",
+        Lattes: "https://picsum.photos/200",
+      },
+      {
+        Cargo: roles.doctorate,
+        Nome: "Lucas",
+        id: 1,
+        Foto: "https://picsum.photos/200",
+        Lattes: "https://picsum.photos/200",
+      },
+    ]);
+  }, []);
 
   const subRolesOrder = {
     Coordenador: 1,
@@ -129,40 +204,48 @@ const Team = () => {
             id="filter"
             options={options}
             onChange={(event) => {
-              setVisibleColumn(event.target.value);
+              setVisibleRoster(event.target.value);
             }}
           />
         </div>
-        <Grid>
+        {/*rows equals a falsy value to explicitly disable fixed row numbers*/}
+        <Grid direction="rows" cols={1} rows={0}>
           {[
             ["Pesquisadores", roles.teacher],
             ["Alunos de Doutorado", roles.doctorate],
             ["Alunos de Mestrado", roles.master],
             ["Alunos de Iniciação Científica", roles.undergraduate],
-          ].map((column) => (
-            <Col
-              key={`col-${column[1]}`}
-              title={column[0]}
-              hidden={!(visibleColumn === "all" || visibleColumn === column[1])}
+          ].map((roster) => (
+            <MemberRoster
+              key={`roster-${roster[1]}`}
+              title={roster[0]}
+              hidden={!(visibleRoster === "all" || visibleRoster === roster[1])}
             >
-              {filterByRole(column[1])
-                .sort((first, second) => {
-                  return (
-                    subRolesOrder[first.SubRole] - subRolesOrder[second.SubRole]
-                  );
-                })
-                .map((member) => (
-                  <MemberCard
-                    subRole={member.SubRole}
-                    name={member.Nome}
-                    lattes={member.Lattes}
-                    id={member.id}
-                    img={member.Foto}
-                    hidden={hideMember(member.Nome)}
-                    teamMemberUrl={`/equipe/teamMemberPage`}
-                  />
-                ))}
-            </Col>
+              <div
+                className={clsx(
+                  "grid grid-cols-members justify-between gap-x-6"
+                )}
+              >
+                {filterByRole(roster[1])
+                  .sort((first, second) => {
+                    return (
+                      subRolesOrder[first.SubRole] -
+                      subRolesOrder[second.SubRole]
+                    );
+                  })
+                  .map((member) => (
+                    <MemberCard
+                      subRole={member.SubRole}
+                      name={member.Nome}
+                      lattes={member.Lattes}
+                      id={member.id}
+                      img={member.Foto}
+                      hidden={hideMember(member.Nome)}
+                      teamMemberUrl={`/equipe/teamMemberPage`}
+                    />
+                  ))}
+              </div>
+            </MemberRoster>
           ))}
         </Grid>
       </Layout>

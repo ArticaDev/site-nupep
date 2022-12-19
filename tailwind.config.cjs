@@ -26,6 +26,10 @@ const config = {
       maxWidth: {
         85: "21.25rem",
       },
+      gridTemplateColumns:{
+        auto: "repeat(auto-fill, minmax(0, 1fr))",
+        members: "repeat(auto-fill, minmax(295px, 1fr))"
+      }
     },
   },
   plugins: [],
