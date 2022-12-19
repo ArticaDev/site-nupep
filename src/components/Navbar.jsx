@@ -2,8 +2,9 @@ import Logo from "../assets/Logo.svg";
 import LogoUfu from "../assets/logo-ufu.png";
 import { Link } from "react-scroll";
 import Sidebar from "./Sidebar";
+import { useEffect } from "react";
 
-const Navbar = () => {
+const Navbar = ({ isLoaded }) => {
   const navbarOptions = [
     { name: "Sobre nós", id: "about" },
     { name: "Pesquisa", id: "search" },
@@ -11,6 +12,22 @@ const Navbar = () => {
     { name: "Publicações", url: "/publicacoes" },
     { name: "Equipe", url: "/equipe" },
   ];
+
+  const hasWordInURL = (word) => {
+    const url = window.location.href;
+    return url.includes(word);
+  };
+
+  useEffect(() => {
+    if (hasWordInURL("search")) {
+      document.getElementById("search").scrollIntoView();
+      window.scrollBy(0, -130);
+    }
+    if (hasWordInURL("about")) {
+      document.getElementById("about").scrollIntoView();
+      window.scrollBy(0, -130);
+    }
+  }, [isLoaded]);
 
   return (
     <>
@@ -53,7 +70,7 @@ const Navbar = () => {
                     )}{" "}
                     {window.location.pathname !== "/" && (
                       <a
-                        href="/"
+                        href={"/#" + option.id}
                         className="bg-black-700 block rounded py-2 pr-4 pl-3 text-2xl font-bold text-black hover:text-blue md:bg-transparent md:p-0"
                       >
                         {option.name}

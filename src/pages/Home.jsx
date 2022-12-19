@@ -8,23 +8,23 @@ import Partners from "../components/Partners";
 import Contact from "../components/Contact";
 import CheckOtherPages from "../components/CheckOtherPages";
 import { useState, useEffect } from "react";
-import axios from 'axios';
-const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN
+import axios from "axios";
+const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
 
 function Home() {
-
-  const [highlights, setHighlights] = useState([])
+  const [highlights, setHighlights] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const formatHighlightsData = (raw_data) => {
-    const higlights_data = raw_data.data.map(data => data.attributes)
-    higlights_data.forEach(highlight => {
+    const higlights_data = raw_data.data.map((data) => data.attributes);
+    higlights_data.forEach((highlight) => {
       if (highlight.Imagem) {
-        const url = highlight.Imagem.data.attributes.url
-        highlight.thumbnail = url
+        const url = highlight.Imagem.data.attributes.url;
+        highlight.thumbnail = url;
       }
     });
     return higlights_data;
-  }
+  };
 
   const getHighlights = async () => {
     const result = await axios.get(`${CMS_URL}/highlights?populate=*`);
@@ -34,19 +34,24 @@ function Home() {
   };
 
   useEffect(() => {
-    getHighlights()
-  }, [])
+    getHighlights().then(() => setIsLoaded(true));
+  }, []);
 
   return (
-    <Layout>
+    <Layout isLoaded={isLoaded}>
       <Slider>
-        {highlights.sort((a, b) => a.id - b.id).map((highlight, index) => (
-          <SwiperSlide key={index}>
-            <a href={highlight.Link}>
-              <SwiperImageWithTitle src={highlight.thumbnail} title={highlight.Titulo} />
-            </a>
-          </SwiperSlide>
-        ))}
+        {highlights
+          .sort((a, b) => a.id - b.id)
+          .map((highlight, index) => (
+            <SwiperSlide key={index}>
+              <a href={highlight.Link}>
+                <SwiperImageWithTitle
+                  src={highlight.thumbnail}
+                  title={highlight.Titulo}
+                />
+              </a>
+            </SwiperSlide>
+          ))}
       </Slider>
       <div className="mt-8 grid min-h-fit gap-28">
         <AboutUs />
