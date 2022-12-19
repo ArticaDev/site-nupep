@@ -76,6 +76,7 @@ const Projects = () => {
                   resume={project.Resumo}
                   status={project.Status}
                   sponsors={project.Financiadores}
+                  coordinator={project.Coordenador}
                 />
               ))}
           </div>
