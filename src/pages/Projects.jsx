@@ -31,7 +31,22 @@ const Projects = () => {
   };
 
   useEffect(() => {
-    getProjects();
+    setProjects(formatProjectsData({data: [{attributes:{
+      "createdAt": "2022-08-30T17:58:37.370Z",
+      "updatedAt": "2022-12-10T02:03:58.917Z",
+      "publishedAt": "2022-08-30T17:59:32.425Z",
+      "Campos": {
+          "id": 3,
+          "Resumo": "<p><strong>Descrição:</strong> Destaca-se como principal contribuição, a modelagem do sistema e o desenvolvimento de uma técnica de controle digital baseada em DSP. Com respeito aos painéis fotovoltaicos, os modelos desenvolvidos deverão primar pela operação do sistema sob diferentes condições climáticas (irradiação solar e temperatura), para que sejam analisadas as condições de operação do conversor CC-CA utilizado para disponibilizar a energia produzida pelos painéis. A modelagem do conversor estático, integrando-o aos modelos dos painéis, envolverá a implementação de algoritmos avançados para a otimização do sistema como um todo, a partir de uma função objetivo a ser definida em função de maximização da disponibilidade da energia elétrica e minimização de custos envolvidos e impactos ambientais.</p>",
+          "Titulo": "Modelagem e controle digital baseado em DSP de um conversor CC-CA elevador de tensão para aplicação em sistemas isolados de geração de energia elétrica que utilizam painéis fotovoltaicos.",
+          "Status": "Concluído",
+          "Natureza": "Pesquisa",
+          "Financiadores": "Fundação de Amparo à Pesquisa do Estado de Minas Gerais - Auxílio financeiro.",
+          "Integrantes": "Luiz Carlos Gomes de Freitas / Ernane Antônio Alves Coelho - Integrante / Valdeir Jose Farias - Integrante / Luiz Carlos de Freitas - Coordenador / Lucas Sampaio Garcia - Integrante / Fabrício A. Borges - Integrante / Fernando Cardoso Melo - Integrante.",
+          "Coordenador": "Luiz Carlos Gomes de Freitas"
+      }
+  }}]}));
+    // getProjects();
   }, []);
 
   return (

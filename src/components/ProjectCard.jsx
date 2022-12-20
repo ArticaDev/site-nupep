@@ -8,7 +8,7 @@ import {
 
 const ProjectCard = ({ status, title, id, resume, sponsors, coordinator }) => {
   return (
-    <div className="lg:w-1/3" key={id}>
+    <div className="md:w-1/2 lg:w-1/3" key={id}>
       <div className="h-full w-full rounded-xl shadow-md">
         <div className="flex place-items-center text-ellipsis whitespace-normal rounded-t-xl bg-black">
           <Link to={`/projeto/${id}`}>
@@ -34,15 +34,17 @@ const ProjectCard = ({ status, title, id, resume, sponsors, coordinator }) => {
               <strong>Coordenador</strong>: {coordinator}
             </h3>
           </div>
-          {status === "Concluído" && <CompleteTag />}
-          {status === "Em andamento" && <InProgressTag />}
-          {status === "Cancelado" && <DroppedTag />}
-          <Link
-            className="rounded-sm bg-black px-8 py-2 text-sm font-bold text-white"
-            to={`/projeto/${id}`}
-          >
-            Ler Mais
-          </Link>
+          <div className = "w-full flex justify-between">
+            {status === "Concluído" && <CompleteTag />}
+            {status === "Em andamento" && <InProgressTag />}
+            {status === "Cancelado" && <DroppedTag />}
+            <Link
+              className="rounded-sm bg-black px-8 py-2 text-sm font-bold text-white"
+              to={`/projeto/${id}`}
+            >
+              Ler Mais
+            </Link>
+          </div>
         </div>
       </div>
     </div>
