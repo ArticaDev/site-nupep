@@ -69,7 +69,7 @@ const Team = () => {
       value: roles.all,
     },
     {
-      name: "Professores",
+      name: "Pesquisadores",
       value: roles.teacher,
     },
     {
