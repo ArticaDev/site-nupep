@@ -8,6 +8,7 @@ import Filter from "../components/Filter";
 import Grid from "../components/Grid";
 import MemberCard from "../components/MemberCard";
 import default_user from "../assets/default_user.png";
+import sortArrWithNaN from "../utils/sortArrWithNaN";
 
 const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
 
@@ -39,7 +40,7 @@ const Team = () => {
     members_data.forEach((member) => {
       if (!Object.values(roles).includes(member.Cargo)) {
         member.SubRole = member.Cargo;
-        member.Cargo = "Professor";
+        member.Cargo = roles.teacher;
       }
       if (member.Foto && member.Foto.data) {
         member.Foto = member.Foto.data.attributes.url;
@@ -146,10 +147,9 @@ const Team = () => {
               >
                 {filterByRole(roster[1])
                   .sort((first, second) => {
-                    return (
-                      subRolesOrder[first.SubRole] -
-                      subRolesOrder[second.SubRole]
-                    );
+                    const a = subRolesOrder[first.SubRole];
+                    const b = subRolesOrder[second.SubRole];
+                    return sortArrWithNaN(a, b);
                   })
                   .map((member) => (
                     <MemberCard
