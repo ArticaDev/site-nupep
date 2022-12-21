@@ -3,41 +3,41 @@ import Slider from "./Slider";
 import { SwiperSlide } from "swiper/react";
 import isMobile from "../utils/isMobile";
 import { useState, useEffect } from "react";
-import axios from 'axios';
-const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN
+import axios from "axios";
+const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
 
 const Searches = () => {
-
-  const [topics, setTopics] = useState([])
+  const [topics, setTopics] = useState([]);
 
   const formatTopics = (raw_data) => {
     let topics_content = raw_data.data.map((data) => {
       return {
         Texto: data.attributes.Texto,
-        Imagens: data.attributes.Imagens.data
-      }
-    })
+        Imagens: data.attributes.Imagens.data,
+      };
+    });
 
-    topics_content.forEach(topic => {
+    topics_content.forEach((topic) => {
       if (topic.Imagens) {
-        topic.Imagens = topic.Imagens.map((image) => image.attributes.url)
+        topic.Imagens = topic.Imagens.map((image) => image.attributes.url);
       }
     });
 
     return topics_content;
-  }
+  };
 
   const getTopics = async () => {
-    const result = await axios.get(`${CMS_URL}/researches-and-developments?populate=*`);
+    const result = await axios.get(
+      `${CMS_URL}/researches-and-developments?populate=*`
+    );
     if (result) {
       setTopics(formatTopics(result.data));
     }
   };
 
   useEffect(() => {
-    getTopics()
-  }, [])
-
+    getTopics();
+  }, []);
 
   return (
     <div className="grid grid-flow-row gap-6 px-6 lg:px-16 " id="search">
@@ -47,15 +47,18 @@ const Searches = () => {
       <Slider withNavigation={!isMobile()}>
         {topics.map((topic, index) => (
           <SwiperSlide key={index} className="home-researches-content">
-            <div className="grid items-center justify-center px-8 pb-16" dangerouslySetInnerHTML={{ __html: topic.Texto }}>
-            </div>
-
+            <div
+              className="grid items-center justify-center px-8 pb-8 sm:pb-16"
+              dangerouslySetInnerHTML={{ __html: topic.Texto }}
+            ></div>
             {topic.Imagens && (
               <>
-                <div className="w-1/2 flex flex-wrap mx-auto justify-center ">
+                <div className="mx-auto flex w-1/2 flex-wrap justify-center ">
                   {topic.Imagens.map((src) => (
-                    <img src={src} alt
-                      className="aspect-square w-1/2 h-1/2"
+                    <img
+                      src={src}
+                      alt
+                      className="aspect-square w-full sm:w-1/2"
                     />
                   ))}
                 </div>
