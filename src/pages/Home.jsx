@@ -41,7 +41,11 @@ function Home() {
     <Layout isLoaded={isLoaded}>
       <Slider>
         {highlights
-          .sort((a, b) => a.id - b.id)
+          .sort(
+            (first, second) =>
+              new Date(first.createdAt).valueOf() -
+              new Date(second.createdAt).valueOf()
+          )
           .map((highlight, index) => (
             <SwiperSlide key={index}>
               <a href={highlight.Link}>
