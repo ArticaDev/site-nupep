@@ -19,7 +19,7 @@ function Home() {
     const higlights_data = raw_data.data.map((data) => data.attributes);
     higlights_data.forEach((highlight) => {
       if (highlight.Imagem) {
-        const url = highlight.Imagem.data.attributes.url;
+        const url = highlight.Imagem.data?.attributes?.url;
         highlight.thumbnail = url;
       }
     });

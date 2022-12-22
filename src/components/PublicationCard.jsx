@@ -1,11 +1,17 @@
-const PublicationCard = ({ doi, title, authors, year, journal, url, supervisor, coordinator }) => {
+const PublicationCard = ({
+  doi,
+  title,
+  authors,
+  year,
+  journal,
+  url,
+  supervisor,
+  coordinator,
+}) => {
   return (
-    <div
-      key={doi}
-      className="mx-auto grid max-w-sm border border-solid border-black"
-    >
+    <div key={doi} className="grid min-w-fit border border-solid border-black">
       <div className="grid grid-flow-row gap-4 py-4 px-2">
-        <div className="">
+        <div>
           <h3 className="text-ellipsis whitespace-normal text-xl font-bold">
             {title}
           </h3>
@@ -14,29 +20,25 @@ const PublicationCard = ({ doi, title, authors, year, journal, url, supervisor, 
           <strong>Autores: </strong>
           {authors}
         </div>
-        {
-          supervisor && (
-            <div>
-              <strong>Orientadores: </strong>
-              {supervisor}
-            </div>)
-        }
-        {
-          coordinator && (
-            <div>
+        {supervisor && (
+          <div>
+            <strong>Orientadores: </strong>
+            {supervisor}
+          </div>
+        )}
+        {coordinator && (
+          <div>
             <strong>Coordenador: </strong>
             {coordinator}
-          </div>)
-        }
-        
-        {
-          journal && (
-            <div>
+          </div>
+        )}
+
+        {journal && (
+          <div>
             <strong>Publicado em: </strong>
             {journal}
           </div>
-          )
-        }
+        )}
 
         {doi ? (
           <div>

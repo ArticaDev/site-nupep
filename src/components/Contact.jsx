@@ -3,16 +3,16 @@ import Input from "./Input";
 import { useState, useEffect } from "react";
 import emailjs from "emailjs-com";
 import { positions, useAlert } from "react-alert";
-import axios from 'axios';
-const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN
+import axios from "axios";
+const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
 
 const Contact = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
-  const [nupepEmail, setNupepEmail] = useState("")
-  const [contactText, setContactText] = useState("")
+  const [nupepEmail, setNupepEmail] = useState("");
+  const [contactText, setContactText] = useState("");
 
   const getEmail = async () => {
     const result = await axios.get(`${CMS_URL}/contact-email`);
@@ -29,9 +29,9 @@ const Contact = () => {
   };
 
   useEffect(() => {
-    getEmail()
-    getContactText()
-  }, [])
+    getEmail();
+    getContactText();
+  }, []);
 
   const alert = useAlert();
 
@@ -100,22 +100,23 @@ const Contact = () => {
               </button>
             </form>
           </div>
-          <div className="">
+          <div className="min-w-fit">
             <div className="grid gap-5">
               <Title>
                 Informações para <span className="text-blue">contato</span>
               </Title>
-              <p className="text-xl font-bold lg:w-150" dangerouslySetInnerHTML={{ __html: contactText }}>
-              </p>
+              <p
+                className="text-xl font-bold lg:w-150"
+                dangerouslySetInnerHTML={{ __html: contactText }}
+              ></p>
             </div>
           </div>
           <div className="grid gap-4">
             <Title>Localização</Title>
-            <div className="grid justify-center">
+            <div className=" grid justify-center">
               <iframe
-                className="h-48 w-72 lg:h-96 lg:w-150"
+                className="h-48 w-72 lg:h-96 2xl:w-150"
                 height="100%"
-                scrolling="no"
                 src="//maps.google.com/?ll=-18.919687%2C-48.258444&amp;spn=0.003613%2C0.005568&amp;ie=UTF8&amp;z=17&amp;t=hybrid&amp;sll=-18.919687%2C-48.258444&amp;sspn=0.003613%2C0.005568&amp;q=-18.919846%2C-48.258616%20(Local%20sem%20t%C3%ADtulo)&amp;output=embed"
                 title="NUPEP"
                 width="100%"

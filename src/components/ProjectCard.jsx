@@ -9,32 +9,24 @@ import {
 const ProjectCard = ({ status, title, id, resume, sponsors, coordinator }) => {
   return (
     <div className="md:w-1/2 lg:w-1/3" key={id}>
-      <div className="h-full w-full rounded-xl shadow-md">
+      <div className=" w-full rounded-xl shadow-md">
         <div className="flex place-items-center text-ellipsis whitespace-normal rounded-t-xl bg-black">
           <Link to={`/projeto/${id}`}>
-            <h3 className="p-7 text-2xl font-bold text-white">
-              {title}
-            </h3>
+            <h3 className="p-7 text-2xl font-bold text-white">{title}</h3>
           </Link>
         </div>
-        <div className="mx-2 flex flex-wrap items-end justify-between overflow-auto p-3 py-4">
-          <p
-            className="pb-3"
-            dangerouslySetInnerHTML={{
-              __html: limitText(resume, 14),
-            }}
-          ></p>
+        <div className="grid p-4">
           <div className="py-4">
             <h3>
               <strong>Financiadores</strong>: {sponsors}
             </h3>
           </div>
-          <div className="py-4">
+          <div className="py-4 pb-8">
             <h3>
               <strong>Coordenador</strong>: {coordinator}
             </h3>
           </div>
-          <div className = "w-full flex justify-between">
+          <div className="flex w-full justify-between">
             {status === "Concluído" && <CompleteTag />}
             {status === "Em andamento" && <InProgressTag />}
             {status === "Cancelado" && <DroppedTag />}
