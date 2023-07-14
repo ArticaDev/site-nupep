@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
+import Api from "../services/Api";
 import PublicationCard from "../components/PublicationCard";
 
 const Thesis = ({ order, type }) => {
@@ -12,9 +11,8 @@ const Thesis = ({ order, type }) => {
   };
 
   const getArticles = async () => {
-    console.log(`${CMS_URL}/otherpubs?filters[Tipo][$eqi]=${type}}`);
-    const result = await axios.get(
-      `${CMS_URL}/otherpubs?filters[Tipo][$eqi]=` + type
+    const result = await Api.get(
+      `/otherpubs?filters[Tipo][$eqi]=` + type
     );
     if (result) {
       setArticles(formatArticlesData(result.data));

@@ -3,8 +3,7 @@ import Input from "./Input";
 import { useState, useEffect } from "react";
 import emailjs from "emailjs-com";
 import { positions, useAlert } from "react-alert";
-import axios from "axios";
-const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
+import Api from "../services/Api";
 
 const Contact = () => {
   const [name, setName] = useState("");

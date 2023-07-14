@@ -1,5 +1,6 @@
 import Title from "./Title";
 import { useState, useEffect } from "react";
+import Api from "../services/Api";
 
 const AboutUs = () => {
 

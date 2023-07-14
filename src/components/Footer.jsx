@@ -1,8 +1,7 @@
 import ufu from "../assets/ufu.png";
-import axios from "axios";
 import { BsLinkedin, BsInstagram, BsYoutube } from "react-icons/bs";
 import { useState, useEffect } from "react";
-const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
+import Api from "../services/Api";
 
 const Footer = () => {
   const [contactText, setContactText] = useState("");

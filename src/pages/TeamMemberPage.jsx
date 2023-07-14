@@ -2,8 +2,7 @@ import { useParams } from "react-router-dom";
 import Layout from "../components/Layout";
 import Title from "../components/Title";
 import { useState, useEffect } from "react";
-import axios from "axios";
-const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
+import Api from "../services/Api";
 
 const TeamMemberPage = () => {
   let { memberID } = useParams();
@@ -19,8 +18,8 @@ const TeamMemberPage = () => {
   };
 
   const getMemberData = async () => {
-    const result = await axios.get(
-      `${CMS_URL}/members/${memberID}?populate[Campos][populate]=*`
+    const result = await Api.get(
+      `/members/${memberID}?populate[Campos][populate]=*`
     );
     if (result) {
       setMember(formatMemberData(result.data));

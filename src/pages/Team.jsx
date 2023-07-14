@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import clsx from "clsx";
-import axios from "axios";
 import Layout from "../components/Layout";
 import Searchbar from "../components/Searchbar";
 import Title from "../components/Title";
@@ -9,8 +8,7 @@ import Grid from "../components/Grid";
 import MemberCard from "../components/MemberCard";
 import default_user from "../assets/default_user.png";
 import sortArrWithNaN from "../utils/sortArrWithNaN";
-
-const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
+import Api from "../services/Api";
 
 const MemberRoster = ({ title, children, hidden }) => {
   return (
@@ -52,8 +50,8 @@ const Team = () => {
   };
 
   const getMembers = async () => {
-    const result = await axios.get(
-      `${CMS_URL}/members?populate[Campos][populate]=*`
+    const result = await Api.get(
+      `/members?populate[Campos][populate]=*`
     );
     if (result) {
       setMembers(formatMembersData(result.data));
