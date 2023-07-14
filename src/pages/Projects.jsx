@@ -4,10 +4,8 @@ import Layout from "../components/Layout";
 import Title from "../components/Title";
 import Searchbar from "../components/Searchbar";
 import SortButton from "../components/SortButton";
-import axios from "axios";
 import { useMemo } from "react";
-
-const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
+import Api from "../services/Api";
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
@@ -24,7 +22,7 @@ const Projects = () => {
   };
 
   const getProjects = async () => {
-    const result = await axios.get(`${CMS_URL}/projects?populate=*`);
+    const result = await Api.get(`/projects?populate=*`);
     if (result) {
       setProjects(formatProjectsData(result.data));
     }

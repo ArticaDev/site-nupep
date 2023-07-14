@@ -15,14 +15,14 @@ const Contact = () => {
   const [contactText, setContactText] = useState("");
 
   const getEmail = async () => {
-    const result = await axios.get(`${CMS_URL}/contact-email`);
+    const result = await Api.get(`/contact-email`);
     if (result) {
       setNupepEmail(result.data.data.attributes.Email);
     }
   };
 
   const getContactText = async () => {
-    const result = await axios.get(`${CMS_URL}/contact`);
+    const result = await Api.get(`/contact`);
     if (result) {
       setContactText(result.data.data.attributes.Texto);
     }

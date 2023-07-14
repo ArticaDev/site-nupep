@@ -8,8 +8,7 @@ import Partners from "../components/Partners";
 import Contact from "../components/Contact";
 import CheckOtherPages from "../components/CheckOtherPages";
 import { useState, useEffect } from "react";
-import axios from "axios";
-const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
+import Api from "../services/Api";
 
 function Home() {
   const [highlights, setHighlights] = useState([]);
@@ -27,7 +26,7 @@ function Home() {
   };
 
   const getHighlights = async () => {
-    const result = await axios.get(`${CMS_URL}/highlights?populate=*`);
+    const result = await Api.get(`/highlights?populate=*`);
     if (result) {
       setHighlights(formatHighlightsData(result.data));
     }

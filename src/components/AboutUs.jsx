@@ -1,14 +1,12 @@
 import Title from "./Title";
-import axios from 'axios';
 import { useState, useEffect } from "react";
-const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN
 
 const AboutUs = () => {
 
   const [aboutUs, setAboutUs] = useState("")
 
   const getAboutText = async () => {
-    const result = await axios.get(`${CMS_URL}/about`);
+    const result = await Api.get(`/about`);
     if (result) {
       setAboutUs(result.data.data.attributes.Texto);
     }

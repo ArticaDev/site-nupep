@@ -8,7 +8,7 @@ const Footer = () => {
   const [contactText, setContactText] = useState("");
 
   const getContactText = async () => {
-    const result = await axios.get(`${CMS_URL}/footer`);
+    const result = await Api.get(`/footer`);
     if (result) {
       setContactText(result.data.data.attributes.Texto);
     }

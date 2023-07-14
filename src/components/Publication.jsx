@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
 import PublicationCard from "../components/PublicationCard";
+import Api from "../services/Api";
 
 const Publication = ({order}) => {
 
@@ -29,7 +29,7 @@ const Publication = ({order}) => {
   };
 
   const getArticles = async () => {
-    const result = await axios.get(`${CMS_URL}/articles`);
+    const result = await Api.get(`/articles`);
     let articles_raw_data;
     if (result) {
       articles_raw_data = formatArticlesData(result.data);
