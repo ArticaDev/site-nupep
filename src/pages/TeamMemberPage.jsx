@@ -56,9 +56,26 @@ const TeamMemberPage = () => {
               <a href={`callto:${member.Telefone}`}> {member.Telefone}</a>
             </p>
             <p dangerouslySetInnerHTML={{ __html: member.Sobre }}></p>
-            <button className="mx-auto w-40 bg-zinc-800 px-4 py-2 text-sm text-white transition-all duration-150 ease-in-out hover:bg-zinc-900 focus:ring-0 active:shadow-lg">
-              <a href={member.Lattes}>Lattes</a>
-            </button>
+            {[
+              {
+                link: member.Lattes,
+                text: "Lattes",
+              },
+              {
+                link: member.OrcId,
+                text: "Orc ID",
+              },
+              {
+                link: member.WebOfScience,
+                text: "Web of Science",
+              },
+            ].map(({ link, text }) => (
+              <a href={link}>
+                <button className="mx-auto w-40 bg-zinc-800 px-4 py-2 text-sm text-white transition-all duration-150 ease-in-out hover:bg-zinc-900 focus:ring-0 active:shadow-lg">
+                  {text}
+                </button>
+              </a>
+            ))}
           </div>
         </div>
       </Layout>
