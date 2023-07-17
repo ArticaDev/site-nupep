@@ -11,7 +11,7 @@ const TeamMemberPage = () => {
 
   const formatMemberData = (raw_data) => {
     const member_data = raw_data.data.attributes.Campos;
-    if (member_data.Foto) {
+    if (member_data.Foto && member_data.Foto.data) {
       member_data.Foto = member_data.Foto.data.attributes.url;
     }
     return member_data;
@@ -54,6 +54,14 @@ const TeamMemberPage = () => {
               Telefone:
               <a href={`callto:${member.Telefone}`}> {member.Telefone}</a>
             </p>
+            { member.Cargo === 'Egressos' &&
+              (
+                <p className="text-xl text-blue hover:text-cyan-700">
+                Ano de conclusão de curso:
+                <a> {member.AnoConclusaoDeCurso}</a>
+              </p>
+              )
+            }
             <p dangerouslySetInnerHTML={{ __html: member.Sobre }}></p>
             <button className="mx-auto w-40 bg-zinc-800 px-4 py-2 text-sm text-white transition-all duration-150 ease-in-out hover:bg-zinc-900 focus:ring-0 active:shadow-lg">
               <a href={member.Lattes}>Lattes</a>
