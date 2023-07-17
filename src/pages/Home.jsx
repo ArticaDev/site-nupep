@@ -39,7 +39,7 @@ function Home() {
 
   return (
     <Layout isLoaded={isLoaded}>
-      <Slider>
+      <Slider autoplay>
         {highlights
           .sort(
             (first, second) =>
