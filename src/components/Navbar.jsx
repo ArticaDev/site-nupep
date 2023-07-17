@@ -11,6 +11,7 @@ const Navbar = ({ isLoaded }) => {
     { name: "Projetos", url: "/projetos" },
     { name: "Publicações", url: "/publicacoes" },
     { name: "Equipe", url: "/equipe" },
+    { name: "Contato", id: "contact" },
   ];
 
   const hasWordInURL = (word) => {
@@ -19,14 +20,13 @@ const Navbar = ({ isLoaded }) => {
   };
 
   useEffect(() => {
-    if (hasWordInURL("search")) {
-      document.getElementById("search").scrollIntoView();
-      window.scrollBy(0, -130);
-    }
-    if (hasWordInURL("about")) {
-      document.getElementById("about").scrollIntoView();
-      window.scrollBy(0, -130);
-    }
+    const possibleIds = ["about", "search", "contact"];
+    possibleIds.forEach((id) => {
+      if (hasWordInURL(id)) {
+        document.getElementById(id).scrollIntoView();
+        window.scrollBy(0, -130);
+      }
+    });
   }, [isLoaded]);
 
   return (

@@ -63,7 +63,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="grid grid-flow-col md:grid-flow-row">
+    <div id="contact" className="grid grid-flow-col md:grid-flow-row">
       <div className="grid grid-flow-row gap-6 px-6 lg:px-16">
         <div className="grid gap-4 lg:grid-flow-col lg:grid-cols-3 lg:gap-12	">
           <div className="grid gap-3.5">
