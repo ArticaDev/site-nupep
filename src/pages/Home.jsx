@@ -46,6 +46,11 @@ function Home() {
               new Date(first.createdAt).valueOf() -
               new Date(second.createdAt).valueOf()
           )
+          .sort((first) => {
+            if (first.Primeiro) {
+              return -1;
+            }
+          })
           .map((highlight, index) => (
             <SwiperSlide key={index}>
               <a href={highlight.Link}>

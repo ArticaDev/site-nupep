@@ -18,9 +18,9 @@ export default ({
 }) => {
   return (
     <Swiper
-      // install Swiper modules
       modules={[Navigation, Pagination, Autoplay]}
       spaceBetween={10}
+      initialSlide={0}
       slidesPerView={sliderPerView}
       navigation={(isMobile() ? false : true) && withNavigation}
       className="w-full"
