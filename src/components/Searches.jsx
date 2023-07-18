@@ -3,8 +3,7 @@ import Slider from "./Slider";
 import { SwiperSlide } from "swiper/react";
 import isMobile from "../utils/isMobile";
 import { useState, useEffect } from "react";
-import axios from "axios";
-const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
+import Api from "../services/Api";
 
 const Searches = () => {
   const [topics, setTopics] = useState([]);
@@ -27,8 +26,8 @@ const Searches = () => {
   };
 
   const getTopics = async () => {
-    const result = await axios.get(
-      `${CMS_URL}/researches-and-developments?populate=*`
+    const result = await Api.get(
+      `/researches-and-developments?populate=*`
     );
     if (result) {
       setTopics(formatTopics(result.data));

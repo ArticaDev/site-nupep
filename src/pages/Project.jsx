@@ -3,8 +3,7 @@ import Layout from "../components/Layout";
 import Title from "../components/Title";
 import Image from "../components/Image";
 import { useState, useEffect } from "react";
-import axios from "axios";
-const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
+import Api from "../services/Api";
 
 const Project = () => {
   const { projectID } = useParams();
@@ -25,8 +24,8 @@ const Project = () => {
   };
 
   const getProject = async () => {
-    const result = await axios.get(
-      `${CMS_URL}/projects/${projectID}?populate[Campos][populate]=*`
+    const result = await Api.get(
+      `/projects/${projectID}?populate[Campos][populate]=*`
     );
     if (result) {
       setProject(formatProjectData(result.data));

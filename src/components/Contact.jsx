@@ -3,8 +3,7 @@ import Input from "./Input";
 import { useState, useEffect } from "react";
 import emailjs from "emailjs-com";
 import { positions, useAlert } from "react-alert";
-import axios from "axios";
-const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
+import Api from "../services/Api";
 
 const Contact = () => {
   const [name, setName] = useState("");
@@ -15,14 +14,14 @@ const Contact = () => {
   const [contactText, setContactText] = useState("");
 
   const getEmail = async () => {
-    const result = await axios.get(`${CMS_URL}/contact-email`);
+    const result = await Api.get(`/contact-email`);
     if (result) {
       setNupepEmail(result.data.data.attributes.Email);
     }
   };
 
   const getContactText = async () => {
-    const result = await axios.get(`${CMS_URL}/contact`);
+    const result = await Api.get(`/contact`);
     if (result) {
       setContactText(result.data.data.attributes.Texto);
     }
@@ -37,6 +36,23 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!name || !email || !message || !subject) {
+      alert.show("Todos os campos precisam ser preenchidos.", {
+        type: "error",
+        position: positions.MIDDLE,
+        timeout: 2000,
+      });
+      return;
+    }
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!emailRegex.test(email)) {
+      alert.show("Email inválido.", {
+        type: "error",
+        position: positions.MIDDLE,
+        timeout: 2000,
+      });
+      return;
+    }
     if (name && email && message) {
       setName("");
       setEmail("");

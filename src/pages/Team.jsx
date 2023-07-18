@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import clsx from "clsx";
-import axios from "axios";
 import Layout from "../components/Layout";
 import Searchbar from "../components/Searchbar";
 import Title from "../components/Title";
@@ -9,8 +8,7 @@ import Grid from "../components/Grid";
 import MemberCard from "../components/MemberCard";
 import default_user from "../assets/default_user.png";
 import sortArrWithNaN from "../utils/sortArrWithNaN";
-
-const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
+import Api from "../services/Api";
 
 const MemberRoster = ({ title, children, hidden }) => {
   return (
@@ -33,6 +31,7 @@ const Team = () => {
     doctorate: "Aluno de Doutorado",
     master: "Aluno de Mestrado",
     undergraduate: "Aluno de IC",
+    egress: "Egressos",
   };
 
   const formatMembersData = (raw_data) => {
@@ -52,8 +51,8 @@ const Team = () => {
   };
 
   const getMembers = async () => {
-    const result = await axios.get(
-      `${CMS_URL}/members?populate[Campos][populate]=*`
+    const result = await Api.get(
+      `/members?populate[Campos][populate]=*`
     );
     if (result) {
       setMembers(formatMembersData(result.data));
@@ -85,6 +84,10 @@ const Team = () => {
       name: "Alunos de Iniciação Científica",
       value: roles.undergraduate,
     },
+    {
+      name: "Egressos",
+      value: roles.egress,
+    },
   ];
 
   const [search, setSearch] = useState("");
@@ -102,7 +105,9 @@ const Team = () => {
     Coordenador: 1,
     "Pós-doc": 2,
     Professor: 3,
-    Colaborador: 4,
+    "Professor Colaborador": 4,
+    "Professor Estrangeiro": 5,
+    Colaborador: 6,
   };
 
   return (
@@ -134,6 +139,7 @@ const Team = () => {
             ["Alunos de Doutorado", roles.doctorate],
             ["Alunos de Mestrado", roles.master],
             ["Alunos de Iniciação Científica", roles.undergraduate],
+            ["Egressos", roles.egress],
           ].map((roster) => (
             <MemberRoster
               key={`roster-${roster[1]}`}

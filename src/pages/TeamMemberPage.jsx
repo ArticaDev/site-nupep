@@ -2,8 +2,7 @@ import { useParams } from "react-router-dom";
 import Layout from "../components/Layout";
 import Title from "../components/Title";
 import { useState, useEffect } from "react";
-import axios from "axios";
-const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
+import Api from "../services/Api";
 
 const TeamMemberPage = () => {
   let { memberID } = useParams();
@@ -12,15 +11,15 @@ const TeamMemberPage = () => {
 
   const formatMemberData = (raw_data) => {
     const member_data = raw_data.data.attributes.Campos;
-    if (member_data.Foto) {
+    if (member_data.Foto && member_data.Foto.data) {
       member_data.Foto = member_data.Foto.data.attributes.url;
     }
     return member_data;
   };
 
   const getMemberData = async () => {
-    const result = await axios.get(
-      `${CMS_URL}/members/${memberID}?populate[Campos][populate]=*`
+    const result = await Api.get(
+      `/members/${memberID}?populate[Campos][populate]=*`
     );
     if (result) {
       setMember(formatMemberData(result.data));
@@ -55,6 +54,14 @@ const TeamMemberPage = () => {
               Telefone:
               <a href={`callto:${member.Telefone}`}> {member.Telefone}</a>
             </p>
+            { member.Cargo === 'Egressos' &&
+              (
+                <p className="text-xl text-blue hover:text-cyan-700">
+                Ano de conclusão de curso:
+                <a> {member.AnoConclusaoDeCurso}</a>
+              </p>
+              )
+            }
             <p dangerouslySetInnerHTML={{ __html: member.Sobre }}></p>
             {[
               {

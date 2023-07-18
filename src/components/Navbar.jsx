@@ -3,6 +3,7 @@ import LogoUfu from "../assets/logo-ufu.png";
 import { Link } from "react-scroll";
 import Sidebar from "./Sidebar";
 import { useEffect } from "react";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const Navbar = ({ isLoaded }) => {
   const navbarOptions = [
@@ -78,6 +79,9 @@ const Navbar = ({ isLoaded }) => {
                   </li>
                 )
               )}
+              <li>
+                <LanguageSwitcher/>
+              </li>
             </ul>
           </div>
         </div>
