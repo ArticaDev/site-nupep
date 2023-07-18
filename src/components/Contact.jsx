@@ -36,6 +36,23 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!name || !email || !message || !subject) {
+      alert.show("Todos os campos precisam ser preenchidos.", {
+        type: "error",
+        position: positions.MIDDLE,
+        timeout: 2000,
+      });
+      return;
+    }
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!emailRegex.test(email)) {
+      alert.show("Email inválido.", {
+        type: "error",
+        position: positions.MIDDLE,
+        timeout: 2000,
+      });
+      return;
+    }
     if (name && email && message) {
       setName("");
       setEmail("");
