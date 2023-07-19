@@ -9,22 +9,25 @@ const SortButton = ({
   className,
   order = "desc",
   onClick,
+  text,
+  status,
 }) => {
+  const hasIcon = order === "asc" || order === "desc";
   const icon = order === "asc" ? CgSortZa : CgSortAz;
   return (
-    <div className="cursor-pointer border-2 border-black px-2">
+    <div className="grid h-14 w-48 cursor-pointer items-center border-2 border-black px-2">
       <IconButton
         title={title}
         name={name}
         id={id}
         size={size}
         className={className}
-        icon={icon}
+        icon={hasIcon ? icon : null}
         onClick={onClick}
       >
-        <label htmlFor="order" className="text-sm font-semibold text-zinc-800">
-          Ordenar por ano: {order === "asc" ? "Crescente" : "Decrescente"}
-        </label>
+        <p htmlFor="order" className="text-sm font-semibold text-zinc-800">
+          {text} <br /> <span className="text-blue">{status}</span>
+        </p>
       </IconButton>
     </div>
   );

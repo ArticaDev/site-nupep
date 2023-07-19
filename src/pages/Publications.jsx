@@ -30,7 +30,6 @@ const Publications = () => {
     setOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
   };
 
-
   return (
     <div>
       <Layout>
@@ -55,13 +54,19 @@ const Publications = () => {
                 size="md"
                 order={order}
                 onClick={handleSortButtonClick}
+                text="Ordenar por:"
+                status={order === "asc" ? "Mais antigos" : "Mais recentes"}
               />
             </div>
           </div>
         </div>
-        {filter === publicationTypes.thesis && <Thesis order={order} type="Tese" />}
+        {filter === publicationTypes.thesis && (
+          <Thesis order={order} type="Tese" />
+        )}
 
-        {filter === publicationTypes.dissertations && <Thesis order={order} type="Dissertação" />}
+        {filter === publicationTypes.dissertations && (
+          <Thesis order={order} type="Dissertação" />
+        )}
 
         {filter === publicationTypes.articles && <Publication order={order} />}
       </Layout>

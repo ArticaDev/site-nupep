@@ -9,11 +9,13 @@ import Api from "../services/Api";
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
-  const [order, setOrder] = useState("desc");
+  const [order, setOrder] = useState("pending_first");
   const [search, setSearch] = useState("");
   const searchRegExp = useMemo(() => new RegExp(search), [search]);
   const handleSortButtonClick = () => {
-    setOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
+    setOrder((prevOrder) =>
+      prevOrder === "concluded_first" ? "pending_first" : "concluded_first"
+    );
   };
 
   const formatProjectsData = (raw_data) => {
@@ -52,6 +54,12 @@ const Projects = () => {
               size="md"
               order={order}
               onClick={handleSortButtonClick}
+              text="Ordenar por Status:"
+              status={
+                order === "pending_first"
+                  ? "Em andamento primeiro"
+                  : "Concluído primeiro"
+              }
             />
           </div>
         </div>
@@ -59,7 +67,9 @@ const Projects = () => {
           <div className="mx-5 flex flex-wrap justify-center gap-8">
             {projects
               .sort((a, b) =>
-                order === "asc" ? a.year - b.year : b.year - a.year
+                order === "pending_first"
+                  ? b.Status.localeCompare(a.Status)
+                  : a.Status.localeCompare(b.Status)
               )
               .filter(
                 (project) =>
