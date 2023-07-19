@@ -13,7 +13,7 @@ import Api from "../services/Api";
 const MemberRoster = ({ title, children, hidden }) => {
   return (
     <div hidden={hidden}>
-      <h3 className="overflow-hidden text-ellipsis whitespace-nowrap text-2xl font-bold text-blue">
+      <h3 className="overflow-hidden text-ellipsis text-2xl font-bold text-blue">
         {title}
       </h3>
       <hr />
@@ -51,9 +51,7 @@ const Team = () => {
   };
 
   const getMembers = async () => {
-    const result = await Api.get(
-      `/members?populate[Campos][populate]=*`
-    );
+    const result = await Api.get(`/members?populate[Campos][populate]=*`);
     if (result) {
       setMembers(formatMembersData(result.data));
     }
@@ -132,12 +130,11 @@ const Team = () => {
             }}
           />
         </div>
-        {/*rows equals a falsy value to explicitly disable fixed row numbers*/}
         <Grid direction="rows" cols={1} rows={0}>
           {[
-            ["Pesquisadores", roles.teacher],
-            ["Alunos de Doutorado", roles.doctorate],
-            ["Alunos de Mestrado", roles.master],
+            ["Pesquisadores Orientadores", roles.teacher],
+            ["Pesquisadores do Curso de Doutorado", roles.doctorate],
+            ["Pesquisadores do Curso de Mestrado", roles.master],
             ["Alunos de Iniciação Científica", roles.undergraduate],
             ["Egressos", roles.egress],
           ].map((roster) => (
