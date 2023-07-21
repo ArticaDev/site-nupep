@@ -1,3 +1,5 @@
+import LocalizedText from "./LocalizedText";
+
 const PublicationCard = ({
   doi,
   title,
@@ -17,25 +19,25 @@ const PublicationCard = ({
           </h3>
         </div>
         <div>
-          <strong>Autores: </strong>
+          <strong><LocalizedText  textKey='Autores'/>: </strong>
           {authors}
         </div>
         {supervisor && (
           <div>
-            <strong>Orientadores: </strong>
+            <strong><LocalizedText  textKey='Orientadores'/>: </strong>
             {supervisor}
           </div>
         )}
         {coordinator && (
           <div>
-            <strong>Coordenador: </strong>
+            <strong><LocalizedText  textKey='Coordenador'/>: </strong>
             {coordinator}
           </div>
         )}
 
         {journal && (
           <div>
-            <strong>Publicado em: </strong>
+            <strong><LocalizedText  textKey='Publicado em'/>: </strong>
             {journal}
           </div>
         )}
@@ -56,7 +58,7 @@ const PublicationCard = ({
           </div>
         )}
         <div className="self-center">
-          <strong>Ano: </strong>
+          <strong><LocalizedText  textKey='Ano'/>: </strong>
           {year}
         </div>
       </div>

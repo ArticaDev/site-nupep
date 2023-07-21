@@ -5,6 +5,7 @@ import Title from "../components/Title";
 import SortButton from "../components/SortButton";
 import Thesis from "../components/Thesis";
 import Publication from "../components/Publication";
+import LocalizedText from "../components/LocalizedText";
 
 const publicationTypes = {
   articles: "articles",
@@ -37,7 +38,7 @@ const Publications = () => {
         <div className="grid px-4 py-3">
           <div className="grid gap-2 lg:grid-flow-col">
             <div className="grid items-center lg:grid-cols-10">
-              <Title>Publicações</Title>
+              <Title><LocalizedText textKey="Publicações"/></Title>
             </div>
             <div className="grid items-center gap-4">
               <Filter

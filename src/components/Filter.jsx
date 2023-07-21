@@ -1,3 +1,5 @@
+import LocalizedText from "./LocalizedText";
+
 const Filter = ({ className, id, name, options = [], onChange, disabled }) => {
   return (
     <div className={className}>
@@ -10,7 +12,7 @@ const Filter = ({ className, id, name, options = [], onChange, disabled }) => {
       >
         {options.map((item) => (
           <option key={item.value} value={item.value}>
-            {item.name}
+            <LocalizedText textKey={item.name} />
           </option>
         ))}
       </select>

@@ -19,6 +19,7 @@ const LanguageSwitcher = () => {
         const newLanguage = prevLanguage === 'pt-BR' ? 'en' : 'pt-BR'
         i18n.changeLanguage(newLanguage);
         localStorage.setItem('language', newLanguage);
+        localStorage.setItem('i18nextLng', newLanguage);
         return newLanguage;
     });
     window.location.reload();

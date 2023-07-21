@@ -9,13 +9,10 @@ import Contact from "../components/Contact";
 import CheckOtherPages from "../components/CheckOtherPages";
 import { useState, useEffect } from "react";
 import Api from "../services/Api";
-import { Trans } from 'react-i18next';
-import { Translation, useTranslation  } from 'react-i18next';
 
 function Home() {
   const [highlights, setHighlights] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
-  const { t, i18n } = useTranslation();
 
   const formatHighlightsData = (raw_data) => {
     const higlights_data = raw_data.data.map((data) => data.attributes);
@@ -70,7 +67,6 @@ function Home() {
         <CheckOtherPages />
         <Partners />
         <Contact />
-        <Trans i18nKey="Welcome to React"><h1>Welcome to React</h1></Trans>
       </div>
     </Layout>
   );
