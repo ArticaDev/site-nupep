@@ -9,7 +9,7 @@ import Team from "./pages/Team";
 import TeamMemberPage from "./pages/TeamMemberPage";
 import AlertTemplate from "react-alert-template-basic";
 import { Provider as AlertProvider } from "react-alert";
-
+import './i18n';
 import "./tailwind.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(

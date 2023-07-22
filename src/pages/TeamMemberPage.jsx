@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import Title from "../components/Title";
 import { useState, useEffect } from "react";
 import Api from "../services/Api";
+import LocalizedText from "../components/LocalizedText";
 
 const TeamMemberPage = () => {
   let { memberID } = useParams();
@@ -51,13 +52,13 @@ const TeamMemberPage = () => {
               <a href={`mailto:${member.Email}`}> {member.Email}</a>
             </p>
             <p className="text-xl text-blue hover:text-cyan-700">
-              Telefone:
+              <LocalizedText textKey="Telefone"/>:
               <a href={`callto:${member.Telefone}`}> {member.Telefone}</a>
             </p>
             { member.Cargo === 'Egressos' &&
               (
                 <p className="text-xl text-blue hover:text-cyan-700">
-                Ano de conclusão de curso:
+               <LocalizedText textKey="Ano de conclusão de curso" />:
                 <a> {member.AnoConclusaoDeCurso}</a>
               </p>
               )

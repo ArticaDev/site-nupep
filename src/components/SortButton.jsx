@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import IconButton from "./IconButton";
 import { CgSortAz, CgSortZa } from "react-icons/cg";
 
@@ -14,6 +15,7 @@ const SortButton = ({
 }) => {
   const hasIcon = order === "asc" || order === "desc";
   const icon = order === "asc" ? CgSortZa : CgSortAz;
+  const { t } = useTranslation();
   return (
     <div className="grid h-14 w-48 cursor-pointer items-center border-2 border-black px-2">
       <IconButton
@@ -26,7 +28,7 @@ const SortButton = ({
         onClick={onClick}
       >
         <p htmlFor="order" className="text-sm font-semibold text-zinc-800">
-          {text} <br /> <span className="text-blue">{status}</span>
+          {t(text)} <br /> <span className="text-blue">{t(status)}</span>
         </p>
       </IconButton>
     </div>

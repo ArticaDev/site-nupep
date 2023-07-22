@@ -4,6 +4,7 @@ import { Link } from "react-scroll";
 import Sidebar from "./Sidebar";
 import { useEffect } from "react";
 import LanguageSwitcher from "./LanguageSwitcher";
+import LocalizedText from "./LocalizedText";
 
 const Navbar = ({ isLoaded }) => {
   const navbarOptions = [
@@ -50,7 +51,7 @@ const Navbar = ({ isLoaded }) => {
                       href={option.url}
                       className="bg-black-700 block rounded py-2 pr-4 pl-3 text-2xl font-bold text-black hover:text-blue md:bg-transparent md:p-0"
                     >
-                      {option.name}
+                      <LocalizedText textKey={option.name}/>
                     </a>
                   </li>
                 ) : (
@@ -65,7 +66,7 @@ const Navbar = ({ isLoaded }) => {
                         duration={500}
                         className="bg-black-700 block cursor-pointer rounded py-2 pr-4 pl-3 text-2xl font-bold text-black hover:text-blue md:bg-transparent md:p-0"
                       >
-                        {option.name}
+                        <LocalizedText textKey={option.name}/>
                       </Link>
                     )}{" "}
                     {window.location.pathname !== "/" && (
@@ -73,7 +74,7 @@ const Navbar = ({ isLoaded }) => {
                         href={"/#" + option.id}
                         className="bg-black-700 block rounded py-2 pr-4 pl-3 text-2xl font-bold text-black hover:text-blue md:bg-transparent md:p-0"
                       >
-                        {option.name}
+                        <LocalizedText textKey={option.name}/>
                       </a>
                     )}
                   </li>

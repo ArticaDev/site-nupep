@@ -9,12 +9,14 @@ import MemberCard from "../components/MemberCard";
 import default_user from "../assets/default_user.png";
 import sortArrWithNaN from "../utils/sortArrWithNaN";
 import Api from "../services/Api";
+import { useTranslation } from "react-i18next";
+import LocalizedText from "../components/LocalizedText";
 
 const MemberRoster = ({ title, children, hidden }) => {
   return (
     <div hidden={hidden}>
       <h3 className="overflow-hidden text-ellipsis whitespace-nowrap text-2xl font-bold text-blue">
-        {title}
+        <LocalizedText textKey={title} />
       </h3>
       <hr />
       {children}
@@ -24,6 +26,7 @@ const MemberRoster = ({ title, children, hidden }) => {
 
 const Team = () => {
   const [members, setMembers] = useState([]);
+  const { t } = useTranslation();
 
   const roles = {
     all: "all",
@@ -114,11 +117,11 @@ const Team = () => {
     <div>
       <Layout>
         <div className="grid grid-cols-2 gap-4 px-4 py-3 md:grid-cols-3">
-          <Title>Equipe</Title>
+          <Title>{t('Equipe')}</Title>
           <Searchbar
             name="search"
             className="col-span-2 h-8 w-full place-self-center md:col-span-1"
-            placeholder={"Digite o nome de um integrante"}
+            placeholder={t("Digite o nome de um integrante")}
             value={search}
             onChange={(event) => setSearch(event.target.value)}
           />

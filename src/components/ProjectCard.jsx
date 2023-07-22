@@ -5,6 +5,7 @@ import {
   InProgressTag,
   DroppedTag,
 } from "../components/CustomTag";
+import LocalizedText from "./LocalizedText";
 
 const ProjectCard = ({ status, title, id, resume, sponsors, coordinator }) => {
   return (
@@ -18,12 +19,12 @@ const ProjectCard = ({ status, title, id, resume, sponsors, coordinator }) => {
         <div className="grid p-4">
           <div className="py-4">
             <h3>
-              <strong>Financiadores</strong>: {sponsors}
+              <strong><LocalizedText textKey="Financiadores"/></strong>: {sponsors}
             </h3>
           </div>
           <div className="py-4 pb-8">
             <h3>
-              <strong>Coordenador</strong>: {coordinator}
+              <strong><LocalizedText textKey="Coordenador"/></strong>: {coordinator}
             </h3>
           </div>
           <div className="flex w-full justify-between">
@@ -34,7 +35,7 @@ const ProjectCard = ({ status, title, id, resume, sponsors, coordinator }) => {
               className="rounded-sm bg-black px-8 py-2 text-sm font-bold text-white"
               to={`/projeto/${id}`}
             >
-              Ler Mais
+              <LocalizedText textKey="Leia mais"/>
             </Link>
           </div>
         </div>
