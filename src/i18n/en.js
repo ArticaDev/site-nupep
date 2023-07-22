@@ -51,6 +51,13 @@ const translation = {
         "Todos": "All",
         "Ano de conclusão de curso": "Year of graduation",
         "Telefone": "Phone number",
+        "Ordenar por:" : "Sort by:",
+        "Mais recentes": "Most recent",
+        "Mais antigos": "Oldest",
+        "Ordenar por Status:" : "Sort by Status:",
+        "Em andamento primeiro": "In progress first",
+        "Concluído primeiro": "Completed first"
+
     }
 }
 
