@@ -6,14 +6,19 @@ import Searchbar from "../components/Searchbar";
 import SortButton from "../components/SortButton";
 import { useMemo } from "react";
 import Api from "../services/Api";
+import LocalizedText from "../components/LocalizedText";
+import { useTranslation } from "react-i18next";
 
 const Projects = () => {
+  const { t } = useTranslation();
   const [projects, setProjects] = useState([]);
-  const [order, setOrder] = useState("desc");
+  const [order, setOrder] = useState("pending_first");
   const [search, setSearch] = useState("");
   const searchRegExp = useMemo(() => new RegExp(search), [search]);
   const handleSortButtonClick = () => {
-    setOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
+    setOrder((prevOrder) =>
+      prevOrder === "concluded_first" ? "pending_first" : "concluded_first"
+    );
   };
 
   const formatProjectsData = (raw_data) => {
@@ -36,11 +41,11 @@ const Projects = () => {
     <div>
       <Layout>
         <div className="grid grid-cols-2 gap-2 px-4 pt-3 pb-10 md:grid-cols-3">
-          <Title>Projetos</Title>
+          <Title><LocalizedText textKey="Projetos"/></Title>
           <Searchbar
             name="search"
             className="col-span-2 h-8 w-full place-self-center md:col-span-1"
-            placeholder={"Busque por projeto ou agência financiadora"}
+            placeholder={t("Busque por projeto ou agência financiadora")}
             value={search}
             onChange={(event) => setSearch(event.target.value)}
           />
@@ -52,6 +57,12 @@ const Projects = () => {
               size="md"
               order={order}
               onClick={handleSortButtonClick}
+              text="Ordenar por Status:"
+              status={
+                order === "pending_first"
+                  ? "Em andamento primeiro"
+                  : "Concluído primeiro"
+              }
             />
           </div>
         </div>
@@ -59,7 +70,9 @@ const Projects = () => {
           <div className="mx-5 flex flex-wrap justify-center gap-8">
             {projects
               .sort((a, b) =>
-                order === "asc" ? a.year - b.year : b.year - a.year
+                order === "pending_first"
+                  ? b.Status.localeCompare(a.Status)
+                  : a.Status.localeCompare(b.Status)
               )
               .filter(
                 (project) =>

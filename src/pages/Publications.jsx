@@ -5,6 +5,7 @@ import Title from "../components/Title";
 import SortButton from "../components/SortButton";
 import Thesis from "../components/Thesis";
 import Publication from "../components/Publication";
+import LocalizedText from "../components/LocalizedText";
 
 const publicationTypes = {
   articles: "articles",
@@ -30,14 +31,13 @@ const Publications = () => {
     setOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
   };
 
-
   return (
     <div>
       <Layout>
         <div className="grid px-4 py-3">
           <div className="grid gap-2 lg:grid-flow-col">
             <div className="grid items-center lg:grid-cols-10">
-              <Title>Publicações</Title>
+              <Title><LocalizedText textKey="Publicações"/></Title>
             </div>
             <div className="grid items-center gap-4">
               <Filter
@@ -55,13 +55,19 @@ const Publications = () => {
                 size="md"
                 order={order}
                 onClick={handleSortButtonClick}
+                text="Ordenar por:"
+                status={order === "asc" ? "Mais antigos" : "Mais recentes"}
               />
             </div>
           </div>
         </div>
-        {filter === publicationTypes.thesis && <Thesis order={order} type="Tese" />}
+        {filter === publicationTypes.thesis && (
+          <Thesis order={order} type="Tese" />
+        )}
 
-        {filter === publicationTypes.dissertations && <Thesis order={order} type="Dissertação" />}
+        {filter === publicationTypes.dissertations && (
+          <Thesis order={order} type="Dissertação" />
+        )}
 
         {filter === publicationTypes.articles && <Publication order={order} />}
       </Layout>

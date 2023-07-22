@@ -4,6 +4,7 @@ import { SwiperSlide } from "swiper/react";
 import isMobile from "../utils/isMobile";
 import { useState, useEffect } from "react";
 import Api from "../services/Api";
+import LocalizedText  from "../components/LocalizedText";
 
 const Searches = () => {
   const [topics, setTopics] = useState([]);
@@ -41,7 +42,7 @@ const Searches = () => {
   return (
     <div className="grid grid-flow-row gap-6 px-6 lg:px-16 " id="search">
       <Title>
-        Pesquisa <span className="text-blue">e desenvolvimento</span>
+        <LocalizedText textKey="Pesquisa e desenvolvimento" colored/>   
       </Title>
       <Slider withNavigation={!isMobile()}>
         {topics.map((topic, index) => (
