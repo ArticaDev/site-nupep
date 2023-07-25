@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import useOnClickOutside from "use-onclickoutside";
 import BurgerIcon from "./BurgerIcon";
 import { Link } from "react-scroll";
+import LanguageSwitcher from "./LanguageSwitcher";
 import LocalizedText from "./LocalizedText";
 
 const Sidebar = ({ navbarOptions }) => {
@@ -42,7 +43,7 @@ const Sidebar = ({ navbarOptions }) => {
                       href={option.url}
                       className="bg-black-700 block rounded py-2 pr-4 pl-3 text-2xl font-bold text-black hover:text-blue md:bg-transparent md:p-0"
                     >
-                      <LocalizedText textKey={option.name}/>
+                      <LocalizedText textKey={option.name} />
                     </a>
                     <hr></hr>
                   </li>
@@ -58,7 +59,7 @@ const Sidebar = ({ navbarOptions }) => {
                         duration={500}
                         className="bg-black-700 block cursor-pointer rounded py-2 pr-4 pl-3 text-2xl font-bold text-black hover:text-blue md:bg-transparent md:p-0"
                       >
-                        <LocalizedText textKey={option.name}/>
+                        <LocalizedText textKey={option.name} />
                       </Link>
                     )}{" "}
                     {window.location.pathname !== "/" && (
@@ -66,13 +67,16 @@ const Sidebar = ({ navbarOptions }) => {
                         href={"/#" + option.id}
                         className="bg-black-700 block rounded py-2 pr-4 pl-3 text-2xl font-bold text-black hover:text-blue md:bg-transparent md:p-0"
                       >
-                        <LocalizedText textKey={option.name}/>
+                        <LocalizedText textKey={option.name} />
                       </a>
                     )}
                     <hr></hr>
                   </li>
                 )
               )}
+              <li>
+                <LanguageSwitcher />
+              </li>
             </ul>
           </div>
         </div>
