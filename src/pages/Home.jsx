@@ -22,14 +22,16 @@ function Home() {
         highlight.thumbnail = url;
       }
     });
-   const sortedByDate = highlights.sort(
-    (first, second) => {
-      if (first.Primeiro) return -1;
-      return new Date(first.createdAt).valueOf() -
-      new Date(second.createdAt).valueOf()
-      }  
-    )
 
+   const sortedByDate = higlights_data.sort(
+    (first, second) => (
+        new Date(first.createdAt).valueOf() -
+        new Date(second.createdAt).valueOf()
+      )
+    ).sort(
+      // A highlight can be explicitly marked as the first one
+      (first) => (first?.Primeiro ? -1 : 1) || 0
+    )
 
     return sortedByDate;
   };
