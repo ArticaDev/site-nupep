@@ -22,7 +22,16 @@ function Home() {
         highlight.thumbnail = url;
       }
     });
-    return higlights_data;
+   const sortedByDate = highlights.sort(
+    (first, second) => {
+      if (first.Primeiro) return -1;
+      return new Date(first.createdAt).valueOf() -
+      new Date(second.createdAt).valueOf()
+      }  
+    )
+
+
+    return sortedByDate;
   };
 
   const getHighlights = async () => {
@@ -39,18 +48,7 @@ function Home() {
   return (
     <Layout isLoaded={isLoaded}>
       <Slider autoplay>
-        {highlights
-          .sort(
-            (first, second) =>
-              new Date(first.createdAt).valueOf() -
-              new Date(second.createdAt).valueOf()
-          )
-          .sort((first) => {
-            if (first.Primeiro) {
-              return -1;
-            }
-          })
-          .map((highlight, index) => (
+        {highlights.map((highlight, index) => (
             <SwiperSlide key={index}>
               <a href={highlight.Link}>
                 <SwiperImageWithTitle
