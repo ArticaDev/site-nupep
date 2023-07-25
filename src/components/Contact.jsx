@@ -3,10 +3,11 @@ import Input from "./Input";
 import { useState, useEffect } from "react";
 import emailjs from "emailjs-com";
 import { positions, useAlert } from "react-alert";
-import axios from "axios";
-const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
+import Api from "../services/Api";
+import { useTranslation } from "react-i18next";
 
 const Contact = () => {
+  const { t } = useTranslation();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
@@ -15,14 +16,14 @@ const Contact = () => {
   const [contactText, setContactText] = useState("");
 
   const getEmail = async () => {
-    const result = await axios.get(`${CMS_URL}/contact-email`);
+    const result = await Api.get(`/contact-email`);
     if (result) {
       setNupepEmail(result.data.data.attributes.Email);
     }
   };
 
   const getContactText = async () => {
-    const result = await axios.get(`${CMS_URL}/contact`);
+    const result = await Api.get(`/contact`);
     if (result) {
       setContactText(result.data.data.attributes.Texto);
     }
@@ -37,6 +38,23 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!name || !email || !message || !subject) {
+      alert.show("Todos os campos precisam ser preenchidos.", {
+        type: "error",
+        position: positions.MIDDLE,
+        timeout: 2000,
+      });
+      return;
+    }
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!emailRegex.test(email)) {
+      alert.show("Email inválido.", {
+        type: "error",
+        position: positions.MIDDLE,
+        timeout: 2000,
+      });
+      return;
+    }
     if (name && email && message) {
       setName("");
       setEmail("");
@@ -63,32 +81,32 @@ const Contact = () => {
   };
 
   return (
-    <div className="grid grid-flow-col md:grid-flow-row">
+    <div id="contact" className="grid grid-flow-col md:grid-flow-row">
       <div className="grid grid-flow-row gap-6 px-6 lg:px-16">
         <div className="grid gap-4 lg:grid-flow-col lg:grid-cols-3 lg:gap-12	">
           <div className="grid gap-3.5">
-            <Title>Contato</Title>
+            <Title>{t("Contato")}</Title>
             <form onSubmit={handleSubmit} className="grid gap-2">
               <Input
                 type="text"
                 value={name}
                 setValue={setName}
-                labelText="Seu nome:"
+                labelText={`${t('Seu nome')}:`}
               />
               <Input
                 type="email"
                 value={email}
                 setValue={setEmail}
-                labelText="Seu email:"
+                labelText={`${t('Seu email')}:`}
               />
               <Input
                 type="text"
                 value={subject}
                 setValue={setSubject}
-                labelText="Assunto:"
+                labelText={`${t('Assunto')}:`}
               />
               <div className="mb-3 grid grid-flow-row">
-                <label className="font-bold">Mensagem:</label>
+                <label className="font-bold">{`${t('Mensagem')}:`}</label>
                 <textarea
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
@@ -96,14 +114,14 @@ const Contact = () => {
                 ></textarea>
               </div>
               <button className="mx-auto w-32 rounded-sm bg-black px-8 py-2 text-sm font-bold text-white">
-                Enviar
+                {t("Enviar")}
               </button>
             </form>
           </div>
           <div className="min-w-fit">
             <div className="grid gap-5">
               <Title>
-                Informações para <span className="text-blue">contato</span>
+              {t("Informações para contato")}
               </Title>
               <p
                 className="text-xl font-bold lg:w-150"
@@ -112,7 +130,7 @@ const Contact = () => {
             </div>
           </div>
           <div className="grid gap-4">
-            <Title>Localização</Title>
+            <Title>{t("Localização")}</Title>
             <div className=" grid justify-center">
               <iframe
                 className="h-48 w-72 lg:h-96 2xl:w-150"

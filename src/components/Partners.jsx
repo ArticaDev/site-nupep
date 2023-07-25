@@ -3,8 +3,8 @@ import Slider from "./Slider";
 import { SwiperSlide } from "swiper/react";
 import isMobile from "../utils/isMobile";
 import { useState, useEffect } from "react";
-import axios from "axios";
-const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
+import Api from "../services/Api";
+import LocalizedText from "./LocalizedText";
 
 const Partners = () => {
   const [partners, setPartners] = useState([]);
@@ -21,7 +21,7 @@ const Partners = () => {
   };
 
   const getPartners = async () => {
-    const result = await axios.get(`${CMS_URL}/partners?populate=*`);
+    const result = await Api.get(`/partners?populate=*`);
     if (result) {
       setPartners(formatPartners(result.data));
     }
@@ -34,7 +34,7 @@ const Partners = () => {
   return (
     <div className="grid grid-flow-row gap-14 px-6 lg:px-16">
       <Title>
-        Nossos <span className="text-blue">parceiros</span>{" "}
+       <LocalizedText textKey="Nossos parceiros" colored/>
       </Title>
       <div className="col-span-3 grid grid-flow-col justify-around gap-11 lg:px-40">
         {partners.length >= 1 && (

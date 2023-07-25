@@ -1,8 +1,10 @@
-import Logo from "../assets/Logo.svg";
+import Logo from "../assets/logo.jpg";
 import LogoUfu from "../assets/logo-ufu.png";
 import { Link } from "react-scroll";
 import Sidebar from "./Sidebar";
 import { useEffect } from "react";
+import LanguageSwitcher from "./LanguageSwitcher";
+import LocalizedText from "./LocalizedText";
 
 const Navbar = ({ isLoaded }) => {
   const navbarOptions = [
@@ -11,6 +13,7 @@ const Navbar = ({ isLoaded }) => {
     { name: "Projetos", url: "/projetos" },
     { name: "Publicações", url: "/publicacoes" },
     { name: "Equipe", url: "/equipe" },
+    { name: "Contato", id: "contact" },
   ];
 
   const hasWordInURL = (word) => {
@@ -19,14 +22,13 @@ const Navbar = ({ isLoaded }) => {
   };
 
   useEffect(() => {
-    if (hasWordInURL("search")) {
-      document.getElementById("search").scrollIntoView();
-      window.scrollBy(0, -130);
-    }
-    if (hasWordInURL("about")) {
-      document.getElementById("about").scrollIntoView();
-      window.scrollBy(0, -130);
-    }
+    const possibleIds = ["about", "search", "contact"];
+    possibleIds.forEach((id) => {
+      if (hasWordInURL(id)) {
+        document.getElementById(id).scrollIntoView();
+        window.scrollBy(0, -130);
+      }
+    });
   }, [isLoaded]);
 
   return (
@@ -36,9 +38,8 @@ const Navbar = ({ isLoaded }) => {
           <a href="/" className="flex items-center">
             <img
               src={Logo}
-              className="h-16 w-36 self-center whitespace-nowrap font-semibold text-black "
+              className="h-16 self-center whitespace-nowrap font-semibold text-black "
             ></img>
-            <img src={LogoUfu} className="h-14"></img>
           </a>
           <Sidebar navbarOptions={navbarOptions} />
           <div className="hidden w-full md:block md:w-auto" id="navbar-default">
@@ -50,7 +51,7 @@ const Navbar = ({ isLoaded }) => {
                       href={option.url}
                       className="bg-black-700 block rounded py-2 pr-4 pl-3 text-2xl font-bold text-black hover:text-blue md:bg-transparent md:p-0"
                     >
-                      {option.name}
+                      <LocalizedText textKey={option.name}/>
                     </a>
                   </li>
                 ) : (
@@ -65,7 +66,7 @@ const Navbar = ({ isLoaded }) => {
                         duration={500}
                         className="bg-black-700 block cursor-pointer rounded py-2 pr-4 pl-3 text-2xl font-bold text-black hover:text-blue md:bg-transparent md:p-0"
                       >
-                        {option.name}
+                        <LocalizedText textKey={option.name}/>
                       </Link>
                     )}{" "}
                     {window.location.pathname !== "/" && (
@@ -73,12 +74,15 @@ const Navbar = ({ isLoaded }) => {
                         href={"/#" + option.id}
                         className="bg-black-700 block rounded py-2 pr-4 pl-3 text-2xl font-bold text-black hover:text-blue md:bg-transparent md:p-0"
                       >
-                        {option.name}
+                        <LocalizedText textKey={option.name}/>
                       </a>
                     )}
                   </li>
                 )
               )}
+              <li>
+                <LanguageSwitcher/>
+              </li>
             </ul>
           </div>
         </div>

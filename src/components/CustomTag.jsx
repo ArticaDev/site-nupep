@@ -1,4 +1,5 @@
 import Tag from "../components/Tag";
+import LocalizedText from "./LocalizedText";
 
 const CustomTag = ({ variant, children }) => {
   return (
@@ -9,13 +10,13 @@ const CustomTag = ({ variant, children }) => {
 };
 
 const CompleteTag = () => {
-  return <CustomTag variant="success">Concluído</CustomTag>;
+  return <CustomTag variant="success"><LocalizedText textKey="Concluído"/></CustomTag>;
 };
 const InProgressTag = () => {
-  return <CustomTag variant="info">Em andamento</CustomTag>;
+  return <CustomTag variant="info"><LocalizedText textKey="Em andamento"/></CustomTag>;
 };
 const DroppedTag = () => {
-  return <CustomTag variant="danger">Abandonado</CustomTag>;
+  return <CustomTag variant="danger"><LocalizedText textKey="Abandonado"/></CustomTag>;
 };
 
 export { CompleteTag, DroppedTag, InProgressTag };

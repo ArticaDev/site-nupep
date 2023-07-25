@@ -2,8 +2,8 @@ import { useParams } from "react-router-dom";
 import Layout from "../components/Layout";
 import Title from "../components/Title";
 import { useState, useEffect } from "react";
-import axios from "axios";
-const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
+import Api from "../services/Api";
+import LocalizedText from "../components/LocalizedText";
 
 const TeamMemberPage = () => {
   let { memberID } = useParams();
@@ -12,15 +12,15 @@ const TeamMemberPage = () => {
 
   const formatMemberData = (raw_data) => {
     const member_data = raw_data.data.attributes.Campos;
-    if (member_data.Foto) {
+    if (member_data.Foto && member_data.Foto.data) {
       member_data.Foto = member_data.Foto.data.attributes.url;
     }
     return member_data;
   };
 
   const getMemberData = async () => {
-    const result = await axios.get(
-      `${CMS_URL}/members/${memberID}?populate[Campos][populate]=*`
+    const result = await Api.get(
+      `/members/${memberID}?populate[Campos][populate]=*`
     );
     if (result) {
       setMember(formatMemberData(result.data));
@@ -52,13 +52,38 @@ const TeamMemberPage = () => {
               <a href={`mailto:${member.Email}`}> {member.Email}</a>
             </p>
             <p className="text-xl text-blue hover:text-cyan-700">
-              Telefone:
+              <LocalizedText textKey="Telefone"/>:
               <a href={`callto:${member.Telefone}`}> {member.Telefone}</a>
             </p>
+            { member.Cargo === 'Egressos' &&
+              (
+                <p className="text-xl text-blue hover:text-cyan-700">
+               <LocalizedText textKey="Ano de conclusão de curso" />:
+                <a> {member.AnoConclusaoDeCurso}</a>
+              </p>
+              )
+            }
             <p dangerouslySetInnerHTML={{ __html: member.Sobre }}></p>
-            <button className="mx-auto w-40 bg-zinc-800 px-4 py-2 text-sm text-white transition-all duration-150 ease-in-out hover:bg-zinc-900 focus:ring-0 active:shadow-lg">
-              <a href={member.Lattes}>Lattes</a>
-            </button>
+            {[
+              {
+                link: member.Lattes,
+                text: "Lattes",
+              },
+              {
+                link: member.OrcId,
+                text: "Orc ID",
+              },
+              {
+                link: member.WebOfScience,
+                text: "Web of Science",
+              },
+            ].map(({ link, text }) => (
+              <a href={link}>
+                <button className="mx-auto w-40 bg-zinc-800 px-4 py-2 text-sm text-white transition-all duration-150 ease-in-out hover:bg-zinc-900 focus:ring-0 active:shadow-lg">
+                  {text}
+                </button>
+              </a>
+            ))}
           </div>
         </div>
       </Layout>

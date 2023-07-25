@@ -8,8 +8,7 @@ import Partners from "../components/Partners";
 import Contact from "../components/Contact";
 import CheckOtherPages from "../components/CheckOtherPages";
 import { useState, useEffect } from "react";
-import axios from "axios";
-const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
+import Api from "../services/Api";
 
 function Home() {
   const [highlights, setHighlights] = useState([]);
@@ -23,11 +22,22 @@ function Home() {
         highlight.thumbnail = url;
       }
     });
-    return higlights_data;
+
+   const sortedByDate = higlights_data.sort(
+    (first, second) => (
+        new Date(first.createdAt).valueOf() -
+        new Date(second.createdAt).valueOf()
+      )
+    ).sort(
+      // A highlight can be explicitly marked as the first one
+      (first) => (first?.Primeiro ? -1 : 1) || 0
+    )
+
+    return sortedByDate;
   };
 
   const getHighlights = async () => {
-    const result = await axios.get(`${CMS_URL}/highlights?populate=*`);
+    const result = await Api.get(`/highlights?populate=*`);
     if (result) {
       setHighlights(formatHighlightsData(result.data));
     }
@@ -39,14 +49,8 @@ function Home() {
 
   return (
     <Layout isLoaded={isLoaded}>
-      <Slider>
-        {highlights
-          .sort(
-            (first, second) =>
-              new Date(first.createdAt).valueOf() -
-              new Date(second.createdAt).valueOf()
-          )
-          .map((highlight, index) => (
+      <Slider autoplay>
+        {highlights.map((highlight, index) => (
             <SwiperSlide key={index}>
               <a href={highlight.Link}>
                 <SwiperImageWithTitle

@@ -22,15 +22,13 @@ const IconButton = ({
       name={name}
       id={id}
       className={clsx(
-        "grid items-center rounded-full border-black p-1",
+        "grid grid-flow-col place-items-center rounded-full border-black p-1",
         className
       )}
       onClick={onClick}
     >
-      <div className="grid grid-flow-col py-2 md:grid-flow-row">
-        {children}
-        {Icon && <Icon className={clsx("", sizes[size])} />}
-      </div>
+      {children}
+      {Icon && <Icon className={clsx("", sizes[size])} />}
     </button>
   );
 };

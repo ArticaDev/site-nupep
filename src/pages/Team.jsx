@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import clsx from "clsx";
-import axios from "axios";
 import Layout from "../components/Layout";
 import Searchbar from "../components/Searchbar";
 import Title from "../components/Title";
@@ -9,14 +8,15 @@ import Grid from "../components/Grid";
 import MemberCard from "../components/MemberCard";
 import default_user from "../assets/default_user.png";
 import sortArrWithNaN from "../utils/sortArrWithNaN";
-
-const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
+import Api from "../services/Api";
+import { useTranslation } from "react-i18next";
+import LocalizedText from "../components/LocalizedText";
 
 const MemberRoster = ({ title, children, hidden }) => {
   return (
     <div hidden={hidden}>
-      <h3 className="overflow-hidden text-ellipsis whitespace-nowrap text-2xl font-bold text-blue">
-        {title}
+      <h3 className="overflow-hidden text-ellipsis text-2xl font-bold text-blue">
+        <LocalizedText textKey={title} />
       </h3>
       <hr />
       {children}
@@ -26,6 +26,7 @@ const MemberRoster = ({ title, children, hidden }) => {
 
 const Team = () => {
   const [members, setMembers] = useState([]);
+  const { t } = useTranslation();
 
   const roles = {
     all: "all",
@@ -33,6 +34,7 @@ const Team = () => {
     doctorate: "Aluno de Doutorado",
     master: "Aluno de Mestrado",
     undergraduate: "Aluno de IC",
+    egress: "Egressos",
   };
 
   const formatMembersData = (raw_data) => {
@@ -52,9 +54,7 @@ const Team = () => {
   };
 
   const getMembers = async () => {
-    const result = await axios.get(
-      `${CMS_URL}/members?populate[Campos][populate]=*`
-    );
+    const result = await Api.get(`/members?populate[Campos][populate]=*`);
     if (result) {
       setMembers(formatMembersData(result.data));
     }
@@ -85,6 +85,10 @@ const Team = () => {
       name: "Alunos de Iniciação Científica",
       value: roles.undergraduate,
     },
+    {
+      name: "Egressos",
+      value: roles.egress,
+    },
   ];
 
   const [search, setSearch] = useState("");
@@ -102,18 +106,20 @@ const Team = () => {
     Coordenador: 1,
     "Pós-doc": 2,
     Professor: 3,
-    Colaborador: 4,
+    "Professor Colaborador": 4,
+    "Professor Estrangeiro": 5,
+    Colaborador: 6,
   };
 
   return (
     <div>
       <Layout>
         <div className="grid grid-cols-2 gap-4 px-4 py-3 md:grid-cols-3">
-          <Title>Equipe</Title>
+          <Title>{t('Equipe')}</Title>
           <Searchbar
             name="search"
             className="col-span-2 h-8 w-full place-self-center md:col-span-1"
-            placeholder={"Digite o nome de um integrante"}
+            placeholder={t("Digite o nome de um integrante")}
             value={search}
             onChange={(event) => setSearch(event.target.value)}
           />
@@ -127,13 +133,13 @@ const Team = () => {
             }}
           />
         </div>
-        {/*rows equals a falsy value to explicitly disable fixed row numbers*/}
         <Grid direction="rows" cols={1} rows={0}>
           {[
-            ["Pesquisadores", roles.teacher],
-            ["Alunos de Doutorado", roles.doctorate],
-            ["Alunos de Mestrado", roles.master],
+            ["Pesquisadores Orientadores", roles.teacher],
+            ["Pesquisadores do Curso de Doutorado", roles.doctorate],
+            ["Pesquisadores do Curso de Mestrado", roles.master],
             ["Alunos de Iniciação Científica", roles.undergraduate],
+            ["Egressos", roles.egress],
           ].map((roster) => (
             <MemberRoster
               key={`roster-${roster[1]}`}

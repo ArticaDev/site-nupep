@@ -3,8 +3,8 @@ import Slider from "./Slider";
 import { SwiperSlide } from "swiper/react";
 import isMobile from "../utils/isMobile";
 import { useState, useEffect } from "react";
-import axios from "axios";
-const CMS_URL = import.meta.env.VITE_NUPEP_CMS_DOMAIN;
+import Api from "../services/Api";
+import LocalizedText  from "../components/LocalizedText";
 
 const Searches = () => {
   const [topics, setTopics] = useState([]);
@@ -27,8 +27,8 @@ const Searches = () => {
   };
 
   const getTopics = async () => {
-    const result = await axios.get(
-      `${CMS_URL}/researches-and-developments?populate=*`
+    const result = await Api.get(
+      `/researches-and-developments?populate=*`
     );
     if (result) {
       setTopics(formatTopics(result.data));
@@ -42,7 +42,7 @@ const Searches = () => {
   return (
     <div className="grid grid-flow-row gap-6 px-6 lg:px-16 " id="search">
       <Title>
-        Pesquisa <span className="text-blue">e desenvolvimento</span>
+        <LocalizedText textKey="Pesquisa e desenvolvimento" colored/>   
       </Title>
       <Slider withNavigation={!isMobile()}>
         {topics.map((topic, index) => (
