@@ -17,7 +17,7 @@ const SortButton = ({
   const icon = order === "asc" ? CgSortZa : CgSortAz;
   const { t } = useTranslation();
   return (
-    <div className="grid h-14 w-48 cursor-pointer items-center border-2 border-black px-2">
+    <div className="grid w-48 min-w-fit cursor-pointer items-center border-2 border-black px-2">
       <IconButton
         title={title}
         name={name}
@@ -27,7 +27,10 @@ const SortButton = ({
         icon={hasIcon ? icon : null}
         onClick={onClick}
       >
-        <p htmlFor="order" className="text-sm font-semibold text-zinc-800">
+        <p
+          htmlFor="order"
+          className="break-words text-sm font-semibold text-zinc-800"
+        >
           {t(text)} <br /> <span className="text-blue">{t(status)}</span>
         </p>
       </IconButton>
