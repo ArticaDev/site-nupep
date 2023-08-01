@@ -7,7 +7,7 @@ import LocalizedText from "../components/LocalizedText";
 
 const TeamMemberPage = () => {
   let { memberID } = useParams();
-
+  const localLanguage = localStorage.getItem("language");
   const [member, setMember] = useState([]);
 
   const formatMemberData = (raw_data) => {
@@ -19,10 +19,19 @@ const TeamMemberPage = () => {
   };
 
   const getMemberData = async () => {
-    const result = await Api.get(
-      `/members/${memberID}?populate[Campos][populate]=*`
+    let result = await Api.get(
+      `/members/${memberID}?populate[Campos][populate]=*&populate=localizations`
     );
     if (result) {
+      if(result.data.data.attributes.locale !== localLanguage){
+        const localizedId = result.data.data.attributes.localizations.data.find(
+          (localization) => localization.attributes.locale === localLanguage
+        ).id;
+        const localizedResult = await Api.get(
+          `/members/${localizedId}?populate[Campos][populate]=*&populate=localizations`
+        );
+        if(localizedResult) result = localizedResult;
+      }
       setMember(formatMemberData(result.data));
     }
   };

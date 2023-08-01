@@ -8,7 +8,7 @@ import LocalizedText from "../components/LocalizedText";
 
 const Project = () => {
   const { projectID } = useParams();
-
+  const localLanguage = localStorage.getItem("language");
   const [project, setProject] = useState([]);
 
   const formatProjectData = (raw_data) => {
@@ -25,10 +25,19 @@ const Project = () => {
   };
 
   const getProject = async () => {
-    const result = await Api.get(
-      `/projects/${projectID}?populate[Campos][populate]=*`
+    let result = await Api.get(
+      `/projects/${projectID}?populate[Campos][populate]=*&populate=localizations`
     );
     if (result) {
+      if(result.data.data.attributes.locale !== localLanguage){
+        const localizedId = result.data.data.attributes.localizations.data.find(
+          (localization) => localization.attributes.locale === localLanguage
+        ).id;
+        const localizedResult = await Api.get(
+          `/projects/${localizedId}?populate[Campos][populate]=*&populate=localizations`
+        );
+        if(localizedResult) result = localizedResult;
+      }
       setProject(formatProjectData(result.data));
     }
   };
