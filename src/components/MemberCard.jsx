@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import LocalizedText from "../components/LocalizedText";
 
 const Card = ({ img, name, hidden, id, lattes, subRole }) => {
   return (
@@ -20,7 +21,9 @@ const Card = ({ img, name, hidden, id, lattes, subRole }) => {
           </Link>
           <div className="mx-auto grid items-center justify-center gap-2">
             {subRole && (
-              <p className="text-xl font-bold text-gray-500">{subRole}</p>
+              <p className="text-xl font-bold text-gray-500">
+                <LocalizedText textKey={subRole} />
+              </p>
             )}
             <button className="mx-auto h-10 w-40 bg-zinc-800 px-4 py-2 text-sm text-white transition-all duration-150 ease-in-out hover:bg-zinc-900 focus:ring-0 active:shadow-lg">
               <a href={lattes}>Lattes</a>

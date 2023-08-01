@@ -56,8 +56,14 @@ const translation = {
         "Mais antigos": "Oldest",
         "Ordenar por Status:" : "Sort by Status:",
         "Em andamento primeiro": "In progress first",
-        "Concluído primeiro": "Completed first"
-
+        "Concluído primeiro": "Completed first",
+        "Pesquisadores Orientadores": "Advising Researchers",
+        "Pesquisadores do Curso de Doutorado": "Doctoral Course Researchers",
+        "Pesquisadores do Curso de Mestrado": "Master's Course Researchers",
+        "Professor Colaborador": "Collaborating Professor",
+        "Pós-doc": "Post-doc",
+        "Professor Estrangeiro": "Foreign Professor",
+        "Colaborador": "Collaborator",
     }
 }
 
