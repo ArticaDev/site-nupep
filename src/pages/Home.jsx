@@ -23,17 +23,11 @@ function Home() {
       }
     });
 
-   const sortedByDate = higlights_data.sort(
-    (first, second) => (
-        new Date(first.createdAt).valueOf() -
-        new Date(second.createdAt).valueOf()
-      )
-    ).sort(
-      // A highlight can be explicitly marked as the first one
-      (first) => (first?.Primeiro ? -1 : 1) || 0
+   const sortedByOrder = higlights_data.sort(
+     (first, second) => (first.Ordem ?? Infinity) - (second.Ordem ?? Infinity  )
     )
 
-    return sortedByDate;
+    return sortedByOrder;
   };
 
   const getHighlights = async () => {
