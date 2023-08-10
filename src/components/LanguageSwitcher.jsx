@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { US, BR } from "country-flag-icons/react/3x2";
 import { useTranslation } from "react-i18next";
 
@@ -24,6 +24,14 @@ const LanguageSwitcher = () => {
     });
     window.location.reload();
   };
+
+  useEffect(() => {
+    const localLanguage = localStorage.getItem("language");
+    if (localLanguage) return;
+    i18n.changeLanguage("pt-BR");
+    localStorage.setItem("language", "pt-BR");
+    localStorage.setItem("i18nextLng", "pt-BR");
+  }, []);
 
   return (
     <>
