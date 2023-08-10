@@ -29,7 +29,7 @@ const Project = () => {
       `/projects/${projectID}?populate[Campos][populate]=*&populate=localizations`
     );
     if (result) {
-      if(result.data.data.attributes.locale !== localLanguage){
+      if(localLanguage && result.data.data.attributes.locale !== localLanguage){
         const localizedId = result.data.data.attributes.localizations.data.find(
           (localization) => localization.attributes.locale === localLanguage
         ).id;
