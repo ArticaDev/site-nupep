@@ -37,7 +37,7 @@ const Publication = ({order}) => {
         articles_raw_data.map(async (article) => {
           if (article.DOI) {
             // avoiding crossRef rate limit
-            await new Promise((r) => setTimeout(r, 100));
+            await new Promise((r) => setTimeout(r, 500));
             return await getInfoFromDOI(article.DOI);
           } else {
             return article;
