@@ -13,7 +13,6 @@ import './i18n';
 import "./tailwind.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
     <AlertProvider template={AlertTemplate}>
       <BrowserRouter>
         <Routes>
@@ -28,5 +27,4 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </Routes>
       </BrowserRouter>
     </AlertProvider>
-  </React.StrictMode>
 );

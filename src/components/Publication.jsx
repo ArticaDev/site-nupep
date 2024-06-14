@@ -13,8 +13,9 @@ const Publication = ({order}) => {
   };
 
   const getInfoFromDOI = async (DOI) => {
-    const response = await axios.get(`https://api.crossref.org/works/${DOI}`);
-    const articleInfo = response.data.message;
+    const response = await fetch(`https://api.crossref.org/works/${DOI}`);
+    const data = await response.json();
+    const articleInfo = data.message;
     const relevantInfo = {
       Titulo: articleInfo.title[0],
       Autores: articleInfo.author
@@ -33,19 +34,16 @@ const Publication = ({order}) => {
     let articles_raw_data;
     if (result) {
       articles_raw_data = formatArticlesData(result.data);
-      const articles_data = await Promise.all(
-        articles_raw_data.map(async (article) => {
-          if (article.DOI) {
-            // avoiding crossRef rate limit
-            await new Promise((r) => setTimeout(r, 500));
-            return await getInfoFromDOI(article.DOI);
-          } else {
-            return article;
-          }
-        })
-      );
-      console.log(articles_data)
-      setArticles(articles_data);
+      
+      for (const article of articles_raw_data) {
+        if (article.DOI) {
+          const info = await getInfoFromDOI(article.DOI);
+          setArticles((prev) => [...prev, info]);
+          await new Promise((r) => setTimeout(r, 100));
+      } else {
+          setArticles((prev) => [...prev, article]);
+        }
+      }
     }
   };
 
@@ -63,6 +61,7 @@ const Publication = ({order}) => {
             )
             .map((article) => (
               <PublicationCard
+                key={article.DOI}
                 authors={article.Autores}
                 doi={article.DOI}
                 title={article.Titulo}
